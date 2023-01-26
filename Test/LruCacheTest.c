@@ -1,0 +1,73 @@
+//
+// Created by Olcay Taner YILDIZ on 20.01.2023.
+//
+
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include "../src/Cache/LRUCache.h"
+
+int compareIntMax(const int* first, const int* second){
+    return *first - *second;
+}
+
+int compareStringMax(char* first, char* second){
+    return strcmp(first, second);
+}
+
+int hash_function_string(char* string, int N){
+    int total;
+    for (int i = 0; i < strlen(string); i++){
+        total = total * 256 + string[i];
+    }
+    return total % N;
+}
+
+int hash_function_int(const int* number, int N){
+    return *number % N;
+}
+
+void lru_cache_test1(){
+    char* keys[3] = {"item1", "item2", "item3"};
+    char* data[3] = {"1", "2", "3"};
+    Lru_cache_ptr cache = create_lru_cache(50,
+                                           (int (*)(void *, int)) hash_function_string,
+                                           (int (*)(void *, void *)) compareStringMax);
+    for (int i = 0; i < 3; i++){
+        lru_cache_add(cache, keys[i], data[i]);
+    }
+    if (!lru_cache_contains(cache, "item1")){
+        printf("Test Failed in lru_cache_test1\n");
+    }
+    if (!lru_cache_contains(cache, "item2")){
+        printf("Test Failed in lru_cache_test1\n");
+    }
+    if (lru_cache_contains(cache, "item4")){
+        printf("Test Failed in lru_cache_test1\n");
+    }
+    free_lru_cache(cache, NULL, NULL);
+}
+
+void lru_cache_test2(){
+    int keys[10000];
+    int data;
+    Lru_cache_ptr cache = create_lru_cache(10000,
+                                           (int (*)(void *, int)) hash_function_int,
+                                           (int (*)(void *, void *)) compareIntMax);
+    for (int i = 0; i < 10000; i++){
+        keys[i] = i;
+        lru_cache_add(cache, &keys[i], &keys[i]);
+    }
+    for (int i = 0; i < 1000; i++){
+        data = random() % 10000;
+        if (!lru_cache_contains(cache, &data)){
+            printf("Test Failed in lru_cache_test2\n");
+        }
+    }
+    free_lru_cache(cache, NULL, NULL);
+}
+
+int main(){
+    lru_cache_test1();
+    lru_cache_test2();
+}
