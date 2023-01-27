@@ -5,26 +5,11 @@
 #include <stdio.h>
 #include <string.h>
 #include "../src/Heap/Heap.h"
-
-int compareIntMax(const int* first, const int* second){
-    return *first - *second;
-}
-
-int compareIntMin(const int* first, const int* second){
-    return *second - *first;
-}
-
-int compareStringMax(char* first, char* second){
-    return strcmp(first, second);
-}
-
-int compareStringMin(char* first, char* second){
-    return strcmp(second, first);
-}
+#include "../src/HashMap/HashMap.h"
 
 void test_max_heap_int(){
     int data[] = {4, 6, 2, 5, 3, 1, 7};
-    Heap_ptr maxHeap = create_heap(8, (int (*)(void *, void *)) compareIntMax);
+    Heap_ptr maxHeap = create_heap(8, (int (*)(void *, void *)) compare_int);
     for (int i = 0; i < 7; i++){
         heap_insert(maxHeap, &data[i]);
     }
@@ -45,7 +30,7 @@ void test_max_heap_int(){
 
 void test_min_heap_int(){
     int data[] = {4, 6, 2, 5, 3, 1, 7};
-    Heap_ptr minHeap = create_heap(8, (int (*)(void *, void *)) compareIntMin);
+    Heap_ptr minHeap = create_heap(8, (int (*)(void *, void *)) compare_int_r);
     for (int i = 0; i < 7; i++){
         heap_insert(minHeap, &data[i]);
     }
@@ -66,7 +51,7 @@ void test_min_heap_int(){
 
 void test_max_heap_string(){
     char* data[] = {"d", "f", "b", "e", "c", "a", "g"};
-    Heap_ptr maxHeap = create_heap(8, (int (*)(void *, void *)) compareStringMax);
+    Heap_ptr maxHeap = create_heap(8, (int (*)(void *, void *)) compare_string);
     for (int i = 0; i < 7; i++){
         heap_insert(maxHeap, data[i]);
     }
@@ -87,7 +72,7 @@ void test_max_heap_string(){
 
 void test_min_heap_string(){
     char* data[] = {"d", "f", "b", "e", "c", "a", "g"};
-    Heap_ptr minHeap = create_heap(8, (int (*)(void *, void *)) compareStringMin);
+    Heap_ptr minHeap = create_heap(8, (int (*)(void *, void *)) compare_string_r);
     for (int i = 0; i < 7; i++){
         heap_insert(minHeap, data[i]);
     }

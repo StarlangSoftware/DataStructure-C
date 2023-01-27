@@ -7,30 +7,10 @@
 #include <stdlib.h>
 #include "../src/CounterHashMap.h"
 
-int hash_function_string(char* string, int N){
-    int total;
-    for (int i = 0; i < strlen(string); i++){
-        total = total * 256 + string[i];
-    }
-    return total % N;
-}
-
-int compareStringMax(char* first, char* second){
-    return strcmp(first, second);
-}
-
-int hash_function_int(const int* number, int N){
-    return *number % N;
-}
-
-int compareIntMax(const int* first, const int* second){
-    return *first - *second;
-}
-
 void testPut1(){
     char* items[3] = {"item1", "item2", "item3"};
     Counter_hash_map_ptr counterHashMap = create_counter_hash_map((int (*)(void *, int)) hash_function_string,
-                                                                  (int (*)(void *, void *)) compareStringMax);
+                                                                  (int (*)(void *, void *)) compare_string);
     put_counter_hash_map(counterHashMap, items[0]);
     put_counter_hash_map(counterHashMap, items[1]);
     put_counter_hash_map(counterHashMap, items[2]);
@@ -46,7 +26,7 @@ void testPut1(){
 void testPut2() {
     int* value;
     Counter_hash_map_ptr counterHashMap = create_counter_hash_map((int (*)(void *, int)) hash_function_int,
-                                                                  (int (*)(void *, void *)) compareIntMax);
+                                                                  (int (*)(void *, void *)) compare_int);
     for (int i = 0; i < 1000; i++){
         value = malloc(sizeof(int));
         *value = random() % 1000;
@@ -67,7 +47,7 @@ void testPut2() {
 void testSumOfCounts() {
     int* value;
     Counter_hash_map_ptr counterHashMap = create_counter_hash_map((int (*)(void *, int)) hash_function_int,
-                                                                  (int (*)(void *, void *)) compareIntMax);
+                                                                  (int (*)(void *, void *)) compare_int);
     for (int i = 0; i < 1000; i++){
         value = malloc(sizeof(int));
         *value = random() % 1000;
@@ -82,7 +62,7 @@ void testSumOfCounts() {
 void testPutNTimes1(){
     char* items[3] = {"item1", "item2", "item3"};
     Counter_hash_map_ptr counterHashMap = create_counter_hash_map((int (*)(void *, int)) hash_function_string,
-                                                                  (int (*)(void *, void *)) compareStringMax);
+                                                                  (int (*)(void *, void *)) compare_string);
     put_counter_hash_map_n_times(counterHashMap, items[0], 2);
     put_counter_hash_map_n_times(counterHashMap, items[1], 3);
     put_counter_hash_map_n_times(counterHashMap, items[2], 6);
@@ -104,7 +84,7 @@ void testPutNTimes1(){
 void testPutNTimes2() {
     int* value;
     Counter_hash_map_ptr counterHashMap = create_counter_hash_map((int (*)(void *, int)) hash_function_int,
-                                                                  (int (*)(void *, void *)) compareIntMax);
+                                                                  (int (*)(void *, void *)) compare_int);
     for (int i = 0; i < 1000; i++){
         value = malloc(sizeof(int));
         *value = random() % 1000;
@@ -119,7 +99,7 @@ void testPutNTimes2() {
 void testMax(){
     char* items[3] = {"item1", "item2", "item3"};
     Counter_hash_map_ptr counterHashMap = create_counter_hash_map((int (*)(void *, int)) hash_function_string,
-                                                                  (int (*)(void *, void *)) compareStringMax);
+                                                                  (int (*)(void *, void *)) compare_string);
     put_counter_hash_map(counterHashMap, items[0]);
     put_counter_hash_map(counterHashMap, items[1]);
     put_counter_hash_map(counterHashMap, items[2]);

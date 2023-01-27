@@ -4,8 +4,37 @@
 
 #include <stdlib.h>
 #include <printf.h>
+#include <string.h>
 #include "HashMap.h"
 #include "HashNode.h"
+
+int hash_function_string(char* string, int N){
+    int total;
+    for (int i = 0; i < strlen(string); i++){
+        total = total * 256 + string[i];
+    }
+    return total % N;
+}
+
+int hash_function_int(const int* number, int N){
+    return *number % N;
+}
+
+int compare_string(char* first, char* second){
+    return strcmp(first, second);
+}
+
+int compare_int(const int* first, const int* second){
+    return *first - *second;
+}
+
+int compare_int_r(const int* first, const int* second){
+    return *second - *first;
+}
+
+int compare_string_r(char* first, char* second){
+    return strcmp(second, first);
+}
 
 Linked_list_ptr* allocate_hash_table(int prime_index, int (*key_compare)(void*, void*)) {
     Linked_list_ptr* table;

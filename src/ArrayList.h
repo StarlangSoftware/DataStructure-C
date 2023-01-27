@@ -26,6 +26,7 @@ int array_list_index_of(Array_list_ptr list, void* data, int comparator(void* it
 void array_list_sort(Array_list_ptr list, int comparator(void* item1, void* item2));
 int is_array_list_empty(Array_list_ptr list);
 Array_list_ptr sub_list(Array_list_ptr list, int first_index, int last_index);
+void array_list_shuffle(Array_list_ptr list);
 
 
 #endif //DATASTRUCTURE_ARRAYLIST_H

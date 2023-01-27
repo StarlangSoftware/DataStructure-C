@@ -7,32 +7,12 @@
 #include <stdlib.h>
 #include "../src/Cache/LRUCache.h"
 
-int compareIntMax(const int* first, const int* second){
-    return *first - *second;
-}
-
-int compareStringMax(char* first, char* second){
-    return strcmp(first, second);
-}
-
-int hash_function_string(char* string, int N){
-    int total;
-    for (int i = 0; i < strlen(string); i++){
-        total = total * 256 + string[i];
-    }
-    return total % N;
-}
-
-int hash_function_int(const int* number, int N){
-    return *number % N;
-}
-
 void lru_cache_test1(){
     char* keys[3] = {"item1", "item2", "item3"};
     char* data[3] = {"1", "2", "3"};
     Lru_cache_ptr cache = create_lru_cache(50,
                                            (int (*)(void *, int)) hash_function_string,
-                                           (int (*)(void *, void *)) compareStringMax);
+                                           (int (*)(void *, void *)) compare_string);
     for (int i = 0; i < 3; i++){
         lru_cache_add(cache, keys[i], data[i]);
     }
@@ -53,7 +33,7 @@ void lru_cache_test2(){
     int data;
     Lru_cache_ptr cache = create_lru_cache(10000,
                                            (int (*)(void *, int)) hash_function_int,
-                                           (int (*)(void *, void *)) compareIntMax);
+                                           (int (*)(void *, void *)) compare_int);
     for (int i = 0; i < 10000; i++){
         keys[i] = i;
         lru_cache_add(cache, &keys[i], &keys[i]);

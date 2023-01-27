@@ -98,3 +98,13 @@ Array_list_ptr sub_list(Array_list_ptr list, int first_index, int last_index) {
     }
     return result;
 }
+
+void array_list_shuffle(Array_list_ptr list) {
+    void* tmp;
+    for (int i = 0; i < list->size; i++){
+        int index = random() % (list->size - i);
+        tmp = list->array[i];
+        list->array[i] = list->array[i + index];
+        list->array[i + index] = tmp;
+    }
+}
