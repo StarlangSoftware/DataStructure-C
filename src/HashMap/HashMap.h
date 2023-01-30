@@ -32,6 +32,8 @@ int compare_string(char* first, char* second);
 int compare_int(const int* first, const int* second);
 int compare_int_r(const int* first, const int* second);
 int compare_string_r(char* first, char* second);
+void free_int(int* value);
+void free_string(char* value);
 Linked_list_ptr* allocate_hash_table(int prime_index, int (*key_compare)(void*, void*));
 Hash_map_ptr create_hash_map(int (*hash_function)(void*, int), int (*key_compare)(void*, void*));
 void free_hash_map(Hash_map_ptr hash_map, void free_method(void *));

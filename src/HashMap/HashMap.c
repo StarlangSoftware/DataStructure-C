@@ -36,6 +36,14 @@ int compare_string_r(char* first, char* second){
     return strcmp(second, first);
 }
 
+void free_int(int* value){
+    free(value);
+}
+
+void free_string(char* value){
+    free(value);
+}
+
 Linked_list_ptr* allocate_hash_table(int prime_index, int (*key_compare)(void*, void*)) {
     Linked_list_ptr* table;
     int N = primes[prime_index];
