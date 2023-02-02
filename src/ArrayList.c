@@ -15,8 +15,10 @@ Array_list_ptr create_array_list() {
 }
 
 void free_array_list(Array_list_ptr array_list, void free_method(void*)) {
-    for (int i = 0; i < array_list->size; i++){
-        free_method(array_list->array[i]);
+    if (free_method != NULL){
+        for (int i = 0; i < array_list->size; i++){
+            free_method(array_list->array[i]);
+        }
     }
     free(array_list->array);
     free(array_list);
