@@ -6,6 +6,7 @@
 #define DATASTRUCTURE_HASHMAP_H
 
 #include "../LinkedList/LinkedList.h"
+#include "../ArrayList.h"
 
 static int primes[] = {11, 23, 53,
                 101, 233, 521,
@@ -44,6 +45,7 @@ void hash_map_remove(Hash_map_ptr hash_map, void* key, void free_method(void *))
 void rehash_hash_map(Hash_map_ptr hash_map);
 Node_ptr hash_list_get(Linked_list_ptr linked_list, void* key);
 int hash_list_contains(Linked_list_ptr linked_list, void* key);
+Array_list_ptr key_value_list(Hash_map_ptr hash_map);
 
 
 #endif //DATASTRUCTURE_HASHMAP_H
