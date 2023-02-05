@@ -12,7 +12,7 @@
  *
  * @param cache_size Integer input defining cache size.
  */
-Lru_cache_ptr create_lru_cache(int cache_size, int (*hash_function)(void*, int), int (*compare)(void*, void*)) {
+Lru_cache_ptr create_lru_cache(int cache_size, unsigned int (*hash_function)(void*, int), int (*compare)(void*, void*)) {
     Lru_cache_ptr result = malloc(sizeof(Lru_cache));
     result->cache_size = cache_size;
     result->map = create_hash_map(hash_function, compare);

@@ -6,7 +6,7 @@
 #include "CounterHashMap.h"
 #include "HashMap/HashNode.h"
 
-Counter_hash_map_ptr create_counter_hash_map(int (*hash_function)(void *, int), int (*key_compare)(void *, void *)) {
+Counter_hash_map_ptr create_counter_hash_map(unsigned int (*hash_function)(void *, int), int (*key_compare)(void *, void *)) {
     Counter_hash_map_ptr result = malloc(sizeof(Counter_hash_map));
     result->map = create_hash_map(hash_function, key_compare);
     return result;

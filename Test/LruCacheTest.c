@@ -11,7 +11,7 @@ void lru_cache_test1(){
     char* keys[3] = {"item1", "item2", "item3"};
     char* data[3] = {"1", "2", "3"};
     Lru_cache_ptr cache = create_lru_cache(50,
-                                           (int (*)(void *, int)) hash_function_string,
+                                           (unsigned int (*)(void *, int)) hash_function_string,
                                            (int (*)(void *, void *)) compare_string);
     for (int i = 0; i < 3; i++){
         lru_cache_add(cache, keys[i], data[i]);
@@ -32,7 +32,7 @@ void lru_cache_test2(){
     int keys[10000];
     int data;
     Lru_cache_ptr cache = create_lru_cache(10000,
-                                           (int (*)(void *, int)) hash_function_int,
+                                           (unsigned int (*)(void *, int)) hash_function_int,
                                            (int (*)(void *, void *)) compare_int);
     for (int i = 0; i < 10000; i++){
         keys[i] = i;

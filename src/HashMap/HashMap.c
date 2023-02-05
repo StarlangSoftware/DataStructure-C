@@ -8,15 +8,15 @@
 #include "HashMap.h"
 #include "HashNode.h"
 
-int hash_function_string(char* string, int N){
-    int total;
+unsigned int hash_function_string(char* string, int N){
+    unsigned int total;
     for (int i = 0; i < strlen(string); i++){
         total = total * 256 + string[i];
     }
     return total % N;
 }
 
-int hash_function_int(const int* number, int N){
+unsigned int hash_function_int(const int* number, int N){
     return *number % N;
 }
 
@@ -54,7 +54,7 @@ Linked_list_ptr* allocate_hash_table(int prime_index, int (*key_compare)(void*, 
     return table;
 }
 
-Hash_map_ptr create_hash_map(int (*hash_function)(void *, int), int (*key_compare)(void*, void*)) {
+Hash_map_ptr create_hash_map(unsigned int (*hash_function)(void *, int), int (*key_compare)(void*, void*)) {
     Hash_map_ptr result = malloc(sizeof(Hash_map));
     result->prime_index = 0;
     result->table = allocate_hash_table(result->prime_index, key_compare);

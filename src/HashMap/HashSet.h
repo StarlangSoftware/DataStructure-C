@@ -14,7 +14,7 @@ struct hash_set{
 typedef struct hash_set Hash_set;
 typedef Hash_set* Hash_set_ptr;
 
-Hash_set_ptr create_hash_set(int (*hash_function)(void*, int), int (*compare)(void*, void*));
+Hash_set_ptr create_hash_set(unsigned int (*hash_function)(void*, int), int (*compare)(void*, void*));
 void free_hash_set(Hash_set_ptr hash_set, void free_method(void *));
 void hash_set_insert(Hash_set_ptr hash_set, void* key);
 int hash_set_contains(Hash_set_ptr hash_set, void* key);

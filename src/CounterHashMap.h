@@ -16,7 +16,7 @@ struct counter_hash_map{
 typedef struct counter_hash_map Counter_hash_map;
 typedef Counter_hash_map* Counter_hash_map_ptr;
 
-Counter_hash_map_ptr create_counter_hash_map(int (*hash_function)(void*, int), int (*key_compare)(void*, void*));
+Counter_hash_map_ptr create_counter_hash_map(unsigned int (*hash_function)(void*, int), int (*key_compare)(void*, void*));
 void free_counter_hash_map(Counter_hash_map_ptr counter_hash_map, void free_method(void *));
 void put_counter_hash_map(Counter_hash_map_ptr counter_hash_map, void* key);
 void put_counter_hash_map_n_times(Counter_hash_map_ptr counter_hash_map, void* key, int N);

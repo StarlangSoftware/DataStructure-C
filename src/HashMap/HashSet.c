@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include "HashSet.h"
 
-Hash_set_ptr create_hash_set(int (*hash_function)(void *, int), int (*compare)(void *, void *)) {
+Hash_set_ptr create_hash_set(unsigned int (*hash_function)(void *, int), int (*compare)(void *, void *)) {
     Hash_set_ptr result = malloc(sizeof(Hash_set));
     result->hash_map = create_hash_map(hash_function, compare);
     return result;
