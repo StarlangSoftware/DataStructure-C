@@ -12,7 +12,20 @@ Hash_set_ptr create_hash_set(unsigned int (*hash_function)(void *, int), int (*c
 }
 
 void free_hash_set(Hash_set_ptr hash_set, void (*free_method)(void *)) {
-    free_hash_map(hash_set->hash_map, free_method);
+    int N = primes[hash_set->hash_map->prime_index];
+    for (int i = 0; i < N; i++){
+        Linked_list_ptr linked_list = hash_set->hash_map->table[i];
+        while (linked_list->head != NULL){
+            Node_ptr removed = linked_list->head;
+            linked_list->head = linked_list->head->next;
+            if (free_method != NULL){
+                free_method(removed->data);
+            }
+            free(removed);
+        }
+        free(linked_list);
+    }
+    free(hash_set->hash_map->table);
     free(hash_set);
 }
 

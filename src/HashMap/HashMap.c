@@ -67,7 +67,18 @@ Hash_map_ptr create_hash_map(unsigned int (*hash_function)(void *, int), int (*k
 void free_hash_map(Hash_map_ptr hash_map, void (*free_method)(void *)) {
     int N = primes[hash_map->prime_index];
     for (int i = 0; i < N; i++){
-        free_linked_list(hash_map->table[i], free_method);
+        Linked_list_ptr linked_list = hash_map->table[i];
+        while (linked_list->head != NULL){
+            Node_ptr removed = linked_list->head;
+            linked_list->head = linked_list->head->next;
+            Hash_node_ptr hash_node = removed->data;
+            if (free_method != NULL){
+                free_method(hash_node->value);
+            }
+            free(hash_node);
+            free(removed);
+        }
+        free(linked_list);
     }
     free(hash_map->table);
     free(hash_map);
