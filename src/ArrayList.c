@@ -110,3 +110,13 @@ void array_list_shuffle(Array_list_ptr list) {
         list->array[i + index] = tmp;
     }
 }
+
+void array_list_remove(Array_list_ptr list, int index, void (*free_method)(void *)) {
+    if (free_method != NULL){
+        free_method(list->array[index]);
+    }
+    for (int i = index; i < list->size - 1; i++){
+        list->array[i] = list->array[i + 1];
+    }
+    list->size--;
+}
