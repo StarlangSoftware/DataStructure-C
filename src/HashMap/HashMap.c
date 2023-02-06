@@ -172,3 +172,17 @@ Array_list_ptr key_value_list(Hash_map_ptr hash_map) {
     }
     return result;
 }
+
+Array_list_ptr key_list(Hash_map_ptr hash_map) {
+    Array_list_ptr result = create_array_list();
+    for (int i = 0; i < primes[hash_map->prime_index]; i++){
+        Linked_list_ptr linked_list = hash_map->table[i];
+        Node_ptr iterator = linked_list->head;
+        while (iterator != NULL){
+            Hash_node_ptr hash_node = iterator->data;
+            array_list_add(result, hash_node->key);
+            iterator = iterator->next;
+        }
+    }
+    return result;
+}

@@ -46,6 +46,7 @@ void rehash_hash_map(Hash_map_ptr hash_map);
 Node_ptr hash_list_get(Linked_list_ptr linked_list, void* key);
 int hash_list_contains(Linked_list_ptr linked_list, void* key);
 Array_list_ptr key_value_list(Hash_map_ptr hash_map);
+Array_list_ptr key_list(Hash_map_ptr hash_map);
 
 
 #endif //DATASTRUCTURE_HASHMAP_H
