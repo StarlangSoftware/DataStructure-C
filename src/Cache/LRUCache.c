@@ -4,7 +4,6 @@
 
 #include <stdlib.h>
 #include "LRUCache.h"
-#include "CacheData.h"
 
 /**
  * A constructor of {@link LRUCache} class which takes cacheSize as input. It creates new
@@ -15,14 +14,12 @@
 Lru_cache_ptr create_lru_cache(int cache_size, unsigned int (*hash_function)(void*, int), int (*compare)(void*, void*)) {
     Lru_cache_ptr result = malloc(sizeof(Lru_cache));
     result->cache_size = cache_size;
-    result->map = create_hash_map(hash_function, compare);
-    result->cache = create_linked_list(compare);
+    result->map = create_linked_hash_map(hash_function, compare);
     return result;
 }
 
 void free_lru_cache(Lru_cache_ptr lru_cache, void (*free_method_map_node)(void *), void (*free_method_node)(void *)) {
-    free_hash_map(lru_cache->map, free_method_map_node);
-    free_linked_list(lru_cache->cache, free_method_node);
+    free_linked_hash_map(lru_cache->map, free_method_map_node);
     free(lru_cache);
 }
 
@@ -34,7 +31,7 @@ void free_lru_cache(Lru_cache_ptr lru_cache, void (*free_method_map_node)(void *
  * @return 1 if the {@link map} has the given key, 0 otherwise.
  */
 int lru_cache_contains(Lru_cache_ptr lru_cache, void *key) {
-    return hash_map_contains(lru_cache->map, key);
+    return linked_hash_map_contains(lru_cache->map, key);
 }
 
 /**
@@ -48,10 +45,10 @@ int lru_cache_contains(Lru_cache_ptr lru_cache, void *key) {
  */
 void *lru_cache_get(Lru_cache_ptr lru_cache, void *key) {
     if (lru_cache_contains(lru_cache, key)){
-        Cache_data_ptr cache_node = hash_map_get(lru_cache->map, key);
-        remove_data(lru_cache->cache, cache_node);
-        add_first(lru_cache->cache, create_node(cache_node));
-        return cache_node->data;
+        void* value = linked_hash_map_get(lru_cache->map, key);
+        linked_hash_map_remove(lru_cache->map, key, NULL);
+        linked_hash_map_insert(lru_cache->map, key, value);
+        return value;
     } else {
         return NULL;
     }
@@ -67,13 +64,9 @@ void *lru_cache_get(Lru_cache_ptr lru_cache, void *key) {
  * @param data T type input.
  */
 void lru_cache_add(Lru_cache_ptr lru_cache, void *key, void *data) {
-    Cache_data_ptr cache_data;
-    if (lru_cache->map->count == lru_cache->cache_size){
-        Node_ptr removed = remove_last(lru_cache->cache);
-        cache_data = removed->data;
-        hash_map_remove(lru_cache->map, cache_data->key, NULL);
+    if (lru_cache->map->hash_map->count == lru_cache->cache_size){
+        Hash_node_ptr hash_node = lru_cache->map->linked_list->head->data;
+        linked_hash_map_remove(lru_cache->map, hash_node->key, NULL);
     }
-    cache_data = create_cache_data(data, key);
-    add_first(lru_cache->cache, create_node(cache_data));
-    hash_map_insert(lru_cache->map, key, cache_data);
+    linked_hash_map_insert(lru_cache->map, key, data);
 }

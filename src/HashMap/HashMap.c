@@ -92,7 +92,7 @@ void rehash_hash_map(Hash_map_ptr hash_map) {
         while (iterator != NULL){
             Node_ptr next = iterator->next;
             Hash_node_ptr hash_node = iterator->data;
-            int address = hash_map->hash_function(hash_node->key, primes[hash_map->prime_index + 1]);
+            unsigned int address = hash_map->hash_function(hash_node->key, primes[hash_map->prime_index + 1]);
             add_last(new_table[address], iterator);
             iterator = next;
         }
@@ -105,8 +105,8 @@ void rehash_hash_map(Hash_map_ptr hash_map) {
     hash_map->table = new_table;
 }
 
-void hash_map_insert(Hash_map_ptr hash_map, void *key, void* value) {
-    int address;
+Hash_node_ptr hash_map_insert(Hash_map_ptr hash_map, void *key, void* value) {
+    unsigned int address;
     address = hash_map->hash_function(key, primes[hash_map->prime_index]);
     if (hash_map_contains(hash_map, key)){
         Node_ptr node = hash_list_get(hash_map->table[address], key);
@@ -119,15 +119,16 @@ void hash_map_insert(Hash_map_ptr hash_map, void *key, void* value) {
     if (hash_map->count > 0.8 * primes[hash_map->prime_index]){
         rehash_hash_map(hash_map);
     }
+    return hash_node;
 }
 
 int hash_map_contains(Hash_map_ptr hash_map, void *key) {
-    int address = hash_map->hash_function(key, primes[hash_map->prime_index]);
+    unsigned int address = hash_map->hash_function(key, primes[hash_map->prime_index]);
     return hash_list_contains(hash_map->table[address], key);
 }
 
 void *hash_map_get(Hash_map_ptr hash_map, void *key) {
-    int address = hash_map->hash_function(key, primes[hash_map->prime_index]);
+    unsigned int address = hash_map->hash_function(key, primes[hash_map->prime_index]);
     Node_ptr node = hash_list_get(hash_map->table[address], key);
     if (node != NULL){
         Hash_node_ptr hash_node = node->data;
@@ -138,9 +139,9 @@ void *hash_map_get(Hash_map_ptr hash_map, void *key) {
 }
 
 void hash_map_remove(Hash_map_ptr hash_map, void *key, void free_method(void *)) {
-    Node_ptr node = hash_map_get(hash_map, key);
+    unsigned int address = hash_map->hash_function(key, primes[hash_map->prime_index]);
+    Node_ptr node = hash_list_get(hash_map->table[address], key);
     if (node != NULL){
-        int address = hash_map->hash_function(key, primes[hash_map->prime_index]);
         remove_node(hash_map->table[address], node, free_method);
         hash_map->count--;
     }

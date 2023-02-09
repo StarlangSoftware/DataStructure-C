@@ -8,6 +8,8 @@
 Node_ptr create_node(void* data){
     Node_ptr result = malloc(sizeof(Node));
     result->data = data;
+    result->previous = NULL;
+    result->next = NULL;
     return result;
 }
 

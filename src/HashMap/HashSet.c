@@ -30,7 +30,7 @@ void free_hash_set(Hash_set_ptr hash_set, void (*free_method)(void *)) {
 }
 
 void hash_set_insert(Hash_set_ptr hash_set, void *key) {
-    int address;
+    unsigned int address;
     address = hash_set->hash_map->hash_function(key, primes[hash_set->hash_map->prime_index]);
     if (!hash_set_contains(hash_set, key)){
         add_last(hash_set->hash_map->table[address], create_node(key));
@@ -42,12 +42,12 @@ void hash_set_insert(Hash_set_ptr hash_set, void *key) {
 }
 
 int hash_set_contains(Hash_set_ptr hash_set, void *key) {
-    int address = hash_set->hash_map->hash_function(key, primes[hash_set->hash_map->prime_index]);
+    unsigned int address = hash_set->hash_map->hash_function(key, primes[hash_set->hash_map->prime_index]);
     return linked_list_contains(hash_set->hash_map->table[address], key);
 }
 
 void hash_set_remove(Hash_set_ptr hash_set, void *key, void (*free_method)(void *)) {
-    int address = hash_set->hash_map->hash_function(key, primes[hash_set->hash_map->prime_index]);
+    unsigned int address = hash_set->hash_map->hash_function(key, primes[hash_set->hash_map->prime_index]);
     Node_ptr node = linked_list_get(hash_set->hash_map->table[address], key);
     if (node != NULL){
         remove_node(hash_set->hash_map->table[address], node, free_method);
@@ -62,7 +62,7 @@ void rehash_hash_set(Hash_map_ptr hash_map) {
         Node_ptr iterator = linked_list->head;
         while (iterator != NULL){
             Node_ptr next = iterator->next;
-            int address = hash_map->hash_function(iterator->data, primes[hash_map->prime_index + 1]);
+            unsigned int address = hash_map->hash_function(iterator->data, primes[hash_map->prime_index + 1]);
             add_last(new_table[address], iterator);
             iterator = next;
         }

@@ -6,11 +6,11 @@
 #define DATASTRUCTURE_LRUCACHE_H
 
 #include "../HashMap/HashMap.h"
+#include "../HashMap/LinkedHashMap.h"
 
 struct lru_cache{
     int cache_size;
-    Hash_map_ptr map;
-    Linked_list_ptr cache;
+    Linked_hash_map_ptr map;
 };
 
 typedef struct lru_cache Lru_cache;

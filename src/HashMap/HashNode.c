@@ -13,7 +13,11 @@ Hash_node_ptr create_hash_node(void *key, void *value) {
 }
 
 void free_hash_node(Hash_node_ptr hash_node, void (*free_key_method)(void *), void (*free_value_method)(void *)) {
-    free_key_method(hash_node->key);
-    free_value_method(hash_node->value);
+    if (free_key_method != NULL){
+        free_key_method(hash_node->key);
+    }
+    if (free_value_method != NULL){
+        free_value_method(hash_node->value);
+    }
     free(hash_node);
 }

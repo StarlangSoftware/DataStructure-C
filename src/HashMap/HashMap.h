@@ -7,6 +7,7 @@
 
 #include "../LinkedList/LinkedList.h"
 #include "../ArrayList.h"
+#include "HashNode.h"
 
 static int primes[] = {11, 23, 53,
                 101, 233, 521,
@@ -38,7 +39,7 @@ void free_string(char* value);
 Linked_list_ptr* allocate_hash_table(int prime_index, int (*key_compare)(void*, void*));
 Hash_map_ptr create_hash_map(unsigned int (*hash_function)(void*, int), int (*key_compare)(void*, void*));
 void free_hash_map(Hash_map_ptr hash_map, void free_method(void *));
-void hash_map_insert(Hash_map_ptr hash_map, void* key, void* value);
+Hash_node_ptr hash_map_insert(Hash_map_ptr hash_map, void* key, void* value);
 int hash_map_contains(Hash_map_ptr hash_map, void* key);
 void* hash_map_get(Hash_map_ptr hash_map, void* key);
 void hash_map_remove(Hash_map_ptr hash_map, void* key, void free_method(void *));
