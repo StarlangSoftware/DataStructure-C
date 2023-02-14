@@ -21,6 +21,7 @@ void linked_hash_map_insert(Linked_hash_map_ptr linked_hash_map, void* key, void
 int linked_hash_map_contains(Linked_hash_map_ptr linked_hash_map, void* key);
 void linked_hash_map_remove(Linked_hash_map_ptr linked_hash_map, void* key, void free_method(void *));
 void linked_hash_map_remove_key(Linked_hash_map_ptr linked_hash_map, void* key);
+void linked_hash_map_update_value(Linked_hash_map_ptr linked_hash_map, void *key, void* value);
 void* linked_hash_map_get(Linked_hash_map_ptr linked_hash_map, void* key);
 Array_list_ptr linked_hash_map_key_value_list(Linked_hash_map_ptr linked_hash_map);
 Array_list_ptr linked_hash_map_key_list(Linked_hash_map_ptr linked_hash_map);

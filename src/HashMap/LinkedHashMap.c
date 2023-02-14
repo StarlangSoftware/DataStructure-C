@@ -19,11 +19,13 @@ void free_linked_hash_map(Linked_hash_map_ptr linked_hash_map, void (*free_metho
 }
 
 void linked_hash_map_insert(Linked_hash_map_ptr linked_hash_map, void *key, void* value) {
+    int contains = linked_hash_map_contains(linked_hash_map, key);
     Hash_node_ptr hash_node = hash_map_insert(linked_hash_map->hash_map, key, value);
-    if (linked_hash_map_contains(linked_hash_map, key)){
-        linked_hash_map_remove_key(linked_hash_map, key);
+    if (!contains){
+        add_last(linked_hash_map->linked_list, create_node(hash_node));
+    } else {
+        linked_hash_map_update_value(linked_hash_map, key, value);
     }
-    add_last(linked_hash_map->linked_list, create_node(hash_node));
 }
 
 int linked_hash_map_contains(Linked_hash_map_ptr linked_hash_map, void *key) {
@@ -41,6 +43,18 @@ void linked_hash_map_remove_key(Linked_hash_map_ptr linked_hash_map, void *key) 
         Hash_node_ptr hash_node = iterator->data;
         if (linked_hash_map->linked_list->compare(hash_node->key, key) == 0){
             remove_node(linked_hash_map->linked_list, iterator, NULL);
+            break;
+        }
+        iterator = iterator->next;
+    }
+}
+
+void linked_hash_map_update_value(Linked_hash_map_ptr linked_hash_map, void *key, void* value) {
+    Node_ptr iterator = linked_hash_map->linked_list->head;
+    while (iterator != NULL){
+        Hash_node_ptr hash_node = iterator->data;
+        if (linked_hash_map->linked_list->compare(hash_node->key, key) == 0){
+            hash_node->value = value;
             break;
         }
         iterator = iterator->next;
