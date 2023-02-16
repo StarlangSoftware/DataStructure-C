@@ -74,3 +74,16 @@ void rehash_hash_set(Hash_map_ptr hash_map) {
     hash_map->prime_index++;
     hash_map->table = new_table;
 }
+
+Array_list_ptr hash_set_key_list(Hash_set_ptr hash_set) {
+    Array_list_ptr result = create_array_list();
+    for (int i = 0; i < primes[hash_set->hash_map->prime_index]; i++){
+        Linked_list_ptr linked_list = hash_set->hash_map->table[i];
+        Node_ptr iterator = linked_list->head;
+        while (iterator != NULL){
+            array_list_add(result, iterator->data);
+            iterator = iterator->next;
+        }
+    }
+    return result;
+}

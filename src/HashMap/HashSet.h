@@ -20,5 +20,6 @@ void hash_set_insert(Hash_set_ptr hash_set, void* key);
 int hash_set_contains(Hash_set_ptr hash_set, void* key);
 void hash_set_remove(Hash_set_ptr hash_set, void* key, void free_method(void *));
 void rehash_hash_set(Hash_map_ptr hash_map);
+Array_list_ptr hash_set_key_list(Hash_set_ptr hash_set);
 
 #endif //DATASTRUCTURE_HASHSET_H
