@@ -14,6 +14,22 @@ Array_list_ptr create_array_list() {
     return array_list;
 }
 
+Array_list_ptr create_array_list_of_string(char **array, int size) {
+    Array_list_ptr result = create_array_list();
+    for (int i = 0; i < size; i++){
+        array_list_add(result, array[i]);
+    }
+    return result;
+}
+
+Array_list_ptr create_array_list_of_int(int *array, int size) {
+    Array_list_ptr result = create_array_list();
+    for (int i = 0; i < size; i++){
+        array_list_add(result, &(array[i]));
+    }
+    return result;
+}
+
 void free_array_list(Array_list_ptr array_list, void free_method(void*)) {
     if (free_method != NULL){
         for (int i = 0; i < array_list->size; i++){
@@ -37,6 +53,12 @@ void array_list_add(Array_list_ptr array_list, void *item) {
     array_list->size++;
 }
 
+void array_list_add_double(Array_list_ptr array_list, double value) {
+    double* item = malloc(sizeof(double));
+    *item = value;
+    array_list_add(array_list, item);
+}
+
 void array_list_insert(Array_list_ptr array_list, int index, void *item) {
     if (index < 0 || index > array_list->size){
         return;
@@ -45,7 +67,9 @@ void array_list_insert(Array_list_ptr array_list, int index, void *item) {
         array_list_add(array_list, item);
     } else {
         check_and_increase_size(array_list);
-        memmove(array_list + ((index + 1) * sizeof(void *)), array_list + (index * sizeof(void *)), (array_list->size - index) * sizeof(void *));
+        for (int i = array_list->size; i > index; i--){
+            array_list->array[i] = array_list->array[i - 1];
+        }
         array_list->array[index] = item;
         array_list->size++;
     }
@@ -56,6 +80,10 @@ void *array_list_get(Array_list_ptr array_list, int index) {
         return NULL;
     }
     return array_list->array[index];
+}
+
+double array_list_get_double(Array_list_ptr array_list, int index) {
+    return *((double*) array_list_get(array_list, index));
 }
 
 void array_list_add_all(Array_list_ptr dst, Array_list_ptr src) {

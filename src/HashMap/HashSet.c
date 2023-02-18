@@ -87,3 +87,12 @@ Array_list_ptr hash_set_key_list(Hash_set_ptr hash_set) {
     }
     return result;
 }
+
+Hash_set_ptr create_hash_set_of_string(char **array, int size) {
+    Hash_set_ptr result = create_hash_set((unsigned int (*)(void *, int)) hash_function_string,
+                                          (int (*)(void *, void *)) compare_string);
+    for (int i = 0; i < size; i++){
+        hash_set_insert(result, array[i]);
+    }
+    return result;
+}
