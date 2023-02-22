@@ -148,3 +148,10 @@ void array_list_remove(Array_list_ptr list, int index, void (*free_method)(void 
     }
     list->size--;
 }
+
+void array_list_replace(Array_list_ptr list, int index, void *item, void (*free_method)(void *)) {
+    if (free_method != NULL){
+        free_method(list->array[index]);
+    }
+    list->array[index] = item;
+}

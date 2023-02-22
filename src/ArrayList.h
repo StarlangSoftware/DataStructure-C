@@ -32,6 +32,7 @@ int is_array_list_empty(Array_list_ptr list);
 Array_list_ptr sub_list(Array_list_ptr list, int first_index, int last_index);
 void array_list_shuffle(Array_list_ptr list);
 void array_list_remove(Array_list_ptr list, int index, void free_method(void* data));
+void array_list_replace(Array_list_ptr list, int index, void* item, void free_method(void* data));
 
 
 #endif //DATASTRUCTURE_ARRAYLIST_H
