@@ -155,3 +155,15 @@ void array_list_replace(Array_list_ptr list, int index, void *item, void (*free_
     }
     list->array[index] = item;
 }
+
+int array_list_equals(Array_list_ptr list1, Array_list_ptr list2, int (*comparator)(void *, void *)) {
+    if (list1->size != list2->size){
+        return 0;
+    }
+    for (int i = 0; i < list1->size; i++){
+        if (comparator(list1->array[i], list2->array[i]) != 0){
+            return 0;
+        }
+    }
+    return 1;
+}
