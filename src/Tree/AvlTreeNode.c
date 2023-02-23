@@ -15,13 +15,13 @@ Avl_tree_node_ptr create_avl_tree_node(void *data) {
 }
 
 void free_avl_tree_node(Avl_tree_node_ptr tree_node, void (*free_method)(void *)) {
-    if (tree_node->left != NULL){
+    if (tree_node->left != NULL) {
         free_avl_tree_node(tree_node->left, free_method);
     }
-    if (tree_node->right != NULL){
+    if (tree_node->right != NULL) {
         free_avl_tree_node(tree_node->right, free_method);
     }
-    if (free_method != NULL){
+    if (free_method != NULL) {
         free_method(tree_node->data);
     }
     free(tree_node);

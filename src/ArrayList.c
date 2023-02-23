@@ -16,7 +16,7 @@ Array_list_ptr create_array_list() {
 
 Array_list_ptr create_array_list_of_string(char **array, int size) {
     Array_list_ptr result = create_array_list();
-    for (int i = 0; i < size; i++){
+    for (int i = 0; i < size; i++) {
         array_list_add(result, array[i]);
     }
     return result;
@@ -24,15 +24,15 @@ Array_list_ptr create_array_list_of_string(char **array, int size) {
 
 Array_list_ptr create_array_list_of_int(int *array, int size) {
     Array_list_ptr result = create_array_list();
-    for (int i = 0; i < size; i++){
+    for (int i = 0; i < size; i++) {
         array_list_add(result, &(array[i]));
     }
     return result;
 }
 
-void free_array_list(Array_list_ptr array_list, void free_method(void*)) {
-    if (free_method != NULL){
-        for (int i = 0; i < array_list->size; i++){
+void free_array_list(Array_list_ptr array_list, void free_method(void *)) {
+    if (free_method != NULL) {
+        for (int i = 0; i < array_list->size; i++) {
             free_method(array_list->array[i]);
         }
     }
@@ -41,7 +41,7 @@ void free_array_list(Array_list_ptr array_list, void free_method(void*)) {
 }
 
 void check_and_increase_size(Array_list_ptr array_list) {
-    if (array_list->size == array_list->maxSize){
+    if (array_list->size == array_list->maxSize) {
         array_list->maxSize *= 2;
         array_list->array = realloc(array_list->array, array_list->maxSize * sizeof(void *));
     }
@@ -54,20 +54,20 @@ void array_list_add(Array_list_ptr array_list, void *item) {
 }
 
 void array_list_add_double(Array_list_ptr array_list, double value) {
-    double* item = malloc(sizeof(double));
+    double *item = malloc(sizeof(double));
     *item = value;
     array_list_add(array_list, item);
 }
 
 void array_list_insert(Array_list_ptr array_list, int index, void *item) {
-    if (index < 0 || index > array_list->size){
+    if (index < 0 || index > array_list->size) {
         return;
     }
-    if (index == array_list->size){
+    if (index == array_list->size) {
         array_list_add(array_list, item);
     } else {
         check_and_increase_size(array_list);
-        for (int i = array_list->size; i > index; i--){
+        for (int i = array_list->size; i > index; i--) {
             array_list->array[i] = array_list->array[i - 1];
         }
         array_list->array[index] = item;
@@ -76,18 +76,18 @@ void array_list_insert(Array_list_ptr array_list, int index, void *item) {
 }
 
 void *array_list_get(Array_list_ptr array_list, int index) {
-    if (index < 0 || index >= array_list->size){
+    if (index < 0 || index >= array_list->size) {
         return NULL;
     }
     return array_list->array[index];
 }
 
 double array_list_get_double(Array_list_ptr array_list, int index) {
-    return *((double*) array_list_get(array_list, index));
+    return *((double *) array_list_get(array_list, index));
 }
 
 void array_list_add_all(Array_list_ptr dst, Array_list_ptr src) {
-    if (dst->size + src->size > dst->maxSize){
+    if (dst->size + src->size > dst->maxSize) {
         dst->maxSize = (dst->size + src->size) * 2;
         dst->array = realloc(dst->array, dst->maxSize * sizeof(void *));
     }
@@ -96,8 +96,8 @@ void array_list_add_all(Array_list_ptr dst, Array_list_ptr src) {
 }
 
 int array_list_contains(Array_list_ptr list, void *data, int (*comparator)(void *, void *)) {
-    for (int i = 0; i < list->size; i++){
-        if (comparator(data, list->array[i]) == 0){
+    for (int i = 0; i < list->size; i++) {
+        if (comparator(data, list->array[i]) == 0) {
             return 1;
         }
     }
@@ -105,8 +105,8 @@ int array_list_contains(Array_list_ptr list, void *data, int (*comparator)(void 
 }
 
 int array_list_index_of(Array_list_ptr list, void *data, int (*comparator)(void *, void *)) {
-    for (int i = 0; i < list->size; i++){
-        if (comparator(data, list->array[i]) == 0){
+    for (int i = 0; i < list->size; i++) {
+        if (comparator(data, list->array[i]) == 0) {
             return i;
         }
     }
@@ -123,15 +123,15 @@ void array_list_sort(Array_list_ptr list, int (*comparator)(void *, void *)) {
 
 Array_list_ptr sub_list(Array_list_ptr list, int first_index, int last_index) {
     Array_list_ptr result = create_array_list();
-    for (int i = first_index; i < last_index; i++){
+    for (int i = first_index; i < last_index; i++) {
         array_list_add(result, list->array[i]);
     }
     return result;
 }
 
 void array_list_shuffle(Array_list_ptr list) {
-    void* tmp;
-    for (int i = 0; i < list->size; i++){
+    void *tmp;
+    for (int i = 0; i < list->size; i++) {
         int index = random() % (list->size - i);
         tmp = list->array[i];
         list->array[i] = list->array[i + index];
@@ -140,28 +140,28 @@ void array_list_shuffle(Array_list_ptr list) {
 }
 
 void array_list_remove(Array_list_ptr list, int index, void (*free_method)(void *)) {
-    if (free_method != NULL){
+    if (free_method != NULL) {
         free_method(list->array[index]);
     }
-    for (int i = index; i < list->size - 1; i++){
+    for (int i = index; i < list->size - 1; i++) {
         list->array[i] = list->array[i + 1];
     }
     list->size--;
 }
 
 void array_list_replace(Array_list_ptr list, int index, void *item, void (*free_method)(void *)) {
-    if (free_method != NULL){
+    if (free_method != NULL) {
         free_method(list->array[index]);
     }
     list->array[index] = item;
 }
 
 int array_list_equals(Array_list_ptr list1, Array_list_ptr list2, int (*comparator)(void *, void *)) {
-    if (list1->size != list2->size){
+    if (list1->size != list2->size) {
         return 0;
     }
-    for (int i = 0; i < list1->size; i++){
-        if (comparator(list1->array[i], list2->array[i]) != 0){
+    for (int i = 0; i < list1->size; i++) {
+        if (comparator(list1->array[i], list2->array[i]) != 0) {
             return 0;
         }
     }

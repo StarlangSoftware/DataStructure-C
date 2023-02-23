@@ -7,18 +7,22 @@
 
 #include "BTreeNode.h"
 
-struct btree{
+struct btree {
     BTree_node_ptr root;
     int d;
-    int (*compare)(void*, void*);
+
+    int (*compare)(void *, void *);
 };
 
 typedef struct btree BTree;
-typedef BTree* BTree_ptr;
+typedef BTree *BTree_ptr;
 
-BTree_ptr create_btree(int d, int (*compare)(void*, void*));
-void free_btree(BTree_ptr tree, void free_method(void* data));
-BTree_node_ptr search_btree(BTree_ptr btree, void* value);
-void insert_btree(BTree_ptr btree, void* value);
+BTree_ptr create_btree(int d, int (*compare)(void *, void *));
+
+void free_btree(BTree_ptr tree, void free_method(void *data));
+
+BTree_node_ptr search_btree(BTree_ptr btree, void *value);
+
+void insert_btree(BTree_ptr btree, void *value);
 
 #endif //DATASTRUCTURE_BTREE_H

@@ -4,7 +4,7 @@
 
 #include "../src/ArrayList.h"
 
-int main(){
+int main() {
     Array_list_ptr a = create_array_list();
     array_list_insert(a, 0, "ali");
     array_list_insert(a, 0, "topu");

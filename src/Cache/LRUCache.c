@@ -11,7 +11,8 @@
  *
  * @param cache_size Integer input defining cache size.
  */
-Lru_cache_ptr create_lru_cache(int cache_size, unsigned int (*hash_function)(void*, int), int (*compare)(void*, void*)) {
+Lru_cache_ptr
+create_lru_cache(int cache_size, unsigned int (*hash_function)(void *, int), int (*compare)(void *, void *)) {
     Lru_cache_ptr result = malloc(sizeof(Lru_cache));
     result->cache_size = cache_size;
     result->map = create_linked_hash_map(hash_function, compare);
@@ -44,8 +45,8 @@ int lru_cache_contains(Lru_cache_ptr lru_cache, void *key) {
  * @return data value if the {@link map} has the given key, nullptr otherwise.
  */
 void *lru_cache_get(Lru_cache_ptr lru_cache, void *key) {
-    if (lru_cache_contains(lru_cache, key)){
-        void* value = linked_hash_map_get(lru_cache->map, key);
+    if (lru_cache_contains(lru_cache, key)) {
+        void *value = linked_hash_map_get(lru_cache->map, key);
         linked_hash_map_remove(lru_cache->map, key, NULL);
         linked_hash_map_insert(lru_cache->map, key, value);
         return value;
@@ -64,7 +65,7 @@ void *lru_cache_get(Lru_cache_ptr lru_cache, void *key) {
  * @param data T type input.
  */
 void lru_cache_add(Lru_cache_ptr lru_cache, void *key, void *data) {
-    if (lru_cache->map->hash_map->count == lru_cache->cache_size){
+    if (lru_cache->map->hash_map->count == lru_cache->cache_size) {
         Hash_node_ptr hash_node = lru_cache->map->linked_list->head->data;
         linked_hash_map_remove(lru_cache->map, hash_node->key, NULL);
     }

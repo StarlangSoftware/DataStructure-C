@@ -7,17 +7,21 @@
 
 #include "LinkedList/LinkedList.h"
 
-struct queue{
+struct queue {
     Linked_list_ptr list;
 };
 
 typedef struct queue Queue;
-typedef Queue* Queue_ptr;
+typedef Queue *Queue_ptr;
 
 Queue_ptr create_queue();
+
 void free_queue(Queue_ptr queue, void free_method(void *));
+
 int is_queue_empty(Queue_ptr queue);
-void enqueue(Queue_ptr queue, void* item);
-void* dequeue(Queue_ptr queue);
+
+void enqueue(Queue_ptr queue, void *item);
+
+void *dequeue(Queue_ptr queue);
 
 #endif //DATASTRUCTURE_QUEUE_H

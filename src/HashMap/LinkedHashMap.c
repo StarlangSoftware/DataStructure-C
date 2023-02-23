@@ -18,10 +18,10 @@ void free_linked_hash_map(Linked_hash_map_ptr linked_hash_map, void (*free_metho
     free_linked_list(linked_hash_map->linked_list, NULL);
 }
 
-void linked_hash_map_insert(Linked_hash_map_ptr linked_hash_map, void *key, void* value) {
+void linked_hash_map_insert(Linked_hash_map_ptr linked_hash_map, void *key, void *value) {
     int contains = linked_hash_map_contains(linked_hash_map, key);
     Hash_node_ptr hash_node = hash_map_insert(linked_hash_map->hash_map, key, value);
-    if (!contains){
+    if (!contains) {
         add_last(linked_hash_map->linked_list, create_node(hash_node));
     } else {
         linked_hash_map_update_value(linked_hash_map, key, value);
@@ -39,9 +39,9 @@ void linked_hash_map_remove(Linked_hash_map_ptr linked_hash_map, void *key, void
 
 void linked_hash_map_remove_key(Linked_hash_map_ptr linked_hash_map, void *key) {
     Node_ptr iterator = linked_hash_map->linked_list->head;
-    while (iterator != NULL){
+    while (iterator != NULL) {
         Hash_node_ptr hash_node = iterator->data;
-        if (linked_hash_map->linked_list->compare(hash_node->key, key) == 0){
+        if (linked_hash_map->linked_list->compare(hash_node->key, key) == 0) {
             remove_node(linked_hash_map->linked_list, iterator, NULL);
             break;
         }
@@ -49,11 +49,11 @@ void linked_hash_map_remove_key(Linked_hash_map_ptr linked_hash_map, void *key) 
     }
 }
 
-void linked_hash_map_update_value(Linked_hash_map_ptr linked_hash_map, void *key, void* value) {
+void linked_hash_map_update_value(Linked_hash_map_ptr linked_hash_map, void *key, void *value) {
     Node_ptr iterator = linked_hash_map->linked_list->head;
-    while (iterator != NULL){
+    while (iterator != NULL) {
         Hash_node_ptr hash_node = iterator->data;
-        if (linked_hash_map->linked_list->compare(hash_node->key, key) == 0){
+        if (linked_hash_map->linked_list->compare(hash_node->key, key) == 0) {
             hash_node->value = value;
             break;
         }
@@ -68,7 +68,7 @@ void *linked_hash_map_get(Linked_hash_map_ptr linked_hash_map, void *key) {
 Array_list_ptr linked_hash_map_key_value_list(Linked_hash_map_ptr linked_hash_map) {
     Array_list_ptr result = create_array_list();
     Node_ptr iterator = linked_hash_map->linked_list->head;
-    while (iterator != NULL){
+    while (iterator != NULL) {
         Hash_node_ptr hash_node = iterator->data;
         array_list_add(result, hash_node);
         iterator = iterator->next;
@@ -79,7 +79,7 @@ Array_list_ptr linked_hash_map_key_value_list(Linked_hash_map_ptr linked_hash_ma
 Array_list_ptr linked_hash_map_key_list(Linked_hash_map_ptr linked_hash_map) {
     Array_list_ptr result = create_array_list();
     Node_ptr iterator = linked_hash_map->linked_list->head;
-    while (iterator != NULL){
+    while (iterator != NULL) {
         Hash_node_ptr hash_node = iterator->data;
         array_list_add(result, hash_node->key);
         iterator = iterator->next;

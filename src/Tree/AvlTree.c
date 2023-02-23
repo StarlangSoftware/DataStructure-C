@@ -14,19 +14,19 @@ Avl_tree_ptr create_avl_tree(int (*compare)(void *, void *)) {
 }
 
 void free_avl_tree(Avl_tree_ptr tree, void (*free_method)(void *)) {
-    if (tree->root != NULL){
+    if (tree->root != NULL) {
         free_avl_tree_node(tree->root, free_method);
     }
     free(tree);
 }
 
-Avl_tree_node_ptr search_avl_tree(Avl_tree_ptr tree, void* value){
+Avl_tree_node_ptr search_avl_tree(Avl_tree_ptr tree, void *value) {
     Avl_tree_node_ptr d = tree->root;
-    while (d != NULL){
-        if (tree->compare(d->data, value) == 0){
+    while (d != NULL) {
+        if (tree->compare(d->data, value) == 0) {
             return d;
         } else {
-            if (tree->compare(d->data, value) > 0){
+            if (tree->compare(d->data, value) > 0) {
                 d = d->left;
             } else {
                 d = d->right;
@@ -37,7 +37,7 @@ Avl_tree_node_ptr search_avl_tree(Avl_tree_ptr tree, void* value){
 }
 
 int avl_tree_node_height(Avl_tree_node_ptr d) {
-    if (d == NULL){
+    if (d == NULL) {
         return 0;
     } else {
         return d->height;
@@ -53,8 +53,8 @@ Avl_tree_node_ptr rotate_left(Avl_tree_node_ptr k2) {
     return k1;
 }
 
-int max(int x, int y){
-    if (x > y){
+int max(int x, int y) {
+    if (x > y) {
         return x;
     } else {
         return y;
@@ -87,11 +87,11 @@ void insert_avl_tree(Avl_tree_ptr tree, void *value) {
     Avl_tree_node_ptr t;
     int dir1 = 0, dir2 = 0;
     Stack_ptr c = create_stack();
-    while (x != NULL){
+    while (x != NULL) {
         y = x;
         push(c, y);
         dir1 = dir2;
-        if (tree->compare(value, x->data) < 0){
+        if (tree->compare(value, x->data) < 0) {
             x = x->left;
             dir2 = LEFT;
         } else {
@@ -100,18 +100,18 @@ void insert_avl_tree(Avl_tree_ptr tree, void *value) {
         }
     }
     insert_avl_child(tree, y, create_avl_tree_node(value));
-    while (!is_stack_empty(c)){
+    while (!is_stack_empty(c)) {
         x = pop(c);
         x->height = max(avl_tree_node_height(x->left), avl_tree_node_height(x->right)) + 1;
-        if (abs(avl_tree_node_height(x->left) - avl_tree_node_height(x->right)) == 2){
-            if (dir1 == LEFT){
-                if (dir2 == LEFT){
+        if (abs(avl_tree_node_height(x->left) - avl_tree_node_height(x->right)) == 2) {
+            if (dir1 == LEFT) {
+                if (dir2 == LEFT) {
                     t = rotate_left(x);
                 } else {
                     t = double_rotate_left(x);
                 }
             } else {
-                if (dir2 == LEFT){
+                if (dir2 == LEFT) {
                     t = double_rotate_right(x);
                 } else {
                     t = rotate_right(x);
@@ -125,10 +125,10 @@ void insert_avl_tree(Avl_tree_ptr tree, void *value) {
 }
 
 void insert_avl_child(Avl_tree_ptr tree, Avl_tree_node_ptr parent, Avl_tree_node_ptr child) {
-    if (parent == NULL){
+    if (parent == NULL) {
         tree->root = child;
     } else {
-        if (tree->compare(child->data, parent->data) < 0){
+        if (tree->compare(child->data, parent->data) < 0) {
             parent->left = child;
         } else {
             parent->right = child;

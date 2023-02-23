@@ -30,7 +30,7 @@ void *dequeue(Queue_ptr queue) {
         return NULL;
     }
     Node_ptr node = remove_first(queue->list);
-    void* item = node->data;
+    void *item = node->data;
     free(node);
     return item;
 }
