@@ -96,3 +96,7 @@ Hash_set_ptr create_hash_set_of_string(char **array, int size) {
     }
     return result;
 }
+
+bool hash_set_is_empty(Hash_set_ptr hash_set) {
+    return hash_map_is_empty(hash_set->hash_map);
+}

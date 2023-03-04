@@ -198,3 +198,7 @@ Array_list_ptr key_list(Hash_map_ptr hash_map) {
     }
     return result;
 }
+
+bool hash_map_is_empty(Hash_map_ptr hash_map) {
+    return hash_map->count == 0;
+}

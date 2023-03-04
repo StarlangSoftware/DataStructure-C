@@ -30,4 +30,6 @@ void rehash_hash_set(Hash_map_ptr hash_map);
 
 Array_list_ptr hash_set_key_list(Hash_set_ptr hash_set);
 
+bool hash_set_is_empty(Hash_set_ptr hash_set);
+
 #endif //DATASTRUCTURE_HASHSET_H
