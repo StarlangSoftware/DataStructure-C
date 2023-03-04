@@ -21,7 +21,7 @@ void free_linked_hash_map(Linked_hash_map_ptr linked_hash_map, void free_method(
 
 void linked_hash_map_insert(Linked_hash_map_ptr linked_hash_map, void *key, void *value);
 
-int linked_hash_map_contains(Linked_hash_map_ptr linked_hash_map, void *key);
+bool linked_hash_map_contains(Linked_hash_map_ptr linked_hash_map, void *key);
 
 void linked_hash_map_remove(Linked_hash_map_ptr linked_hash_map, void *key, void free_method(void *));
 

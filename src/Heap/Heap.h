@@ -5,6 +5,8 @@
 #ifndef DATASTRUCTURE_HEAP_H
 #define DATASTRUCTURE_HEAP_H
 
+#include <stdbool.h>
+
 struct heap {
     void **array;
     int count;
@@ -20,7 +22,7 @@ Heap_ptr create_heap(int N, int (*comparator)(void *, void *));
 
 void free_heap(Heap_ptr heap, void free_method(void *));
 
-int is_heap_empty(Heap_ptr heap);
+bool is_heap_empty(Heap_ptr heap);
 
 void swap_heap_node(Heap_ptr heap, int index1, int index2);
 

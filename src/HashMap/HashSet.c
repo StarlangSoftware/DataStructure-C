@@ -41,7 +41,7 @@ void hash_set_insert(Hash_set_ptr hash_set, void *key) {
     }
 }
 
-int hash_set_contains(Hash_set_ptr hash_set, void *key) {
+bool hash_set_contains(Hash_set_ptr hash_set, void *key) {
     unsigned int address = hash_set->hash_map->hash_function(key, primes[hash_set->hash_map->prime_index]);
     return linked_list_contains(hash_set->hash_map->table[address], key);
 }

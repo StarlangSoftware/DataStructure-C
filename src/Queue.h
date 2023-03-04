@@ -18,7 +18,7 @@ Queue_ptr create_queue();
 
 void free_queue(Queue_ptr queue, void free_method(void *));
 
-int is_queue_empty(Queue_ptr queue);
+bool is_queue_empty(Queue_ptr queue);
 
 void enqueue(Queue_ptr queue, void *item);
 

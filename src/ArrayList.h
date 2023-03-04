@@ -5,6 +5,8 @@
 #ifndef DATASTRUCTURE_ARRAYLIST_H
 #define DATASTRUCTURE_ARRAYLIST_H
 
+#include <stdbool.h>
+
 struct array_list {
     void **array;
     int maxSize;
@@ -36,15 +38,15 @@ double array_list_get_double(Array_list_ptr array_list, int index);
 
 void array_list_add_all(Array_list_ptr dst, Array_list_ptr src);
 
-int array_list_contains(Array_list_ptr list, void *data, int comparator(void *item1, void *item2));
+bool array_list_contains(Array_list_ptr list, void *data, int comparator(void *item1, void *item2));
 
-int array_list_equals(Array_list_ptr list1, Array_list_ptr list2, int comparator(void *item1, void *item2));
+bool array_list_equals(Array_list_ptr list1, Array_list_ptr list2, int comparator(void *item1, void *item2));
 
 int array_list_index_of(Array_list_ptr list, void *data, int comparator(void *item1, void *item2));
 
 void array_list_sort(Array_list_ptr list, int comparator(void *item1, void *item2));
 
-int is_array_list_empty(Array_list_ptr list);
+bool is_array_list_empty(Array_list_ptr list);
 
 Array_list_ptr sub_list(Array_list_ptr list, int first_index, int last_index);
 

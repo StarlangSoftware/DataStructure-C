@@ -73,7 +73,7 @@ void free_linked_list(Linked_list_ptr linked_list, void free_method(void *)) {
     free(linked_list);
 }
 
-int is_linked_list_empty(Linked_list_ptr linked_list) {
+bool is_linked_list_empty(Linked_list_ptr linked_list) {
     return linked_list->head == NULL;
 }
 
@@ -88,15 +88,15 @@ void add_last(Linked_list_ptr linked_list, Node_ptr node) {
     linked_list->tail = node;
 }
 
-int linked_list_contains(Linked_list_ptr linked_list, void *item) {
+bool linked_list_contains(Linked_list_ptr linked_list, void *item) {
     Node_ptr iterator = linked_list->head;
     while (iterator != NULL) {
         if (linked_list->compare(iterator->data, item) == 0) {
-            return 1;
+            return true;
         }
         iterator = iterator->next;
     }
-    return 0;
+    return false;
 }
 
 Node_ptr linked_list_get(Linked_list_ptr linked_list, void *item) {

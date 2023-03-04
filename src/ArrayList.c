@@ -95,13 +95,13 @@ void array_list_add_all(Array_list_ptr dst, Array_list_ptr src) {
     dst->size += src->size;
 }
 
-int array_list_contains(Array_list_ptr list, void *data, int (*comparator)(void *, void *)) {
+bool array_list_contains(Array_list_ptr list, void *data, int (*comparator)(void *, void *)) {
     for (int i = 0; i < list->size; i++) {
         if (comparator(data, list->array[i]) == 0) {
-            return 1;
+            return true;
         }
     }
-    return 0;
+    return false;
 }
 
 int array_list_index_of(Array_list_ptr list, void *data, int (*comparator)(void *, void *)) {
@@ -113,7 +113,7 @@ int array_list_index_of(Array_list_ptr list, void *data, int (*comparator)(void 
     return -1;
 }
 
-int is_array_list_empty(Array_list_ptr list) {
+bool is_array_list_empty(Array_list_ptr list) {
     return list->size == 0;
 }
 
@@ -156,14 +156,14 @@ void array_list_replace(Array_list_ptr list, int index, void *item, void (*free_
     list->array[index] = item;
 }
 
-int array_list_equals(Array_list_ptr list1, Array_list_ptr list2, int (*comparator)(void *, void *)) {
+bool array_list_equals(Array_list_ptr list1, Array_list_ptr list2, int (*comparator)(void *, void *)) {
     if (list1->size != list2->size) {
-        return 0;
+        return false;
     }
     for (int i = 0; i < list1->size; i++) {
         if (comparator(list1->array[i], list2->array[i]) != 0) {
-            return 0;
+            return false;
         }
     }
-    return 1;
+    return true;
 }

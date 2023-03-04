@@ -10,7 +10,6 @@
 struct btree {
     BTree_node_ptr root;
     int d;
-
     int (*compare)(void *, void *);
 };
 

@@ -22,7 +22,7 @@ void free_hash_set(Hash_set_ptr hash_set, void free_method(void *));
 
 void hash_set_insert(Hash_set_ptr hash_set, void *key);
 
-int hash_set_contains(Hash_set_ptr hash_set, void *key);
+bool hash_set_contains(Hash_set_ptr hash_set, void *key);
 
 void hash_set_remove(Hash_set_ptr hash_set, void *key, void free_method(void *));
 

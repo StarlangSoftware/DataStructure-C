@@ -5,6 +5,7 @@
 #ifndef DATASTRUCTURE_LINKEDLIST_H
 #define DATASTRUCTURE_LINKEDLIST_H
 
+#include <stdbool.h>
 #include "Node.h"
 
 struct linked_list {
@@ -33,9 +34,9 @@ Node_ptr remove_first(Linked_list_ptr linked_list);
 
 Node_ptr remove_last(Linked_list_ptr linked_list);
 
-int is_linked_list_empty(Linked_list_ptr linked_list);
+bool is_linked_list_empty(Linked_list_ptr linked_list);
 
-int linked_list_contains(Linked_list_ptr linked_list, void *item);
+bool linked_list_contains(Linked_list_ptr linked_list, void *item);
 
 Node_ptr linked_list_get(Linked_list_ptr linked_list, void *item);
 

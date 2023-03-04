@@ -9,7 +9,6 @@
 
 struct tree {
     Tree_node_ptr root;
-
     int (*compare)(void *, void *);
 };
 

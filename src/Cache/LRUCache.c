@@ -31,7 +31,7 @@ void free_lru_cache(Lru_cache_ptr lru_cache, void (*free_method_map_node)(void *
  * @param key T type input key.
  * @return 1 if the {@link map} has the given key, 0 otherwise.
  */
-int lru_cache_contains(Lru_cache_ptr lru_cache, void *key) {
+bool lru_cache_contains(Lru_cache_ptr lru_cache, void *key) {
     return linked_hash_map_contains(lru_cache->map, key);
 }
 

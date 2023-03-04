@@ -122,7 +122,7 @@ Hash_node_ptr hash_map_insert(Hash_map_ptr hash_map, void *key, void *value) {
     return hash_node;
 }
 
-int hash_map_contains(Hash_map_ptr hash_map, void *key) {
+bool hash_map_contains(Hash_map_ptr hash_map, void *key) {
     unsigned int address = hash_map->hash_function(key, primes[hash_map->prime_index]);
     return hash_list_contains(hash_map->table[address], key);
 }
@@ -159,16 +159,16 @@ Node_ptr hash_list_get(Linked_list_ptr linked_list, void *key) {
     return NULL;
 }
 
-int hash_list_contains(Linked_list_ptr linked_list, void *key) {
+bool hash_list_contains(Linked_list_ptr linked_list, void *key) {
     Node_ptr iterator = linked_list->head;
     while (iterator != NULL) {
         Hash_node_ptr hash_node = iterator->data;
         if (linked_list->compare(hash_node->key, key) == 0) {
-            return 1;
+            return true;
         }
         iterator = iterator->next;
     }
-    return 0;
+    return false;
 }
 
 Array_list_ptr key_value_list(Hash_map_ptr hash_map) {

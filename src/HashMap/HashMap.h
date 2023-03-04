@@ -5,6 +5,7 @@
 #ifndef DATASTRUCTURE_HASHMAP_H
 #define DATASTRUCTURE_HASHMAP_H
 
+#include <stdbool.h>
 #include "../LinkedList/LinkedList.h"
 #include "../ArrayList.h"
 #include "HashNode.h"
@@ -54,7 +55,7 @@ void free_hash_map(Hash_map_ptr hash_map, void free_method(void *));
 
 Hash_node_ptr hash_map_insert(Hash_map_ptr hash_map, void *key, void *value);
 
-int hash_map_contains(Hash_map_ptr hash_map, void *key);
+bool hash_map_contains(Hash_map_ptr hash_map, void *key);
 
 void *hash_map_get(Hash_map_ptr hash_map, void *key);
 
@@ -64,7 +65,7 @@ void rehash_hash_map(Hash_map_ptr hash_map);
 
 Node_ptr hash_list_get(Linked_list_ptr linked_list, void *key);
 
-int hash_list_contains(Linked_list_ptr linked_list, void *key);
+bool hash_list_contains(Linked_list_ptr linked_list, void *key);
 
 Array_list_ptr key_value_list(Hash_map_ptr hash_map);
 

@@ -28,7 +28,7 @@ void linked_hash_map_insert(Linked_hash_map_ptr linked_hash_map, void *key, void
     }
 }
 
-int linked_hash_map_contains(Linked_hash_map_ptr linked_hash_map, void *key) {
+bool linked_hash_map_contains(Linked_hash_map_ptr linked_hash_map, void *key) {
     return hash_map_contains(linked_hash_map->hash_map, key);
 }
 
