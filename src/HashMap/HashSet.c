@@ -100,3 +100,11 @@ Hash_set_ptr create_hash_set_of_string(char **array, int size) {
 bool hash_set_is_empty(Hash_set_ptr hash_set) {
     return hash_map_is_empty(hash_set->hash_map);
 }
+
+void hash_set_merge(Hash_set_ptr hash_set1, Hash_set_ptr hash_set2) {
+    Array_list_ptr key_list = hash_set_key_list(hash_set2);
+    for (int i = 0; i < key_list->size; i++){
+        hash_set_insert(hash_set1, array_list_get(key_list, i));
+    }
+    free_array_list(key_list, NULL);
+}
