@@ -12,7 +12,7 @@ int compareIntMax(const int *first, const int *second) {
 
 void testTree() {
     int array[8] = {4, 6, 2, 5, 3, 1, 7, 8};
-    Tree_ptr tree = create_tree((int (*)(void *, void *)) compareIntMax);
+    Tree_ptr tree = create_tree((int (*)(const void *, const void *)) compareIntMax);
     for (int i = 0; i < 7; i++) {
         insert_tree(tree, &array[i]);
     }
@@ -30,7 +30,7 @@ void testTree2() {
         array[i] = i;
     }
     array[31] = 31;
-    Avl_tree_ptr tree = create_avl_tree((int (*)(void *, void *)) compareIntMax);
+    Avl_tree_ptr tree = create_avl_tree((int (*)(const void *, const void *)) compareIntMax);
     for (int i = 0; i < 31; i++) {
         insert_avl_tree(tree, &array[i]);
     }
@@ -50,7 +50,7 @@ void testTree3() {
         array[i] = i;
     }
     array[31] = 31;
-    BTree_ptr tree = create_btree(1, (int (*)(void *, void *)) compareIntMax);
+    BTree_ptr tree = create_btree(1, (int (*)(const void *, const void *)) compareIntMax);
     for (int i = 0; i < 31; i++) {
         insert_btree(tree, &array[i]);
     }

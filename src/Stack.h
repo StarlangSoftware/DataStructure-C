@@ -22,6 +22,6 @@ void push(Stack_ptr stack, void *item);
 
 void *pop(Stack_ptr stack);
 
-bool is_stack_empty(Stack_ptr stack);
+bool is_stack_empty(const Stack* stack);
 
 #endif //DATASTRUCTURE_STACK_H

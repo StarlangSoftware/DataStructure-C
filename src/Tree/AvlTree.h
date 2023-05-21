@@ -10,19 +10,19 @@
 struct avl_tree {
     Avl_tree_node_ptr root;
 
-    int (*compare)(void *, void *);
+    int (*compare)(const void *, const void *);
 };
 
 typedef struct avl_tree Avl_tree;
 typedef Avl_tree *Avl_tree_ptr;
 
-Avl_tree_ptr create_avl_tree(int (*compare)(void *, void *));
+Avl_tree_ptr create_avl_tree(int (*compare)(const void *, const void *));
 
 void free_avl_tree(Avl_tree_ptr tree, void free_method(void *data));
 
-Avl_tree_node_ptr search_avl_tree(Avl_tree_ptr tree, void *value);
+Avl_tree_node_ptr search_avl_tree(const Avl_tree* tree, const void *value);
 
-int avl_tree_node_height(Avl_tree_node_ptr d);
+int avl_tree_node_height(const Avl_tree_node* d);
 
 Avl_tree_node_ptr rotate_left(Avl_tree_node_ptr k2);
 

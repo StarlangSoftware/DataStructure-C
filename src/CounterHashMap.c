@@ -7,7 +7,7 @@
 #include "HashMap/HashNode.h"
 
 Counter_hash_map_ptr
-create_counter_hash_map(unsigned int (*hash_function)(void *, int), int (*key_compare)(void *, void *)) {
+create_counter_hash_map(unsigned int (*hash_function)(const void *, int), int (*key_compare)(const void *, const void *)) {
     Counter_hash_map_ptr result = malloc(sizeof(Counter_hash_map));
     result->map = create_hash_map(hash_function, key_compare);
     return result;
@@ -65,7 +65,7 @@ void put_counter_hash_map_n_times(Counter_hash_map_ptr counter_hash_map, void *k
  * @param key to get value.
  * @return the value corresponding given key, 0 if it is not mapped.
  */
-int count_counter_hash_map(Counter_hash_map_ptr counter_hash_map, void *key) {
+int count_counter_hash_map(const Counter_hash_map* counter_hash_map, const void *key) {
     if (hash_map_contains(counter_hash_map->map, key)) {
         return *((int *) hash_map_get(counter_hash_map->map, key));
     } else {
@@ -79,7 +79,7 @@ int count_counter_hash_map(Counter_hash_map_ptr counter_hash_map, void *key) {
  * @param counter_hash_map Map to process.
  * @return accumulated counts.
  */
-int sum_of_counts_counter_hash_map(Counter_hash_map_ptr counter_hash_map) {
+int sum_of_counts_counter_hash_map(const Counter_hash_map* counter_hash_map) {
     int sum = 0;
     for (int i = 0; i < primes[counter_hash_map->map->prime_index]; i++) {
         Linked_list_ptr linked_list = counter_hash_map->map->table[i];
@@ -102,7 +102,7 @@ int sum_of_counts_counter_hash_map(Counter_hash_map_ptr counter_hash_map) {
  * @param counter_hash_map Map to process.
  * @return T type maxKey which is the maximum valued key.
  */
-void *max_counter_hash_map(Counter_hash_map_ptr counter_hash_map) {
+void *max_counter_hash_map(const Counter_hash_map* counter_hash_map) {
     int max_count = 0;
     void *max_key = NULL;
     for (int i = 0; i < primes[counter_hash_map->map->prime_index]; i++) {
@@ -133,7 +133,7 @@ void *max_counter_hash_map(Counter_hash_map_ptr counter_hash_map) {
  * @param threshold double value.
  * @return T type maxKey if greater than the given threshold, null otherwise.
  */
-void *max_than_threshold_counter_hash_map(Counter_hash_map_ptr counter_hash_map, double threshold) {
+void *max_than_threshold_counter_hash_map(const Counter_hash_map* counter_hash_map, double threshold) {
     int max_count = 0, total = 0;
     void *max_key = NULL;
     for (int i = 0; i < primes[counter_hash_map->map->prime_index]; i++) {
@@ -164,7 +164,7 @@ void *max_than_threshold_counter_hash_map(Counter_hash_map_ptr counter_hash_map,
  * @param counter_hash_map Map to process.
  * @param toBeAdded CounterHashMap to be added to this counterHashMap.
  */
-void add_counter_hash_map(Counter_hash_map_ptr dst, Counter_hash_map_ptr src) {
+void add_counter_hash_map(Counter_hash_map_ptr dst, const Counter_hash_map* src) {
     for (int i = 0; i < primes[src->map->prime_index]; i++) {
         Linked_list_ptr linked_list = src->map->table[i];
         Node_ptr iterator = linked_list->head;
@@ -187,7 +187,7 @@ void add_counter_hash_map(Counter_hash_map_ptr dst, Counter_hash_map_ptr src) {
  * @param N Integer value for defining size of the sublist.
  * @return a sublist of N element.
  */
-Array_list_ptr top_N_counter_hash_map(Counter_hash_map_ptr counter_hash_map, int N) {
+Array_list_ptr top_N_counter_hash_map(const Counter_hash_map* counter_hash_map, int N) {
     Array_list_ptr result = create_array_list();
     for (int i = 0; i < primes[counter_hash_map->map->prime_index]; i++) {
         Linked_list_ptr linked_list = counter_hash_map->map->table[i];
@@ -199,11 +199,11 @@ Array_list_ptr top_N_counter_hash_map(Counter_hash_map_ptr counter_hash_map, int
             iterator = next;
         }
     }
-    array_list_sort(result, (int (*)(void *, void *)) compare_values_of_counter_hash_map);
+    array_list_sort(result, (int (*)(const void *, const void *)) compare_values_of_counter_hash_map);
     return sub_list(result, 0, N);
 }
 
-int compare_values_of_counter_hash_map(Hash_node_ptr item1, Hash_node_ptr item2) {
+int compare_values_of_counter_hash_map(const Hash_node* item1, const Hash_node* item2) {
     int value1 = *((int *) item1->value);
     int value2 = *((int *) item2->value);
     if (value1 < value2) {

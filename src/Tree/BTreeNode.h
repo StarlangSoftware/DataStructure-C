@@ -25,7 +25,7 @@ BTree_node_ptr create_btree_node_with_children(BTree_node_ptr first_Child,
 
 void free_btree_node(BTree_node_ptr btree_node, void free_method(void *data));
 
-int btree_node_position(BTree_node_ptr btree_node, void *value, int (*compare)(void *, void *));
+int btree_node_position(const BTree_node* btree_node, const void *value, int (*compare)(const void *, const void *));
 
 void insert_into_K(BTree_node_ptr btree_node, int index, void *inserted_K);
 
@@ -35,8 +35,8 @@ void move_half_of_the_children_to_new_node(BTree_node_ptr btree_node, BTree_node
 
 void move_half_of_the_elements_to_new_node(BTree_node_ptr btree_node, BTree_node_ptr new_node);
 
-BTree_node_ptr insert_btree_node(BTree_node_ptr btree_node, void *value, int (*compare)(void *, void *), int is_root);
+BTree_node_ptr insert_btree_node(BTree_node_ptr btree_node, void *value, int (*compare)(const void *, const void *), int is_root);
 
-BTree_node_ptr insert_btree_leaf(BTree_node_ptr btree_node, void *value, int (*compare)(void *, void *));
+BTree_node_ptr insert_btree_leaf(BTree_node_ptr btree_node, void *value, int (*compare)(const void *, const void *));
 
 #endif //DATASTRUCTURE_BTREENODE_H

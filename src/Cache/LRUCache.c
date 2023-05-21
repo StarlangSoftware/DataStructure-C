@@ -12,7 +12,7 @@
  * @param cache_size Integer input defining cache size.
  */
 Lru_cache_ptr
-create_lru_cache(int cache_size, unsigned int (*hash_function)(void *, int), int (*compare)(void *, void *)) {
+create_lru_cache(int cache_size, unsigned int (*hash_function)(const void *, int), int (*compare)(const void *, const void *)) {
     Lru_cache_ptr result = malloc(sizeof(Lru_cache));
     result->cache_size = cache_size;
     result->map = create_linked_hash_map(hash_function, compare);
@@ -31,7 +31,7 @@ void free_lru_cache(Lru_cache_ptr lru_cache, void (*free_method_map_node)(void *
  * @param key T type input key.
  * @return 1 if the {@link map} has the given key, 0 otherwise.
  */
-bool lru_cache_contains(Lru_cache_ptr lru_cache, void *key) {
+bool lru_cache_contains(const Lru_cache *lru_cache, const void *key) {
     return linked_hash_map_contains(lru_cache->map, key);
 }
 
@@ -44,7 +44,7 @@ bool lru_cache_contains(Lru_cache_ptr lru_cache, void *key) {
  * @param key T type input key.
  * @return data value if the {@link map} has the given key, nullptr otherwise.
  */
-void *lru_cache_get(Lru_cache_ptr lru_cache, void *key) {
+void *lru_cache_get(const Lru_cache* lru_cache, void *key) {
     if (lru_cache_contains(lru_cache, key)) {
         void *value = linked_hash_map_get(lru_cache->map, key);
         linked_hash_map_remove(lru_cache->map, key, NULL);

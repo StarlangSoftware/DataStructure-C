@@ -6,7 +6,7 @@
 #include "Tree.h"
 #include "TreeNode.h"
 
-Tree_ptr create_tree(int (*compare)(void *, void *)) {
+Tree_ptr create_tree(int (*compare)(const void *, const void *)) {
     Tree_ptr result = malloc(sizeof(Tree));
     result->root = NULL;
     result->compare = compare;
@@ -20,7 +20,7 @@ void free_tree(Tree_ptr tree, void (*free_method)(void *)) {
     free(tree);
 }
 
-Tree_node_ptr search_tree(Tree_ptr tree, void *value) {
+Tree_node_ptr search_tree(const Tree* tree, const void *value) {
     Tree_node_ptr d = tree->root;
     while (d != NULL) {
         if (tree->compare(d->data, value) == 0) {

@@ -31,6 +31,6 @@ void *pop(Stack_ptr stack) {
     return item;
 }
 
-bool is_stack_empty(Stack_ptr stack) {
+bool is_stack_empty(const Stack* stack) {
     return is_linked_list_empty(stack->list);
 }

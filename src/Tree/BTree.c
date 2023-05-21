@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include "BTree.h"
 
-BTree_ptr create_btree(int d, int (*compare)(void *, void *)) {
+BTree_ptr create_btree(int d, int (*compare)(const void *, const void *)) {
     BTree_ptr result = malloc(sizeof(BTree));
     result->d = d;
     result->compare = compare;
@@ -20,7 +20,7 @@ void free_btree(BTree_ptr btree, void (*free_method)(void *)) {
     free(btree);
 }
 
-BTree_node_ptr search_btree(BTree_ptr btree, void *value) {
+BTree_node_ptr search_btree(const BTree* btree, const void *value) {
     int child;
     BTree_node_ptr b;
     b = btree->root;

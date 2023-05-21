@@ -47,7 +47,7 @@ void free_btree_node(BTree_node_ptr btree_node, void (*free_method)(void *)) {
     free(btree_node);
 }
 
-int btree_node_position(BTree_node_ptr btree_node, void *value, int (*compare)(void *, void *)) {
+int btree_node_position(const BTree_node* btree_node, const void *value, int (*compare)(const void *, const void *)) {
     if (btree_node->m == 0) {
         return 0;
     }
@@ -89,7 +89,7 @@ void move_half_of_the_elements_to_new_node(BTree_node_ptr btree_node, BTree_node
     move_half_of_the_children_to_new_node(btree_node, new_node);
 }
 
-BTree_node_ptr insert_btree_node(BTree_node_ptr btree_node, void *value, int (*compare)(void *, void *), int is_root) {
+BTree_node_ptr insert_btree_node(BTree_node_ptr btree_node, void *value, int (*compare)(const void *, const void *), int is_root) {
     BTree_node_ptr s;
     BTree_node_ptr new_node;
     int child;
@@ -123,7 +123,7 @@ BTree_node_ptr insert_btree_node(BTree_node_ptr btree_node, void *value, int (*c
     }
 }
 
-BTree_node_ptr insert_btree_leaf(BTree_node_ptr btree_node, void *value, int (*compare)(void *, void *)) {
+BTree_node_ptr insert_btree_leaf(BTree_node_ptr btree_node, void *value, int (*compare)(const void *, const void *)) {
     int child;
     BTree_node_ptr new_node;
     child = btree_node_position(btree_node, value, compare);

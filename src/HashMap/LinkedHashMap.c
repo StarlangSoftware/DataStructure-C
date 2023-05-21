@@ -6,7 +6,7 @@
 #include "LinkedHashMap.h"
 #include "HashNode.h"
 
-Linked_hash_map_ptr create_linked_hash_map(unsigned int (*hash_function)(void *, int), int (*compare)(void *, void *)) {
+Linked_hash_map_ptr create_linked_hash_map(unsigned int (*hash_function)(const void *, int), int (*compare)(const void *, const void *)) {
     Linked_hash_map_ptr result = malloc(sizeof(Linked_hash_map));
     result->hash_map = create_hash_map(hash_function, compare);
     result->linked_list = create_linked_list(compare);
@@ -28,7 +28,7 @@ void linked_hash_map_insert(Linked_hash_map_ptr linked_hash_map, void *key, void
     }
 }
 
-bool linked_hash_map_contains(Linked_hash_map_ptr linked_hash_map, void *key) {
+bool linked_hash_map_contains(const Linked_hash_map* linked_hash_map, const void *key) {
     return hash_map_contains(linked_hash_map->hash_map, key);
 }
 
@@ -37,7 +37,7 @@ void linked_hash_map_remove(Linked_hash_map_ptr linked_hash_map, void *key, void
     linked_hash_map_remove_key(linked_hash_map, key);
 }
 
-void linked_hash_map_remove_key(Linked_hash_map_ptr linked_hash_map, void *key) {
+void linked_hash_map_remove_key(Linked_hash_map_ptr linked_hash_map, const void *key) {
     Node_ptr iterator = linked_hash_map->linked_list->head;
     while (iterator != NULL) {
         Hash_node_ptr hash_node = iterator->data;
@@ -49,7 +49,7 @@ void linked_hash_map_remove_key(Linked_hash_map_ptr linked_hash_map, void *key) 
     }
 }
 
-void linked_hash_map_update_value(Linked_hash_map_ptr linked_hash_map, void *key, void *value) {
+void linked_hash_map_update_value(Linked_hash_map_ptr linked_hash_map, const void *key, void *value) {
     Node_ptr iterator = linked_hash_map->linked_list->head;
     while (iterator != NULL) {
         Hash_node_ptr hash_node = iterator->data;
@@ -61,11 +61,11 @@ void linked_hash_map_update_value(Linked_hash_map_ptr linked_hash_map, void *key
     }
 }
 
-void *linked_hash_map_get(Linked_hash_map_ptr linked_hash_map, void *key) {
+void *linked_hash_map_get(const Linked_hash_map* linked_hash_map, const void *key) {
     return hash_map_get(linked_hash_map->hash_map, key);
 }
 
-Array_list_ptr linked_hash_map_key_value_list(Linked_hash_map_ptr linked_hash_map) {
+Array_list_ptr linked_hash_map_key_value_list(const Linked_hash_map* linked_hash_map) {
     Array_list_ptr result = create_array_list();
     Node_ptr iterator = linked_hash_map->linked_list->head;
     while (iterator != NULL) {
@@ -76,7 +76,7 @@ Array_list_ptr linked_hash_map_key_value_list(Linked_hash_map_ptr linked_hash_ma
     return result;
 }
 
-Array_list_ptr linked_hash_map_key_list(Linked_hash_map_ptr linked_hash_map) {
+Array_list_ptr linked_hash_map_key_list(const Linked_hash_map* linked_hash_map) {
     Array_list_ptr result = create_array_list();
     Node_ptr iterator = linked_hash_map->linked_list->head;
     while (iterator != NULL) {

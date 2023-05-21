@@ -17,7 +17,7 @@ void free_queue(Queue_ptr queue, void free_method(void *)) {
     free(queue);
 }
 
-bool is_queue_empty(Queue_ptr queue) {
+bool is_queue_empty(const Queue* queue) {
     return is_linked_list_empty(queue->list);
 }
 

@@ -8,7 +8,7 @@
 #include "HashMap.h"
 #include "HashNode.h"
 
-unsigned int hash_function_string(char *string, int N) {
+unsigned int hash_function_string(const char *string, int N) {
     unsigned int total;
     for (int i = 0; i < strlen(string); i++) {
         total = total * 256 + string[i];
@@ -20,7 +20,7 @@ unsigned int hash_function_int(const int *number, int N) {
     return *number % N;
 }
 
-int compare_string(char *first, char *second) {
+int compare_string(const char *first, const char *second) {
     return strcmp(first, second);
 }
 
@@ -44,7 +44,7 @@ void free_string(char *value) {
     free(value);
 }
 
-Linked_list_ptr *allocate_hash_table(int prime_index, int (*key_compare)(void *, void *)) {
+Linked_list_ptr *allocate_hash_table(int prime_index, int (*key_compare)(const void *, const void *)) {
     Linked_list_ptr *table;
     int N = primes[prime_index];
     table = malloc(N * sizeof(Linked_list_ptr));
@@ -54,7 +54,7 @@ Linked_list_ptr *allocate_hash_table(int prime_index, int (*key_compare)(void *,
     return table;
 }
 
-Hash_map_ptr create_hash_map(unsigned int (*hash_function)(void *, int), int (*key_compare)(void *, void *)) {
+Hash_map_ptr create_hash_map(unsigned int (*hash_function)(const void *, int), int (*key_compare)(const void *, const void *)) {
     Hash_map_ptr result = malloc(sizeof(Hash_map));
     result->prime_index = 0;
     result->table = allocate_hash_table(result->prime_index, key_compare);
@@ -122,12 +122,12 @@ Hash_node_ptr hash_map_insert(Hash_map_ptr hash_map, void *key, void *value) {
     return hash_node;
 }
 
-bool hash_map_contains(Hash_map_ptr hash_map, void *key) {
+bool hash_map_contains(const Hash_map* hash_map, const void *key) {
     unsigned int address = hash_map->hash_function(key, primes[hash_map->prime_index]);
     return hash_list_contains(hash_map->table[address], key);
 }
 
-void *hash_map_get(Hash_map_ptr hash_map, void *key) {
+void *hash_map_get(const Hash_map* hash_map, const void *key) {
     unsigned int address = hash_map->hash_function(key, primes[hash_map->prime_index]);
     Node_ptr node = hash_list_get(hash_map->table[address], key);
     if (node != NULL) {
@@ -138,7 +138,7 @@ void *hash_map_get(Hash_map_ptr hash_map, void *key) {
     }
 }
 
-void hash_map_remove(Hash_map_ptr hash_map, void *key, void free_method(void *)) {
+void hash_map_remove(Hash_map_ptr hash_map, const void *key, void free_method(void *)) {
     unsigned int address = hash_map->hash_function(key, primes[hash_map->prime_index]);
     Node_ptr node = hash_list_get(hash_map->table[address], key);
     if (node != NULL) {
@@ -147,7 +147,7 @@ void hash_map_remove(Hash_map_ptr hash_map, void *key, void free_method(void *))
     }
 }
 
-Node_ptr hash_list_get(Linked_list_ptr linked_list, void *key) {
+Node_ptr hash_list_get(const Linked_list* linked_list, const void *key) {
     Node_ptr iterator = linked_list->head;
     while (iterator != NULL) {
         Hash_node_ptr hash_node = iterator->data;
@@ -159,7 +159,7 @@ Node_ptr hash_list_get(Linked_list_ptr linked_list, void *key) {
     return NULL;
 }
 
-bool hash_list_contains(Linked_list_ptr linked_list, void *key) {
+bool hash_list_contains(const Linked_list* linked_list, const void *key) {
     Node_ptr iterator = linked_list->head;
     while (iterator != NULL) {
         Hash_node_ptr hash_node = iterator->data;
@@ -171,7 +171,7 @@ bool hash_list_contains(Linked_list_ptr linked_list, void *key) {
     return false;
 }
 
-Array_list_ptr key_value_list(Hash_map_ptr hash_map) {
+Array_list_ptr key_value_list(const Hash_map* hash_map) {
     Array_list_ptr result = create_array_list();
     for (int i = 0; i < primes[hash_map->prime_index]; i++) {
         Linked_list_ptr linked_list = hash_map->table[i];
@@ -185,7 +185,7 @@ Array_list_ptr key_value_list(Hash_map_ptr hash_map) {
     return result;
 }
 
-Array_list_ptr key_list(Hash_map_ptr hash_map) {
+Array_list_ptr key_list(const Hash_map* hash_map) {
     Array_list_ptr result = create_array_list();
     for (int i = 0; i < primes[hash_map->prime_index]; i++) {
         Linked_list_ptr linked_list = hash_map->table[i];
@@ -199,6 +199,6 @@ Array_list_ptr key_list(Hash_map_ptr hash_map) {
     return result;
 }
 
-bool hash_map_is_empty(Hash_map_ptr hash_map) {
+bool hash_map_is_empty(const Hash_map* hash_map) {
     return hash_map->count == 0;
 }

@@ -6,7 +6,7 @@
 #include "AvlTree.h"
 #include "../Stack.h"
 
-Avl_tree_ptr create_avl_tree(int (*compare)(void *, void *)) {
+Avl_tree_ptr create_avl_tree(int (*compare)(const void *, const void *)) {
     Avl_tree_ptr result = malloc(sizeof(Avl_tree));
     result->root = NULL;
     result->compare = compare;
@@ -20,7 +20,7 @@ void free_avl_tree(Avl_tree_ptr tree, void (*free_method)(void *)) {
     free(tree);
 }
 
-Avl_tree_node_ptr search_avl_tree(Avl_tree_ptr tree, void *value) {
+Avl_tree_node_ptr search_avl_tree(const Avl_tree* tree, const void *value) {
     Avl_tree_node_ptr d = tree->root;
     while (d != NULL) {
         if (tree->compare(d->data, value) == 0) {
@@ -36,7 +36,7 @@ Avl_tree_node_ptr search_avl_tree(Avl_tree_ptr tree, void *value) {
     return NULL;
 }
 
-int avl_tree_node_height(Avl_tree_node_ptr d) {
+int avl_tree_node_height(const Avl_tree_node* d) {
     if (d == NULL) {
         return 0;
     } else {

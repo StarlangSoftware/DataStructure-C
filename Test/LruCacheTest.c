@@ -11,8 +11,8 @@ void lru_cache_test1() {
     char *keys[3] = {"item1", "item2", "item3"};
     char *data[3] = {"1", "2", "3"};
     Lru_cache_ptr cache = create_lru_cache(50,
-                                           (unsigned int (*)(void *, int)) hash_function_string,
-                                           (int (*)(void *, void *)) compare_string);
+                                           (unsigned int (*)(const void *, int)) hash_function_string,
+                                           (int (*)(const void *, const void *)) compare_string);
     for (int i = 0; i < 3; i++) {
         lru_cache_add(cache, keys[i], data[i]);
     }
@@ -32,8 +32,8 @@ void lru_cache_test2() {
     char *keys[3] = {"item1", "item2", "item3"};
     char *data[3] = {"1", "2", "3"};
     Lru_cache_ptr cache = create_lru_cache(2,
-                                           (unsigned int (*)(void *, int)) hash_function_string,
-                                           (int (*)(void *, void *)) compare_string);
+                                           (unsigned int (*)(const void *, int)) hash_function_string,
+                                           (int (*)(const void *, const void *)) compare_string);
     for (int i = 0; i < 3; i++) {
         lru_cache_add(cache, keys[i], data[i]);
     }
@@ -50,8 +50,8 @@ void lru_cache_test3() {
     int keys[10000];
     int data;
     Lru_cache_ptr cache = create_lru_cache(10000,
-                                           (unsigned int (*)(void *, int)) hash_function_int,
-                                           (int (*)(void *, void *)) compare_int);
+                                           (unsigned int (*)(const void *, int)) hash_function_int,
+                                           (int (*)(const void *, const void *)) compare_int);
     for (int i = 0; i < 10000; i++) {
         keys[i] = i;
         lru_cache_add(cache, &keys[i], &keys[i]);

@@ -22,7 +22,7 @@ Heap_ptr create_heap(int N, int (*comparator)(void *, void *));
 
 void free_heap(Heap_ptr heap, void free_method(void *));
 
-bool is_heap_empty(Heap_ptr heap);
+bool is_heap_empty(const Heap* heap);
 
 void swap_heap_node(Heap_ptr heap, int index1, int index2);
 

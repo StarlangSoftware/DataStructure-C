@@ -75,18 +75,18 @@ void array_list_insert(Array_list_ptr array_list, int index, void *item) {
     }
 }
 
-void *array_list_get(Array_list_ptr array_list, int index) {
+void *array_list_get(const Array_list* array_list, int index) {
     if (index < 0 || index >= array_list->size) {
         return NULL;
     }
     return array_list->array[index];
 }
 
-double array_list_get_double(Array_list_ptr array_list, int index) {
+double array_list_get_double(const Array_list* array_list, int index) {
     return *((double *) array_list_get(array_list, index));
 }
 
-void array_list_add_all(Array_list_ptr dst, Array_list_ptr src) {
+void array_list_add_all(Array_list_ptr dst, const Array_list* src) {
     if (dst->size + src->size > dst->maxSize) {
         dst->maxSize = (dst->size + src->size) * 2;
         dst->array = realloc(dst->array, dst->maxSize * sizeof(void *));
@@ -95,7 +95,7 @@ void array_list_add_all(Array_list_ptr dst, Array_list_ptr src) {
     dst->size += src->size;
 }
 
-bool array_list_contains(Array_list_ptr list, void *data, int (*comparator)(void *, void *)) {
+bool array_list_contains(const Array_list* list, const void *data, int (*comparator)(const void *, const void *)) {
     for (int i = 0; i < list->size; i++) {
         if (comparator(data, list->array[i]) == 0) {
             return true;
@@ -104,7 +104,7 @@ bool array_list_contains(Array_list_ptr list, void *data, int (*comparator)(void
     return false;
 }
 
-int array_list_index_of(Array_list_ptr list, void *data, int (*comparator)(void *, void *)) {
+int array_list_index_of(const Array_list* list, const void *data, int (*comparator)(const void *, const void *)) {
     for (int i = 0; i < list->size; i++) {
         if (comparator(data, list->array[i]) == 0) {
             return i;
@@ -113,15 +113,15 @@ int array_list_index_of(Array_list_ptr list, void *data, int (*comparator)(void 
     return -1;
 }
 
-bool is_array_list_empty(Array_list_ptr list) {
+bool is_array_list_empty(const Array_list* list) {
     return list->size == 0;
 }
 
-void array_list_sort(Array_list_ptr list, int (*comparator)(void *, void *)) {
-    qsort(list->array, list->size, sizeof(void *), (int (*)(const void *, const void *)) comparator);
+void array_list_sort(Array_list_ptr list, int (*comparator)(const void *, const void *)) {
+    qsort(list->array, list->size, sizeof(void *), comparator);
 }
 
-Array_list_ptr sub_list(Array_list_ptr list, int first_index, int last_index) {
+Array_list_ptr sub_list(const Array_list* list, int first_index, int last_index) {
     Array_list_ptr result = create_array_list();
     for (int i = first_index; i < last_index; i++) {
         array_list_add(result, list->array[i]);
@@ -156,7 +156,7 @@ void array_list_replace(Array_list_ptr list, int index, void *item, void (*free_
     list->array[index] = item;
 }
 
-bool array_list_equals(Array_list_ptr list1, Array_list_ptr list2, int (*comparator)(void *, void *)) {
+bool array_list_equals(const Array_list* list1, const Array_list* list2, int (*comparator)(const void *, const void *)) {
     if (list1->size != list2->size) {
         return false;
     }

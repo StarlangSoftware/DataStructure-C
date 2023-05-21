@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include "LinkedList.h"
 
-Linked_list_ptr create_linked_list(int (*compare)(void *, void *)) {
+Linked_list_ptr create_linked_list(int (*compare)(const void *, const void *)) {
     Linked_list_ptr result = malloc(sizeof(Linked_list));
     result->head = NULL;
     result->tail = NULL;
@@ -73,7 +73,7 @@ void free_linked_list(Linked_list_ptr linked_list, void free_method(void *)) {
     free(linked_list);
 }
 
-bool is_linked_list_empty(Linked_list_ptr linked_list) {
+bool is_linked_list_empty(const Linked_list* linked_list) {
     return linked_list->head == NULL;
 }
 
@@ -88,7 +88,7 @@ void add_last(Linked_list_ptr linked_list, Node_ptr node) {
     linked_list->tail = node;
 }
 
-bool linked_list_contains(Linked_list_ptr linked_list, void *item) {
+bool linked_list_contains(const Linked_list* linked_list, const void *item) {
     Node_ptr iterator = linked_list->head;
     while (iterator != NULL) {
         if (linked_list->compare(iterator->data, item) == 0) {
@@ -99,7 +99,7 @@ bool linked_list_contains(Linked_list_ptr linked_list, void *item) {
     return false;
 }
 
-Node_ptr linked_list_get(Linked_list_ptr linked_list, void *item) {
+Node_ptr linked_list_get(const Linked_list* linked_list, const void *item) {
     Node_ptr iterator = linked_list->head;
     while (iterator != NULL) {
         if (linked_list->compare(iterator->data, item) == 0) {
@@ -110,7 +110,7 @@ Node_ptr linked_list_get(Linked_list_ptr linked_list, void *item) {
     return NULL;
 }
 
-void remove_data(Linked_list_ptr linked_list, void *data) {
+void remove_data(Linked_list_ptr linked_list, const void *data) {
     Node_ptr node = linked_list_get(linked_list, data);
     if (node != NULL) {
         remove_node(linked_list, node, NULL);

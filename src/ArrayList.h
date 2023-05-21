@@ -32,23 +32,23 @@ void array_list_add_double(Array_list_ptr array_list, double value);
 
 void array_list_insert(Array_list_ptr array_list, int index, void *item);
 
-void *array_list_get(Array_list_ptr array_list, int index);
+void *array_list_get(const Array_list* array_list, int index);
 
-double array_list_get_double(Array_list_ptr array_list, int index);
+double array_list_get_double(const Array_list* array_list, int index);
 
-void array_list_add_all(Array_list_ptr dst, Array_list_ptr src);
+void array_list_add_all(Array_list_ptr dst, const Array_list* src);
 
-bool array_list_contains(Array_list_ptr list, void *data, int comparator(void *item1, void *item2));
+bool array_list_contains(const Array_list* list, const void *data, int comparator(const void *item1, const void *item2));
 
-bool array_list_equals(Array_list_ptr list1, Array_list_ptr list2, int comparator(void *item1, void *item2));
+bool array_list_equals(const Array_list* list1, const Array_list* list2, int comparator(const void *item1, const void *item2));
 
-int array_list_index_of(Array_list_ptr list, void *data, int comparator(void *item1, void *item2));
+int array_list_index_of(const Array_list* list, const void *data, int comparator(const void *item1, const void *item2));
 
-void array_list_sort(Array_list_ptr list, int comparator(void *item1, void *item2));
+void array_list_sort(Array_list_ptr list, int comparator(const void *item1, const void *item2));
 
-bool is_array_list_empty(Array_list_ptr list);
+bool is_array_list_empty(const Array_list* list);
 
-Array_list_ptr sub_list(Array_list_ptr list, int first_index, int last_index);
+Array_list_ptr sub_list(const Array_list* list, int first_index, int last_index);
 
 void array_list_shuffle(Array_list_ptr list);
 

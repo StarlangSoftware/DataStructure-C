@@ -24,7 +24,7 @@ void free_heap(Heap_ptr heap, void (*free_method)(void *)) {
     free(heap);
 }
 
-bool is_heap_empty(Heap_ptr heap) {
+bool is_heap_empty(const Heap* heap) {
     return heap->count == 0;
 }
 
