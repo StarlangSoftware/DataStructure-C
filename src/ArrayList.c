@@ -167,3 +167,9 @@ bool array_list_equals(const Array_list* list1, const Array_list* list2, int (*c
     }
     return true;
 }
+
+void array_list_swap(Array_list_ptr list, int index1, int index2) {
+    void* tmp = list->array[index1];
+    list->array[index1] = list->array[index2];
+    list->array[index2] = tmp;
+}

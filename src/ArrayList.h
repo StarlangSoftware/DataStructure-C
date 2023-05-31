@@ -56,5 +56,6 @@ void array_list_remove(Array_list_ptr list, int index, void free_method(void *da
 
 void array_list_replace(Array_list_ptr list, int index, void *item, void free_method(void *data));
 
+void array_list_swap(Array_list_ptr list, int index1, int index2);
 
 #endif //DATASTRUCTURE_ARRAYLIST_H
