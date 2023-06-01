@@ -112,6 +112,31 @@ void testMax() {
     free_counter_hash_map(counterHashMap, NULL);
 }
 
+void testTopN() {
+    char *items[3] = {"item1", "item2", "item3"};
+    Counter_hash_map_ptr counterHashMap = create_counter_hash_map((unsigned int (*)(const void *, int)) hash_function_string,
+                                                                  (int (*)(const void *, const void *)) compare_string);
+    put_counter_hash_map(counterHashMap, items[0]);
+    put_counter_hash_map(counterHashMap, items[1]);
+    put_counter_hash_map(counterHashMap, items[2]);
+    put_counter_hash_map(counterHashMap, items[0]);
+    put_counter_hash_map(counterHashMap, items[1]);
+    put_counter_hash_map(counterHashMap, items[0]);
+    Hash_node_ptr hashNode = array_list_get(top_N_counter_hash_map(counterHashMap, 1), 0);
+    if (strcmp(hashNode->key, items[0]) != 0) {
+        printf("Test Failed in testTopN 1\n");
+    }
+    hashNode = array_list_get(top_N_counter_hash_map(counterHashMap, 2), 1);
+    if (strcmp(hashNode->key, items[1]) != 0) {
+        printf("Test Failed in testTopN 2\n");
+    }
+    hashNode = array_list_get(top_N_counter_hash_map(counterHashMap, 3), 2);
+    if (strcmp(hashNode->key, items[2]) != 0) {
+        printf("Test Failed in testTopN 3\n");
+    }
+    free_counter_hash_map(counterHashMap, NULL);
+}
+
 int main() {
     testPut1();
     testPut2();
@@ -119,4 +144,5 @@ int main() {
     testPutNTimes1();
     testPutNTimes2();
     testMax();
+    testTopN();
 }

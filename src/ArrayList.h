@@ -44,6 +44,26 @@ bool array_list_equals(const Array_list* list1, const Array_list* list2, int com
 
 int array_list_index_of(const Array_list* list, const void *data, int comparator(const void *item1, const void *item2));
 
+void array_list_dummy_sort(Array_list_ptr list, int comparator(const void *item1, const void *item2));
+
+void array_list_insertion_sort(Array_list_ptr list, int comparator(const void *item1, const void *item2));
+
+void array_list_bubble_sort(Array_list_ptr list, int comparator(const void *item1, const void *item2));
+
+void array_list_selection_sort(Array_list_ptr list, int comparator(const void *item1, const void *item2));
+
+void array_list_quick_sort(Array_list_ptr list, int comparator(const void *item1, const void *item2));
+
+void array_list_quick_sort_r(Array_list_ptr list, int first, int last, int comparator(const void *item1, const void *item2));
+
+int array_list_partition(Array_list_ptr list, int first, int last, int comparator(const void *item1, const void *item2));
+
+void array_list_merge_sort(Array_list_ptr list, int comparator(const void *item1, const void *item2));
+
+void array_list_merge_sort_r(Array_list_ptr list, int first, int last, int comparator(const void *item1, const void *item2));
+
+void array_list_merge(Array_list_ptr list, int start, int middle, int end, int comparator(const void *item1, const void *item2));
+
 void array_list_sort(Array_list_ptr list, int comparator(const void *item1, const void *item2));
 
 bool is_array_list_empty(const Array_list* list);

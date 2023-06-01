@@ -206,10 +206,10 @@ Array_list_ptr top_N_counter_hash_map(const Counter_hash_map* counter_hash_map, 
 int compare_values_of_counter_hash_map(const Hash_node* item1, const Hash_node* item2) {
     int value1 = *((int *) item1->value);
     int value2 = *((int *) item2->value);
-    if (value1 < value2) {
+    if (value1 > value2) {
         return -1;
     } else {
-        if (value1 > value2) {
+        if (value1 < value2) {
             return 1;
         } else {
             return 0;
