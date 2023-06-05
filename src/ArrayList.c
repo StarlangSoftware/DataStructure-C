@@ -299,3 +299,15 @@ array_list_merge(Array_list_ptr list, int start, int middle, int end, int (*comp
     free(leftPart);
     free(rightPart);
 }
+
+void array_list_clear(Array_list_ptr list, void (*free_method)(void *)) {
+    if (free_method != NULL) {
+        for (int i = 0; i < list->size; i++) {
+            free_method(list->array[i]);
+        }
+    }
+    free(list->array);
+    list->maxSize = 10;
+    list->array = malloc(list->maxSize * sizeof(void *));
+    list->size = 0;
+}
