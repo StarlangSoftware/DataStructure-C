@@ -22,6 +22,8 @@ Array_list_ptr create_array_list_of_string(char *array[], int size);
 
 Array_list_ptr create_array_list_of_int(int array[], int size);
 
+Array_list_ptr create_array_list_of_double(int size);
+
 void free_array_list(Array_list_ptr array_list, void free_method(void *data));
 
 void check_and_increase_size(Array_list_ptr array_list);

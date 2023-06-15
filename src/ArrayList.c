@@ -311,3 +311,12 @@ void array_list_clear(Array_list_ptr list, void (*free_method)(void *)) {
     list->array = malloc(list->maxSize * sizeof(void *));
     list->size = 0;
 }
+
+Array_list_ptr create_array_list_of_double(int size) {
+    Array_list_ptr values = create_array_list();
+    for (int i = 0; i < size; i++){
+        double *value = calloc(1, sizeof(double));
+        array_list_add(values, value);
+    }
+    return values;
+}
