@@ -72,7 +72,7 @@ bool is_array_list_empty(const Array_list* list);
 
 Array_list_ptr sub_list(const Array_list* list, int first_index, int last_index);
 
-void array_list_shuffle(Array_list_ptr list);
+void array_list_shuffle(Array_list_ptr list, int seed);
 
 void array_list_remove(Array_list_ptr list, int index, void free_method(void *data));
 
