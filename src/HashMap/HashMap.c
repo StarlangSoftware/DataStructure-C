@@ -202,3 +202,8 @@ Array_list_ptr key_list(const Hash_map* hash_map) {
 bool hash_map_is_empty(const Hash_map* hash_map) {
     return hash_map->count == 0;
 }
+
+Hash_map_ptr create_string_hash_map() {
+    return create_hash_map((unsigned int (*)(const void *, int)) hash_function_string,
+                           (int (*)(const void *, const void *)) compare_string);
+}

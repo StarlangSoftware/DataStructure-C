@@ -51,6 +51,8 @@ Linked_list_ptr *allocate_hash_table(int prime_index, int (*key_compare)(const v
 
 Hash_map_ptr create_hash_map(unsigned int (*hash_function)(const void *, int), int (*key_compare)(const void *, const void *));
 
+Hash_map_ptr create_string_hash_map();
+
 void free_hash_map(Hash_map_ptr hash_map, void free_method(void *));
 
 Hash_node_ptr hash_map_insert(Hash_map_ptr hash_map, void *key, void *value);
