@@ -91,7 +91,9 @@ void array_list_add_all(Array_list_ptr dst, const Array_list* src) {
         dst->maxSize = (dst->size + src->size) * 2;
         dst->array = realloc(dst->array, dst->maxSize * sizeof(void *));
     }
-    memcpy(dst->array + dst->size * (sizeof(void *)), src->array, src->size * (sizeof(void *)));
+    for (int i = 0; i < src->size; i++){
+        dst->array[dst->size + i] = src->array[i];
+    }
     dst->size += src->size;
 }
 
