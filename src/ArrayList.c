@@ -233,7 +233,7 @@ void array_list_quick_sort(Array_list_ptr list, int (*comparator)(const void *, 
     array_list_quick_sort_r(list, 0, list->size - 1, comparator);
 }
 
-void array_list_quick_sort2(Array_list_ptr list, int (*comparator)(const void *, const void *, const void *), void* arg) {
+void array_list_quick_sort2(Array_list_ptr list, int (*comparator)(const void *, const void *, const void *), const void* arg) {
     array_list_quick_sort_r2(list, 0, list->size - 1, comparator, arg);
 }
 
@@ -246,7 +246,7 @@ void array_list_quick_sort_r(Array_list_ptr list, int first, int last, int (*com
 }
 
 void array_list_quick_sort_r2(Array_list_ptr list, int first, int last,
-                              int (*comparator)(const void *, const void *, const void *), void* arg) {
+                              int (*comparator)(const void *, const void *, const void *), const void* arg) {
 
     if (first < last){
         int pivot = array_list_partition2(list, first, last, comparator, arg);
@@ -269,7 +269,7 @@ int array_list_partition(Array_list_ptr list, int first, int last, int (*compara
 }
 
 int array_list_partition2(Array_list_ptr list, int first, int last,
-                          int (*comparator)(const void *, const void *, const void *), void* arg) {
+                          int (*comparator)(const void *, const void *, const void *), const void* arg) {
     void* x = list->array[last];
     int i = first - 1;
     for (int j = first; j < last; j++){
