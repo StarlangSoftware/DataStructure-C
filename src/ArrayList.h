@@ -56,9 +56,15 @@ void array_list_selection_sort(Array_list_ptr list, int comparator(const void *i
 
 void array_list_quick_sort(Array_list_ptr list, int comparator(const void *item1, const void *item2));
 
+void array_list_quick_sort2(Array_list_ptr list, int comparator(const void *item1, const void *item2, const void* extra), void* arg);
+
 void array_list_quick_sort_r(Array_list_ptr list, int first, int last, int comparator(const void *item1, const void *item2));
 
+void array_list_quick_sort_r2(Array_list_ptr list, int first, int last, int comparator(const void *item1, const void *item2, const void* extra), void* arg);
+
 int array_list_partition(Array_list_ptr list, int first, int last, int comparator(const void *item1, const void *item2));
+
+int array_list_partition2(Array_list_ptr list, int first, int last, int comparator(const void *item1, const void *item2, const void* extra), void* arg);
 
 void array_list_merge_sort(Array_list_ptr list, int comparator(const void *item1, const void *item2));
 
