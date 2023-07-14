@@ -7,6 +7,7 @@
 #include <string.h>
 #include "HashMap.h"
 #include "HashNode.h"
+#include "../CounterHashMap.h"
 
 unsigned int hash_function_string(const char *string, int N) {
     unsigned int total;
@@ -75,6 +76,24 @@ void free_hash_map(Hash_map_ptr hash_map, void (*free_method)(void *)) {
             if (free_method != NULL) {
                 free_method(hash_node->value);
             }
+            free(hash_node);
+            free(removed);
+        }
+        free(linked_list);
+    }
+    free(hash_map->table);
+    free(hash_map);
+}
+
+void free_hash_map_of_counter_hash_map(Hash_map_ptr hash_map, void (*free_method)(void *)) {
+    int N = primes[hash_map->prime_index];
+    for (int i = 0; i < N; i++) {
+        Linked_list_ptr linked_list = hash_map->table[i];
+        while (linked_list->head != NULL) {
+            Node_ptr removed = linked_list->head;
+            linked_list->head = linked_list->head->next;
+            Hash_node_ptr hash_node = removed->data;
+            free_counter_hash_map(hash_node->value, free_method);
             free(hash_node);
             free(removed);
         }
