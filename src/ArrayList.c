@@ -286,12 +286,27 @@ void array_list_merge_sort(Array_list_ptr list, int (*comparator)(const void *, 
     array_list_merge_sort_r(list, 0, list->size - 1, comparator);
 }
 
+void array_list_merge_sort2(Array_list_ptr list, int (*comparator)(const void *, const void *, const void *),
+                            const void *arg) {
+    array_list_merge_sort_r2(list, 0, list->size - 1, comparator, arg);
+}
+
 void array_list_merge_sort_r(Array_list_ptr list, int first, int last, int (*comparator)(const void *, const void *)) {
     if (first < last){
         int pivot = (first + last) / 2;
         array_list_merge_sort_r(list, first, pivot, comparator);
         array_list_merge_sort_r(list, pivot + 1, last, comparator);
         array_list_merge(list, first, pivot, last, comparator);
+    }
+}
+
+void array_list_merge_sort_r2(Array_list_ptr list, int first, int last,
+                              int (*comparator)(const void *, const void *, const void *), const void *arg) {
+    if (first < last){
+        int pivot = (first + last) / 2;
+        array_list_merge_sort_r2(list, first, pivot, comparator, arg);
+        array_list_merge_sort_r2(list, pivot + 1, last, comparator, arg);
+        array_list_merge2(list, first, pivot, last, comparator, arg);
     }
 }
 
@@ -318,6 +333,42 @@ array_list_merge(Array_list_ptr list, int start, int middle, int end, int (*comp
                 j++;
             } else {
                 if (comparator(leftPart[i], rightPart[j]) <= 0){
+                    list->array[k] = leftPart[i];
+                    i++;
+                } else {
+                    list->array[k] = rightPart[j];
+                    j++;
+                }
+            }
+        }
+    }
+    free(leftPart);
+    free(rightPart);
+}
+
+void array_list_merge2(Array_list_ptr list, int start, int middle, int end,
+                       int (*comparator)(const void *, const void *, const void *), const void *arg) {
+    int leftCount = middle - start + 1;
+    int rightCount = end - middle;
+    void** leftPart = malloc(leftCount * sizeof(void*));
+    void** rightPart = malloc(rightCount * sizeof(void*));
+    for (int i = 0; i < leftCount; i++){
+        leftPart[i] = list->array[start + i];
+    }
+    for (int i = 0; i < rightCount; i++){
+        rightPart[i] = list->array[middle + i + 1];
+    }
+    int i = 0, j = 0;
+    for (int k = start; k <= end; k++){
+        if (j == rightCount){
+            list->array[k] = leftPart[i];
+            i++;
+        } else {
+            if (i == leftCount){
+                list->array[k] = rightPart[j];
+                j++;
+            } else {
+                if (comparator(leftPart[i], rightPart[j], arg) <= 0){
                     list->array[k] = leftPart[i];
                     i++;
                 } else {
