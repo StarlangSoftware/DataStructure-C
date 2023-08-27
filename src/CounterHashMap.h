@@ -19,7 +19,7 @@ typedef Counter_hash_map *Counter_hash_map_ptr;
 Counter_hash_map_ptr
 create_counter_hash_map(unsigned int (*hash_function)(const void *, int), int (*key_compare)(const void *, const void *));
 
-void free_counter_hash_map(Counter_hash_map_ptr counter_hash_map, void free_method(void *));
+void free_counter_hash_map(Counter_hash_map_ptr counter_hash_map);
 
 void put_counter_hash_map(Counter_hash_map_ptr counter_hash_map, void *key);
 

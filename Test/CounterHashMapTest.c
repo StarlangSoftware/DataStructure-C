@@ -20,7 +20,7 @@ void testPut1() {
     if (count_counter_hash_map(counterHashMap, items[0]) != 3) {
         printf("Test Failed in testPut1\n");
     }
-    free_counter_hash_map(counterHashMap, NULL);
+    free_counter_hash_map(counterHashMap);
 }
 
 void testPut2() {
@@ -41,7 +41,7 @@ void testPut2() {
     if (count != 1000) {
         printf("Test Failed in testPut2\n");
     }
-    free_counter_hash_map(counterHashMap, free);
+    free_counter_hash_map(counterHashMap);
 }
 
 void testSumOfCounts() {
@@ -56,7 +56,7 @@ void testSumOfCounts() {
     if (sum_of_counts_counter_hash_map(counterHashMap) != 1000) {
         printf("Test Failed in testSumOfCounts\n");
     }
-    free_counter_hash_map(counterHashMap, free);
+    free_counter_hash_map(counterHashMap);
 }
 
 void testPutNTimes1() {
@@ -78,7 +78,7 @@ void testPutNTimes1() {
     if (count_counter_hash_map(counterHashMap, items[2]) != 6) {
         printf("Test Failed in testPutNTimes\n");
     }
-    free_counter_hash_map(counterHashMap, NULL);
+    free_counter_hash_map(counterHashMap);
 }
 
 void testPutNTimes2() {
@@ -93,7 +93,7 @@ void testPutNTimes2() {
     if (sum_of_counts_counter_hash_map(counterHashMap) != 500500) {
         printf("Test Failed in testPutNTimes2\n");
     }
-    free_counter_hash_map(counterHashMap, free);
+    free_counter_hash_map(counterHashMap);
 }
 
 void testMax() {
@@ -109,7 +109,7 @@ void testMax() {
     if (strcmp(max_counter_hash_map(counterHashMap), items[0]) != 0) {
         printf("Test Failed in testMax\n");
     }
-    free_counter_hash_map(counterHashMap, NULL);
+    free_counter_hash_map(counterHashMap);
 }
 
 void testTopN() {
@@ -134,7 +134,7 @@ void testTopN() {
     if (strcmp(hashNode->key, items[2]) != 0) {
         printf("Test Failed in testTopN 3\n");
     }
-    free_counter_hash_map(counterHashMap, NULL);
+    free_counter_hash_map(counterHashMap);
 }
 
 int main() {

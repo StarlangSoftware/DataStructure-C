@@ -13,8 +13,8 @@ create_counter_hash_map(unsigned int (*hash_function)(const void *, int), int (*
     return result;
 }
 
-void free_counter_hash_map(Counter_hash_map_ptr counter_hash_map, void (*free_method)(void *)) {
-    free_hash_map(counter_hash_map->map, free_method);
+void free_counter_hash_map(Counter_hash_map_ptr counter_hash_map) {
+    free_hash_map(counter_hash_map->map, free);
     free(counter_hash_map);
 }
 

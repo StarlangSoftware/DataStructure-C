@@ -85,7 +85,7 @@ void free_hash_map(Hash_map_ptr hash_map, void (*free_method)(void *)) {
     free(hash_map);
 }
 
-void free_hash_map_of_counter_hash_map(Hash_map_ptr hash_map, void (*free_method)(void *)) {
+void free_hash_map_of_counter_hash_map(Hash_map_ptr hash_map) {
     int N = primes[hash_map->prime_index];
     for (int i = 0; i < N; i++) {
         Linked_list_ptr linked_list = hash_map->table[i];
@@ -93,7 +93,7 @@ void free_hash_map_of_counter_hash_map(Hash_map_ptr hash_map, void (*free_method
             Node_ptr removed = linked_list->head;
             linked_list->head = linked_list->head->next;
             Hash_node_ptr hash_node = removed->data;
-            free_counter_hash_map(hash_node->value, free_method);
+            free_counter_hash_map(hash_node->value);
             free(hash_node);
             free(removed);
         }
