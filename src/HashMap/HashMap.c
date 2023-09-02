@@ -226,3 +226,26 @@ Hash_map_ptr create_string_hash_map() {
     return create_hash_map((unsigned int (*)(const void *, int)) hash_function_string,
                            (int (*)(const void *, const void *)) compare_string);
 }
+
+void free_hash_map2(Hash_map_ptr hash_map, void (*key_free_method)(void *), void (*value_free_method)(void *)) {
+    int N = primes[hash_map->prime_index];
+    for (int i = 0; i < N; i++) {
+        Linked_list_ptr linked_list = hash_map->table[i];
+        while (linked_list->head != NULL) {
+            Node_ptr removed = linked_list->head;
+            linked_list->head = linked_list->head->next;
+            Hash_node_ptr hash_node = removed->data;
+            if (key_free_method != NULL) {
+                key_free_method(hash_node->key);
+            }
+            if (value_free_method != NULL) {
+                value_free_method(hash_node->value);
+            }
+            free(hash_node);
+            free(removed);
+        }
+        free(linked_list);
+    }
+    free(hash_map->table);
+    free(hash_map);
+}
