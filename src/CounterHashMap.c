@@ -216,3 +216,8 @@ int compare_values_of_counter_hash_map(const Hash_node* item1, const Hash_node* 
         }
     }
 }
+
+void free_counter_hash_map2(Counter_hash_map_ptr counter_hash_map, void (*key_free_method)(void *)) {
+    free_hash_map2(counter_hash_map->map, key_free_method, free);
+    free(counter_hash_map);
+}

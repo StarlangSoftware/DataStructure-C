@@ -21,6 +21,8 @@ create_counter_hash_map(unsigned int (*hash_function)(const void *, int), int (*
 
 void free_counter_hash_map(Counter_hash_map_ptr counter_hash_map);
 
+void free_counter_hash_map2(Counter_hash_map_ptr counter_hash_map, void key_free_method(void *));
+
 void put_counter_hash_map(Counter_hash_map_ptr counter_hash_map, void *key);
 
 void put_counter_hash_map_n_times(Counter_hash_map_ptr counter_hash_map, void *key, int N);
