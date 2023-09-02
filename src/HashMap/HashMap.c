@@ -249,3 +249,8 @@ void free_hash_map2(Hash_map_ptr hash_map, void (*key_free_method)(void *), void
     free(hash_map->table);
     free(hash_map);
 }
+
+Hash_map_ptr create_integer_hash_map() {
+    return create_hash_map((unsigned int (*)(const void *, int)) hash_function_int,
+                           (int (*)(const void *, const void *)) compare_int);
+}
