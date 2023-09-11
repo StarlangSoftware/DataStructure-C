@@ -14,4 +14,5 @@ int main(){
             printf("Error in word %s\n", words[i]);
         }
     }
+    free_hash_set(set, NULL);
 }
