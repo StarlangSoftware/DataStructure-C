@@ -79,6 +79,8 @@ Array_list_ptr key_value_list(const Hash_map* hash_map);
 
 Array_list_ptr key_list(const Hash_map* hash_map);
 
+Array_list_ptr value_list(const Hash_map* hash_map);
+
 bool hash_map_is_empty(const Hash_map* hash_map);
 
 #endif //DATASTRUCTURE_HASHMAP_H
