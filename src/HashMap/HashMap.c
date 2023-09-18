@@ -268,3 +268,15 @@ Hash_map_ptr create_integer_hash_map() {
     return create_hash_map((unsigned int (*)(const void *, int)) hash_function_int,
                            (int (*)(const void *, const void *)) compare_int);
 }
+
+void hash_map_merge(Hash_map_ptr hash_map1, Hash_map_ptr hash_map2) {
+    for (int i = 0; i < primes[hash_map2->prime_index]; i++) {
+        Linked_list_ptr linked_list = hash_map2->table[i];
+        Node_ptr iterator = linked_list->head;
+        while (iterator != NULL) {
+            Hash_node_ptr hash_node = iterator->data;
+            hash_map_insert(hash_map1, hash_node->key, hash_node->value);
+            iterator = iterator->next;
+        }
+    }
+}
