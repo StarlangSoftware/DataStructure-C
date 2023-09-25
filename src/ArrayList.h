@@ -26,6 +26,8 @@ Array_list_ptr create_array_list_of_double(int size);
 
 void free_array_list(Array_list_ptr array_list, void free_method(void *data));
 
+void free_2d_array_list(Array_list_ptr array_list, void free_method(void *data));
+
 void check_and_increase_size(Array_list_ptr array_list);
 
 void array_list_add(Array_list_ptr array_list, void *item);

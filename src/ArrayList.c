@@ -402,3 +402,11 @@ Array_list_ptr create_array_list_of_double(int size) {
     }
     return values;
 }
+
+void free_2d_array_list(Array_list_ptr array_list, void (*free_method)(void *)) {
+    for (int i = 0; i < array_list->size; i++){
+        Array_list_ptr list = array_list_get(array_list, i);
+        free_array_list(list, free_method);
+    }
+    free_array_list(array_list, NULL);
+}
