@@ -108,3 +108,12 @@ void hash_set_merge(Hash_set_ptr hash_set1, const Hash_set* hash_set2) {
     }
     free_array_list(key_list, NULL);
 }
+
+Hash_set_ptr create_hash_set_of_string2(Array_list_ptr list) {
+    Hash_set_ptr result = create_hash_set((unsigned int (*)(const void *, int)) hash_function_string,
+                                          (int (*)(const void *, const void *)) compare_string);
+    for (int i = 0; i < list->size; i++) {
+        hash_set_insert(result, array_list_get(list, i));
+    }
+    return result;
+}

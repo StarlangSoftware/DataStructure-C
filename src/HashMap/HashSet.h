@@ -18,6 +18,8 @@ Hash_set_ptr create_hash_set(unsigned int (*hash_function)(const void *, int), i
 
 Hash_set_ptr create_hash_set_of_string(char *array[], int size);
 
+Hash_set_ptr create_hash_set_of_string2(Array_list_ptr list);
+
 void free_hash_set(Hash_set_ptr hash_set, void free_method(void *));
 
 void hash_set_insert(Hash_set_ptr hash_set, void *key);
