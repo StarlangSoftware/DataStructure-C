@@ -410,3 +410,15 @@ void free_2d_array_list(Array_list_ptr array_list, void (*free_method)(void *)) 
     }
     free_array_list(array_list, NULL);
 }
+
+int array_list_get_int(const Array_list *array_list, int index) {
+    return *((int *) array_list_get(array_list, index));
+}
+
+void array_list_resize(Array_list_ptr array_list, int new_size) {
+    if (array_list->size < new_size) {
+        array_list->maxSize = new_size;
+        array_list->size = new_size;
+        array_list->array = realloc(array_list->array, array_list->maxSize * sizeof(void *));
+    }
+}

@@ -96,4 +96,8 @@ void array_list_swap(Array_list_ptr list, int index1, int index2);
 
 void array_list_clear(Array_list_ptr list, void free_method(void *data));
 
+int array_list_get_int(const Array_list* array_list, int index);
+
+void array_list_resize(Array_list_ptr list, int new_size);
+
 #endif //DATASTRUCTURE_ARRAYLIST_H
