@@ -422,3 +422,10 @@ void array_list_resize(Array_list_ptr array_list, int new_size) {
         array_list->array = realloc(array_list->array, array_list->maxSize * sizeof(void *));
     }
 }
+
+void array_list_add_int(Array_list_ptr array_list, int value) {
+    int *item = malloc(sizeof(int));
+    *item = value;
+    array_list_add(array_list, item);
+}
+

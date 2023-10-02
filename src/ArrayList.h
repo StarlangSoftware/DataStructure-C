@@ -100,4 +100,6 @@ int array_list_get_int(const Array_list* array_list, int index);
 
 void array_list_resize(Array_list_ptr list, int new_size);
 
+void array_list_add_int(Array_list_ptr array_list, int value);
+
 #endif //DATASTRUCTURE_ARRAYLIST_H
