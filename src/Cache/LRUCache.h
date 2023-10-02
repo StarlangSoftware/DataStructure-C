@@ -20,7 +20,7 @@ typedef Lru_cache *Lru_cache_ptr;
 Lru_cache_ptr
 create_lru_cache(int cache_size, unsigned int (*hash_function)(const void *, int), int (*compare)(const void *, const void *));
 
-void free_lru_cache(Lru_cache_ptr lru_cache, void free_method_map_node(void *), void free_method_node(void *));
+void free_lru_cache(Lru_cache_ptr lru_cache, void free_method_map_node(void *));
 
 bool lru_cache_contains(const Lru_cache* lru_cache, const void *key);
 

@@ -25,7 +25,7 @@ void lru_cache_test1() {
     if (lru_cache_contains(cache, "item4")) {
         printf("Test Failed in lru_cache_test1\n");
     }
-    free_lru_cache(cache, NULL, NULL);
+    free_lru_cache(cache, NULL);
 }
 
 void lru_cache_test2() {
@@ -43,7 +43,7 @@ void lru_cache_test2() {
     if (!lru_cache_contains(cache, "item2")) {
         printf("Test Failed in lru_cache_test2\n");
     }
-    free_lru_cache(cache, NULL, NULL);
+    free_lru_cache(cache, NULL);
 }
 
 void lru_cache_test3() {
@@ -62,7 +62,7 @@ void lru_cache_test3() {
             printf("Test Failed in lru_cache_test2\n");
         }
     }
-    free_lru_cache(cache, NULL, NULL);
+    free_lru_cache(cache, NULL);
 }
 
 int main() {

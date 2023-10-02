@@ -6,9 +6,10 @@
 #include "LRUCache.h"
 
 /**
- * A constructor of {@link LRUCache} class which takes cacheSize as input. It creates new
- * {@link CacheLinkedList} and {@link map}.
+ * A constructor of LRUCache class which takes cacheSize as input. It creates new
+ * CacheLinkedList and map.
  *
+ * @allocated map
  * @param cache_size Integer input defining cache size.
  */
 Lru_cache_ptr
@@ -19,17 +20,24 @@ create_lru_cache(int cache_size, unsigned int (*hash_function)(const void *, int
     return result;
 }
 
-void free_lru_cache(Lru_cache_ptr lru_cache, void (*free_method_map_node)(void *), void (*free_method_node)(void *)) {
+/**
+ * Destructor of LRUCache class
+ *
+ * @freed Itself
+ * @param lru_cache
+ * @param free_method_map_node Free method for hash map node
+ */
+void free_lru_cache(Lru_cache_ptr lru_cache, void (*free_method_map_node)(void *)) {
     free_linked_hash_map(lru_cache->map, free_method_map_node);
     free(lru_cache);
 }
 
 /**
- * The contains method takes a T type input key and returns true if the {@link map} has the given key,
+ * The contains method takes a T type input key and returns true if the map has the given key,
  * false otherwise.
  *
  * @param key T type input key.
- * @return 1 if the {@link map} has the given key, 0 otherwise.
+ * @return 1 if the map has the given key, 0 otherwise.
  */
 bool lru_cache_contains(const Lru_cache *lru_cache, const void *key) {
     return linked_hash_map_contains(lru_cache->map, key);
@@ -37,8 +45,8 @@ bool lru_cache_contains(const Lru_cache *lru_cache, const void *key) {
 
 /**
  * The get method takes T type input key and returns the least recently used value. First it checks
- * whether the {@link map} has the given key, if so it gets the corresponding cacheNode. It removes
- * that cacheNode from {@link LinkedList} and adds it again to the beginning of the list since it is
+ * whether the map has the given key, if so it gets the corresponding cacheNode. It removes
+ * that cacheNode from LinkedList and adds it again to the beginning of the list since it is
  * more likely to be used again. At the end, returns the data value of that cacheNode.
  *
  * @param key T type input key.
