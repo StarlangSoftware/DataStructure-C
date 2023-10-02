@@ -30,7 +30,23 @@ int compare_int(const int *first, const int *second) {
 }
 
 int compare_int_r(const int *first, const int *second) {
-    return *second - *first;
+    return -compare_int(first, second);
+}
+
+int compare_double(const double *first, const double *second) {
+    if (*first < *second){
+        return -1;
+    } else {
+        if (*first > *second){
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+}
+
+int compare_double_r(const double *first, const double *second) {
+    return -compare_double(first, second);
 }
 
 int compare_string_r(char *first, char *second) {

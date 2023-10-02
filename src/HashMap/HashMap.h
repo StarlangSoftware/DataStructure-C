@@ -41,6 +41,10 @@ int compare_int(const int *first, const int *second);
 
 int compare_int_r(const int *first, const int *second);
 
+int compare_double(const double *first, const double *second);
+
+int compare_double_r(const double *first, const double *second);
+
 int compare_string_r(char *first, char *second);
 
 void free_int(int *value);
