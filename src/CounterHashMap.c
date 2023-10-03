@@ -179,9 +179,9 @@ void add_counter_hash_map(Counter_hash_map_ptr dst, const Counter_hash_map* src)
 }
 
 /**
- * The topN method takes an integer N as inout. It creates an {@link vector} result and loops through the the
- * mappings contained in this map and adds each entry to the result {@link vector}. Then sort this {@link vector}
- * according to their values and returns an {@link vector} which is a sublist of result with N elements.
+ * The topN method takes an integer N as inout. It creates an vector result and loops through the the
+ * mappings contained in this map and adds each entry to the result vector. Then sort this vector
+ * according to their values and returns an vector which is a sublist of result with N elements.
  *
  * @param counter_hash_map Map to process.
  * @param N Integer value for defining size of the sublist.

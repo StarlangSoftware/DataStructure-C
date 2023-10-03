@@ -50,7 +50,7 @@ bool lru_cache_contains(const Lru_cache *lru_cache, const void *key) {
  * more likely to be used again. At the end, returns the data value of that cacheNode.
  *
  * @param key T type input key.
- * @return data value if the {@link map} has the given key, nullptr otherwise.
+ * @return data value if the map has the given key, nullptr otherwise.
  */
 void *lru_cache_get(const Lru_cache* lru_cache, void *key) {
     if (lru_cache_contains(lru_cache, key)) {
@@ -64,10 +64,10 @@ void *lru_cache_get(const Lru_cache* lru_cache, void *key) {
 }
 
 /**
- * The add method take a key and a data as inputs. First it checks the size of the {@link map}, if it is
+ * The add method take a key and a data as inputs. First it checks the size of the map, if it is
  * full (i.e equal to the given cacheSize) then it removes the last cacheNode in the @link LinkedList}. If
  * it has space for new entries, it creates new cacheNode with given inputs and adds this cacheNode to the
- * {@link LinkedList} and also puts it to the {@link map}.
+ * LinkedList and also puts it to the map.
  *
  * @param key  T type input.
  * @param data T type input.
