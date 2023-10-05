@@ -429,3 +429,18 @@ void array_list_add_int(Array_list_ptr array_list, int value) {
     array_list_add(array_list, item);
 }
 
+double **allocate_2d(int size1, int size2) {
+    double **result = malloc(size1 * sizeof(double*));
+    for (int i = 0; i < size1; i++){
+        result[i] = malloc(size2 * sizeof(double));
+    }
+    return result;
+}
+
+void free_2d(double** array, int size1) {
+    for (int i = 0; i < size1; i++){
+        free(array[i]);
+    }
+    free(array);
+}
+

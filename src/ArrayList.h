@@ -102,4 +102,8 @@ void array_list_resize(Array_list_ptr list, int new_size);
 
 void array_list_add_int(Array_list_ptr array_list, int value);
 
+double** allocate_2d(int size1, int size2);
+
+void free_2d(double** array, int size1);
+
 #endif //DATASTRUCTURE_ARRAYLIST_H
