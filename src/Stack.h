@@ -24,4 +24,6 @@ void *pop(Stack_ptr stack);
 
 bool is_stack_empty(const Stack* stack);
 
+void *peek(Stack_ptr stack);
+
 #endif //DATASTRUCTURE_STACK_H

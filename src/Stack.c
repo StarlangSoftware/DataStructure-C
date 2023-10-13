@@ -34,3 +34,10 @@ void *pop(Stack_ptr stack) {
 bool is_stack_empty(const Stack* stack) {
     return is_linked_list_empty(stack->list);
 }
+
+void *peek(Stack_ptr stack) {
+    if (is_linked_list_empty(stack->list)) {
+        return NULL;
+    }
+    return stack->list->tail->data;
+}
