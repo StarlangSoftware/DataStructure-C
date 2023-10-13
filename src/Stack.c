@@ -13,7 +13,6 @@ Stack_ptr create_stack() {
 
 void free_stack(Stack_ptr stack, void free_method(void *)) {
     free_linked_list(stack->list, free_method);
-    free(stack->list);
     free(stack);
 }
 

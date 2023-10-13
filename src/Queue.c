@@ -13,7 +13,6 @@ Queue_ptr create_queue() {
 
 void free_queue(Queue_ptr queue, void free_method(void *)) {
     free_linked_list(queue->list, free_method);
-    free(queue->list);
     free(queue);
 }
 
