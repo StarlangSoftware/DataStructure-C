@@ -314,8 +314,8 @@ void
 array_list_merge(Array_list_ptr list, int start, int middle, int end, int (*comparator)(const void *, const void *)) {
     int leftCount = middle - start + 1;
     int rightCount = end - middle;
-    void** leftPart = malloc(leftCount * sizeof(void*));
-    void** rightPart = malloc(rightCount * sizeof(void*));
+    void* leftPart[leftCount];
+    void* rightPart[rightCount];
     for (int i = 0; i < leftCount; i++){
         leftPart[i] = list->array[start + i];
     }
@@ -342,16 +342,14 @@ array_list_merge(Array_list_ptr list, int start, int middle, int end, int (*comp
             }
         }
     }
-    free(leftPart);
-    free(rightPart);
 }
 
 void array_list_merge2(Array_list_ptr list, int start, int middle, int end,
                        int (*comparator)(const void *, const void *, const void *), const void *arg) {
     int leftCount = middle - start + 1;
     int rightCount = end - middle;
-    void** leftPart = malloc(leftCount * sizeof(void*));
-    void** rightPart = malloc(rightCount * sizeof(void*));
+    void* leftPart[leftCount];
+    void* rightPart[rightCount];
     for (int i = 0; i < leftCount; i++){
         leftPart[i] = list->array[start + i];
     }
@@ -378,8 +376,6 @@ void array_list_merge2(Array_list_ptr list, int start, int middle, int end,
             }
         }
     }
-    free(leftPart);
-    free(rightPart);
 }
 
 void array_list_clear(Array_list_ptr list, void (*free_method)(void *)) {
