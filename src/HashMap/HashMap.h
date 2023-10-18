@@ -59,7 +59,7 @@ Hash_map_ptr create_string_hash_map();
 
 Hash_map_ptr create_integer_hash_map();
 
-void free_hash_map(Hash_map_ptr hash_map, void free_method(void *));
+void free_hash_map(Hash_map_ptr hash_map, void free_value_method(void *));
 
 void free_hash_map2(Hash_map_ptr hash_map, void key_free_method(void *), void value_free_method(void *));
 
