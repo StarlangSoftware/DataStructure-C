@@ -6,6 +6,7 @@
 #define DATASTRUCTURE_QUEUE_H
 
 #include "LinkedList/LinkedList.h"
+#include "ArrayList.h"
 
 struct queue {
     Linked_list_ptr list;
@@ -15,6 +16,8 @@ typedef struct queue Queue;
 typedef Queue *Queue_ptr;
 
 Queue_ptr create_queue();
+
+Queue_ptr create_queue2(Array_list_ptr items);
 
 void free_queue(Queue_ptr queue, void free_method(void *));
 

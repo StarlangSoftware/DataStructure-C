@@ -33,3 +33,11 @@ void *dequeue(Queue_ptr queue) {
     free(node);
     return item;
 }
+
+Queue_ptr create_queue2(Array_list_ptr items) {
+    Queue_ptr result = create_queue();
+    for (int i = 0; i < items->size; i++){
+        enqueue(result, array_list_get(items, i));
+    }
+    return result;
+}
