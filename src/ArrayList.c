@@ -449,11 +449,16 @@ Array_list_ptr array_list_copy(Array_list_ptr array_list) {
 }
 
 Array_list_ptr string_array_list_clone(Array_list_ptr array_list) {
+    char *dst, *src;
     Array_list_ptr result = create_array_list();
     for (int i = 0; i < array_list->size; i++){
-        char* src = array_list_get(array_list, i);
-        char* dst = malloc(strlen(src) + 1);
-        strcpy(dst, src);
+        src = array_list_get(array_list, i);
+        if (src != NULL){
+            dst = malloc(strlen(src) + 1);
+            strcpy(dst, src);
+        } else {
+            dst = NULL;
+        }
         array_list_add(result, dst);
     }
     return result;
