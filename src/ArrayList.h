@@ -106,4 +106,6 @@ double** allocate_2d(int size1, int size2);
 
 void free_2d(double** array, int size1);
 
+Array_list_ptr array_list_copy(Array_list_ptr array_list);
+
 #endif //DATASTRUCTURE_ARRAYLIST_H

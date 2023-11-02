@@ -440,3 +440,11 @@ void free_2d(double** array, int size1) {
     free(array);
 }
 
+Array_list_ptr array_list_copy(Array_list_ptr array_list) {
+    Array_list_ptr result = malloc(sizeof(Array_list));
+    result->size = array_list->size;
+    result->maxSize = array_list->maxSize;
+    result->array = array_list->array;
+    return result;
+}
+
