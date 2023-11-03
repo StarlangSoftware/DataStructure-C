@@ -106,9 +106,7 @@ double** allocate_2d(int size1, int size2);
 
 void free_2d(double** array, int size1);
 
-Array_list_ptr array_list_copy(Array_list_ptr array_list);
-
-Array_list_ptr string_array_list_clone(Array_list_ptr array_list);
+Array_list_ptr clone_array_list(Array_list_ptr array_list);
 
 void print_string_array_list(Array_list_ptr array_list);
 
