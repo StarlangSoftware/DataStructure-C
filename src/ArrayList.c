@@ -441,26 +441,10 @@ void free_2d(double** array, int size1) {
     free(array);
 }
 
-Array_list_ptr array_list_copy(Array_list_ptr array_list) {
-    Array_list_ptr result = malloc(sizeof(Array_list));
-    result->size = array_list->size;
-    result->maxSize = array_list->maxSize;
-    result->array = array_list->array;
-    return result;
-}
-
-Array_list_ptr string_array_list_clone(Array_list_ptr array_list) {
-    char *dst, *src;
+Array_list_ptr clone_array_list(Array_list_ptr array_list) {
     Array_list_ptr result = create_array_list();
     for (int i = 0; i < array_list->size; i++){
-        src = array_list_get(array_list, i);
-        if (src != NULL){
-            dst = malloc(strlen(src) + 1);
-            strcpy(dst, src);
-        } else {
-            dst = NULL;
-        }
-        array_list_add(result, dst);
+        array_list_add(result, array_list_get(array_list, i));
     }
     return result;
 }
