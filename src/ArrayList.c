@@ -4,6 +4,7 @@
 
 #include <stdlib.h>
 #include <string.h>
+#include <stdio.h>
 #include "ArrayList.h"
 
 Array_list_ptr create_array_list() {
@@ -462,4 +463,12 @@ Array_list_ptr string_array_list_clone(Array_list_ptr array_list) {
         array_list_add(result, dst);
     }
     return result;
+}
+
+void print_string_array_list(Array_list_ptr array_list) {
+    printf("%s", (char*) array_list_get(array_list, 0));
+    for (int i = 1; i < array_list->size; i++){
+        printf(" %s", (char*) array_list_get(array_list, i));
+    }
+    printf("\n");
 }

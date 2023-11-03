@@ -110,4 +110,6 @@ Array_list_ptr array_list_copy(Array_list_ptr array_list);
 
 Array_list_ptr string_array_list_clone(Array_list_ptr array_list);
 
+void print_string_array_list(Array_list_ptr array_list);
+
 #endif //DATASTRUCTURE_ARRAYLIST_H
