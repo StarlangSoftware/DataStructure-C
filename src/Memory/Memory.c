@@ -148,3 +148,11 @@ void *realloc_(void *ptr, size_t size, char* function_name) {
     }
     return allocated;
 }
+
+void *calloc_(size_t count, size_t size, char *function_name) {
+    void* allocated = calloc(count, size);
+    if (memory_map != NULL){
+        hash_map_insert_(memory_map, allocated, function_name);
+    }
+    return allocated;
+}
