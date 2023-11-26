@@ -16,6 +16,8 @@ void end_memory_check();
 
 void* malloc_(size_t size, char* function_name);
 
+void* realloc_(void *ptr, size_t size, char* function_name);
+
 void free_(void* allocated);
 
 #endif //DATASTRUCTURE_MEMORY_H

@@ -139,3 +139,12 @@ void end_memory_check() {
         free_array_list(list, NULL);
     }
 }
+
+void *realloc_(void *ptr, size_t size, char* function_name) {
+    void* allocated = realloc(ptr, size);
+    if (memory_map != NULL){
+        hash_map_remove(memory_map, ptr, NULL);
+        hash_map_insert_(memory_map, allocated, function_name);
+    }
+    return allocated;
+}
