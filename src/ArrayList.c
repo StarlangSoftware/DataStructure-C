@@ -3,7 +3,6 @@
 //
 
 #include <stdlib.h>
-#include <string.h>
 #include <stdio.h>
 #include "ArrayList.h"
 #include "Memory/Memory.h"
