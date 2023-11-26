@@ -22,4 +22,7 @@ int main(){
     for (int i = 0; i < list->size; i++){
         printf("%s\n", (char*)array_list_get(list, i));
     }
+    free_array_list(list, NULL);
+    free_hash_map(map2, NULL);
+    free_hash_map(map1, NULL);
 }

@@ -4,10 +4,11 @@
 
 #include <stdlib.h>
 #include "Heap.h"
+#include "../Memory/Memory.h"
 
 Heap_ptr create_heap(int N, int (*comparator)(void *, void *)) {
-    Heap_ptr heap = malloc(sizeof(Heap));
-    heap->array = malloc(N * sizeof(void *));
+    Heap_ptr heap = malloc_(sizeof(Heap), "create_heap_1");
+    heap->array = malloc_(N * sizeof(void *), "create_heap_2");
     heap->count = 0;
     heap->N = N;
     heap->compare = comparator;
@@ -20,8 +21,8 @@ void free_heap(Heap_ptr heap, void (*free_method)(void *)) {
             free_method(heap->array[i]);
         }
     }
-    free(heap->array);
-    free(heap);
+    free_(heap->array);
+    free_(heap);
 }
 
 bool is_heap_empty(const Heap* heap) {

@@ -4,9 +4,10 @@
 
 #include <stdlib.h>
 #include "BTree.h"
+#include "../Memory/Memory.h"
 
 BTree_ptr create_btree(int d, int (*compare)(const void *, const void *)) {
-    BTree_ptr result = malloc(sizeof(BTree));
+    BTree_ptr result = malloc_(sizeof(BTree), "create_btree");
     result->d = d;
     result->compare = compare;
     result->root = NULL;
@@ -17,7 +18,7 @@ void free_btree(BTree_ptr btree, void (*free_method)(void *)) {
     if (btree->root != NULL) {
         free_btree_node(btree->root, free_method);
     }
-    free(btree);
+    free_(btree);
 }
 
 BTree_node_ptr search_btree(const BTree* btree, const void *value) {

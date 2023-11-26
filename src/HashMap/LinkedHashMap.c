@@ -5,9 +5,10 @@
 #include <stdlib.h>
 #include "LinkedHashMap.h"
 #include "HashNode.h"
+#include "../Memory/Memory.h"
 
 Linked_hash_map_ptr create_linked_hash_map(unsigned int (*hash_function)(const void *, int), int (*compare)(const void *, const void *)) {
-    Linked_hash_map_ptr result = malloc(sizeof(Linked_hash_map));
+    Linked_hash_map_ptr result = malloc_(sizeof(Linked_hash_map), "create_linked_hash_map");
     result->hash_map = create_hash_map(hash_function, compare);
     result->linked_list = create_linked_list(compare);
     return result;
@@ -16,6 +17,7 @@ Linked_hash_map_ptr create_linked_hash_map(unsigned int (*hash_function)(const v
 void free_linked_hash_map(Linked_hash_map_ptr linked_hash_map, void (*free_method)(void *)) {
     free_hash_map(linked_hash_map->hash_map, free_method);
     free_linked_list(linked_hash_map->linked_list, NULL);
+    free_(linked_hash_map);
 }
 
 void linked_hash_map_insert(Linked_hash_map_ptr linked_hash_map, void *key, void *value) {
@@ -42,7 +44,7 @@ void linked_hash_map_remove_key(Linked_hash_map_ptr linked_hash_map, const void 
     while (iterator != NULL) {
         Hash_node_ptr hash_node = iterator->data;
         if (linked_hash_map->linked_list->compare(hash_node->key, key) == 0) {
-            remove_node(linked_hash_map->linked_list, iterator, NULL);
+            remove_node(linked_hash_map->linked_list, iterator, free_);
             break;
         }
         iterator = iterator->next;

@@ -4,6 +4,7 @@
 
 #include <stdlib.h>
 #include "LRUCache.h"
+#include "../Memory/Memory.h"
 
 /**
  * A constructor of LRUCache class which takes cacheSize as input. It creates new
@@ -14,7 +15,7 @@
  */
 Lru_cache_ptr
 create_lru_cache(int cache_size, unsigned int (*hash_function)(const void *, int), int (*compare)(const void *, const void *)) {
-    Lru_cache_ptr result = malloc(sizeof(Lru_cache));
+    Lru_cache_ptr result = malloc_(sizeof(Lru_cache), "create_lru_cache");
     result->cache_size = cache_size;
     result->map = create_linked_hash_map(hash_function, compare);
     return result;
@@ -29,7 +30,7 @@ create_lru_cache(int cache_size, unsigned int (*hash_function)(const void *, int
  */
 void free_lru_cache(Lru_cache_ptr lru_cache, void (*free_method_map_node)(void *)) {
     free_linked_hash_map(lru_cache->map, free_method_map_node);
-    free(lru_cache);
+    free_(lru_cache);
 }
 
 /**

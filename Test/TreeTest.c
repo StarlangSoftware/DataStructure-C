@@ -22,6 +22,7 @@ void testTree() {
     if (search_tree(tree, &array[7]) != NULL) {
         printf("Test Failed in testTree\n");
     }
+    free_tree(tree, NULL);
 }
 
 void testTree2() {
@@ -42,6 +43,7 @@ void testTree2() {
     if (search_avl_tree(tree, &array[31]) != NULL) {
         printf("Test Failed in testTree2\n");
     }
+    free_avl_tree(tree, NULL);
 }
 
 void testTree3() {
@@ -62,6 +64,7 @@ void testTree3() {
     if (search_btree(tree, &array[31]) != NULL) {
         printf("Test Failed in testTree3\n");
     }
+    free_btree(tree, NULL);
 }
 
 int main() {

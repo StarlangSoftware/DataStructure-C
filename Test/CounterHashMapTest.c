@@ -122,18 +122,24 @@ void testTopN() {
     put_counter_hash_map(counterHashMap, items[0]);
     put_counter_hash_map(counterHashMap, items[1]);
     put_counter_hash_map(counterHashMap, items[0]);
-    Hash_node_ptr hashNode = array_list_get(top_N_counter_hash_map(counterHashMap, 1), 0);
+    Array_list_ptr top_n = top_N_counter_hash_map(counterHashMap, 1);
+    Hash_node_ptr hashNode = array_list_get(top_n, 0);
     if (strcmp(hashNode->key, items[0]) != 0) {
         printf("Test Failed in testTopN 1\n");
     }
-    hashNode = array_list_get(top_N_counter_hash_map(counterHashMap, 2), 1);
+    free_array_list(top_n, NULL);
+    top_n = top_N_counter_hash_map(counterHashMap, 2);
+    hashNode = array_list_get(top_n, 1);
     if (strcmp(hashNode->key, items[1]) != 0) {
         printf("Test Failed in testTopN 2\n");
     }
-    hashNode = array_list_get(top_N_counter_hash_map(counterHashMap, 3), 2);
+    free_array_list(top_n, NULL);
+    top_n = top_N_counter_hash_map(counterHashMap, 3);
+    hashNode = array_list_get(top_n, 2);
     if (strcmp(hashNode->key, items[2]) != 0) {
         printf("Test Failed in testTopN 3\n");
     }
+    free_array_list(top_n, NULL);
     free_counter_hash_map(counterHashMap);
 }
 

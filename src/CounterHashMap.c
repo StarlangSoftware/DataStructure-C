@@ -5,17 +5,18 @@
 #include <stdlib.h>
 #include "CounterHashMap.h"
 #include "HashMap/HashNode.h"
+#include "Memory/Memory.h"
 
 Counter_hash_map_ptr
 create_counter_hash_map(unsigned int (*hash_function)(const void *, int), int (*key_compare)(const void *, const void *)) {
-    Counter_hash_map_ptr result = malloc(sizeof(Counter_hash_map));
+    Counter_hash_map_ptr result = malloc_(sizeof(Counter_hash_map), "create_counter_hash_map");
     result->map = create_hash_map(hash_function, key_compare);
     return result;
 }
 
 void free_counter_hash_map(Counter_hash_map_ptr counter_hash_map) {
-    free_hash_map(counter_hash_map->map, free);
-    free(counter_hash_map);
+    free_hash_map(counter_hash_map->map, free_);
+    free_(counter_hash_map);
 }
 
 /**
@@ -29,9 +30,8 @@ void put_counter_hash_map(Counter_hash_map_ptr counter_hash_map, void *key) {
     if (hash_map_contains(counter_hash_map->map, key)) {
         int *previous_value = hash_map_get(counter_hash_map->map, key);
         (*previous_value)++;
-        hash_map_insert(counter_hash_map->map, key, previous_value);
     } else {
-        int *value = malloc(sizeof(int));
+        int *value = malloc_(sizeof(int), "put_counter_hash_map");
         *value = 1;
         hash_map_insert(counter_hash_map->map, key, value);
     }
@@ -49,9 +49,8 @@ void put_counter_hash_map_n_times(Counter_hash_map_ptr counter_hash_map, void *k
     if (hash_map_contains(counter_hash_map->map, key)) {
         int *previous_value = hash_map_get(counter_hash_map->map, key);
         (*previous_value) += N;
-        hash_map_insert(counter_hash_map->map, key, previous_value);
     } else {
-        int *value = malloc(sizeof(int));
+        int *value = malloc_(sizeof(int), "put_counter_hash_map_n_times");
         *value = N;
         hash_map_insert(counter_hash_map->map, key, value);
     }
@@ -200,7 +199,9 @@ Array_list_ptr top_N_counter_hash_map(const Counter_hash_map* counter_hash_map, 
         }
     }
     array_list_sort(result, (int (*)(const void *, const void *)) compare_values_of_counter_hash_map);
-    return sub_list(result, 0, N);
+    Array_list_ptr sub = sub_list(result, 0, N);
+    free_array_list(result, NULL);
+    return sub;
 }
 
 int compare_values_of_counter_hash_map(const Hash_node* item1, const Hash_node* item2) {
@@ -218,6 +219,6 @@ int compare_values_of_counter_hash_map(const Hash_node* item1, const Hash_node* 
 }
 
 void free_counter_hash_map2(Counter_hash_map_ptr counter_hash_map, void (*key_free_method)(void *)) {
-    free_hash_map2(counter_hash_map->map, key_free_method, free);
-    free(counter_hash_map);
+    free_hash_map2(counter_hash_map->map, key_free_method, free_);
+    free_(counter_hash_map);
 }

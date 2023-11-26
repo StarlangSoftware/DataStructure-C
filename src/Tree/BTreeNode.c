@@ -4,14 +4,18 @@
 
 #include <stdlib.h>
 #include "BTreeNode.h"
+#include "../Memory/Memory.h"
 
 BTree_node_ptr create_btree_node(int d) {
-    BTree_node_ptr result = malloc(sizeof(BTree_node));
+    BTree_node_ptr result = malloc_(sizeof(BTree_node), "create_btree_node_1");
     result->m = 0;
     result->d = d;
     result->leaf = 1;
-    result->K = malloc((2 * d + 1) * sizeof(void *));
-    result->children = malloc((2 * d + 1) * sizeof(BTree_node_ptr));
+    result->K = malloc_((2 * d + 1) * sizeof(void *), "create_btree_node_2");
+    result->children = malloc_((2 * d + 1) * sizeof(BTree_node_ptr), "create_btree_node_3");
+    for (int i = 0; i < 2 * d + 1; i++){
+        result->children[i] = NULL;
+    }
     return result;
 }
 
@@ -19,12 +23,15 @@ BTree_node_ptr create_btree_node_with_children(BTree_node_ptr first_Child,
                                                BTree_node_ptr second_child,
                                                void *newK,
                                                int d) {
-    BTree_node_ptr result = malloc(sizeof(BTree_node));
+    BTree_node_ptr result = malloc_(sizeof(BTree_node), "create_btree_node_with_children_1");
     result->m = 1;
     result->d = d;
     result->leaf = 0;
-    result->K = malloc((2 * d + 1) * sizeof(void *));
-    result->children = malloc((2 * d + 1) * sizeof(BTree_node_ptr));
+    result->K = malloc_((2 * d + 1) * sizeof(void *), "create_btree_node_with_children_2");
+    result->children = malloc_((2 * d + 1) * sizeof(BTree_node_ptr), "create_btree_node_with_children_3");
+    for (int i = 0; i < 2 * d + 1; i++){
+        result->children[i] = NULL;
+    }
     result->children[0] = first_Child;
     result->children[1] = second_child;
     result->K[0] = newK;
@@ -34,17 +41,21 @@ BTree_node_ptr create_btree_node_with_children(BTree_node_ptr first_Child,
 void free_btree_node(BTree_node_ptr btree_node, void (*free_method)(void *)) {
     if (!btree_node->leaf) {
         for (int i = 0; i < 2 * btree_node->d + 1; i++) {
-            free_btree_node(btree_node->children[i], free_method);
+            if (btree_node->children[i] != NULL){
+                free_btree_node(btree_node->children[i], free_method);
+            }
         }
-        free(btree_node->children);
+        free_(btree_node->children);
+    } else {
+        free_(btree_node->children);
     }
     if (free_method != NULL) {
         for (int i = 0; i < 2 * btree_node->d + 1; i++) {
             free_method(btree_node->K[i]);
         }
     }
-    free(btree_node->K);
-    free(btree_node);
+    free_(btree_node->K);
+    free_(btree_node);
 }
 
 int btree_node_position(const BTree_node* btree_node, const void *value, int (*compare)(const void *, const void *)) {

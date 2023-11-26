@@ -4,9 +4,10 @@
 
 #include <stdlib.h>
 #include "HashSet.h"
+#include "../Memory/Memory.h"
 
 Hash_set_ptr create_hash_set(unsigned int (*hash_function)(const void *, int), int (*compare)(const void *, const void *)) {
-    Hash_set_ptr result = malloc(sizeof(Hash_set));
+    Hash_set_ptr result = malloc_(sizeof(Hash_set), "create_hash_set");
     result->hash_map = create_hash_map(hash_function, compare);
     return result;
 }
@@ -21,12 +22,13 @@ void free_hash_set(Hash_set_ptr hash_set, void (*free_method)(void *)) {
             if (free_method != NULL) {
                 free_method(removed->data);
             }
-            free(removed);
+            free_(removed);
         }
-        free(linked_list);
+        free_(linked_list);
     }
-    free(hash_set->hash_map->table);
-    free(hash_set);
+    free_(hash_set->hash_map->table);
+    free_(hash_set->hash_map);
+    free_(hash_set);
 }
 
 void hash_set_insert(Hash_set_ptr hash_set, void *key) {
@@ -68,9 +70,9 @@ void rehash_hash_set(Hash_map_ptr hash_map) {
         }
     }
     for (int i = 0; i < primes[hash_map->prime_index]; i++) {
-        free(hash_map->table[i]);
+        free_(hash_map->table[i]);
     }
-    free(hash_map->table);
+    free_(hash_map->table);
     hash_map->prime_index++;
     hash_map->table = new_table;
 }

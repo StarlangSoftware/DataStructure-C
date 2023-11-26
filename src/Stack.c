@@ -4,16 +4,17 @@
 
 #include <stdlib.h>
 #include "Stack.h"
+#include "Memory/Memory.h"
 
 Stack_ptr create_stack() {
-    Stack_ptr result = malloc(sizeof(Stack));
+    Stack_ptr result = malloc_(sizeof(Stack), "create_stack");
     result->list = create_linked_list(NULL);
     return result;
 }
 
 void free_stack(Stack_ptr stack, void free_method(void *)) {
     free_linked_list(stack->list, free_method);
-    free(stack);
+    free_(stack);
 }
 
 void push(Stack_ptr stack, void *item) {
@@ -26,7 +27,7 @@ void *pop(Stack_ptr stack) {
     }
     Node_ptr node = remove_last(stack->list);
     void *item = node->data;
-    free(node);
+    free_(node);
     return item;
 }
 

@@ -4,6 +4,7 @@
 
 #include <stdlib.h>
 #include "TreeNode.h"
+#include "../Memory/Memory.h"
 
 Tree_node_ptr create_tree_node(void *data) {
     Tree_node_ptr result = malloc(sizeof(Tree_node));
@@ -23,5 +24,5 @@ void free_tree_node(Tree_node_ptr tree_node, void (*free_method)(void *)) {
     if (free_method != NULL) {
         free_method(tree_node->data);
     }
-    free(tree_node);
+    free_(tree_node);
 }

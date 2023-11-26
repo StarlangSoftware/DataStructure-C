@@ -6,11 +6,12 @@
 #include <string.h>
 #include <stdio.h>
 #include "ArrayList.h"
+#include "Memory/Memory.h"
 
 Array_list_ptr create_array_list() {
-    Array_list_ptr array_list = malloc(sizeof(Array_list));
+    Array_list_ptr array_list = malloc_(sizeof(Array_list), "create_array_list_1");
     array_list->maxSize = 10;
-    array_list->array = malloc(array_list->maxSize * sizeof(void *));
+    array_list->array = malloc_(array_list->maxSize * sizeof(void *), "create_array_list_2");
     array_list->size = 0;
     return array_list;
 }
@@ -37,8 +38,8 @@ void free_array_list(Array_list_ptr array_list, void free_method(void *)) {
             free_method(array_list->array[i]);
         }
     }
-    free(array_list->array);
-    free(array_list);
+    free_(array_list->array);
+    free_(array_list);
 }
 
 void check_and_increase_size(Array_list_ptr array_list) {
@@ -55,7 +56,7 @@ void array_list_add(Array_list_ptr array_list, void *item) {
 }
 
 void array_list_add_double(Array_list_ptr array_list, double value) {
-    double *item = malloc(sizeof(double));
+    double *item = malloc_(sizeof(double), "array_list_add_double");
     *item = value;
     array_list_add(array_list, item);
 }
@@ -385,9 +386,9 @@ void array_list_clear(Array_list_ptr list, void (*free_method)(void *)) {
             free_method(list->array[i]);
         }
     }
-    free(list->array);
+    free_(list->array);
     list->maxSize = 10;
-    list->array = malloc(list->maxSize * sizeof(void *));
+    list->array = malloc_(list->maxSize * sizeof(void *), "array_list_clear");
     list->size = 0;
 }
 
@@ -421,24 +422,24 @@ void array_list_resize(Array_list_ptr array_list, int new_size) {
 }
 
 void array_list_add_int(Array_list_ptr array_list, int value) {
-    int *item = malloc(sizeof(int));
+    int *item = malloc_(sizeof(int), "array_list_add_int");
     *item = value;
     array_list_add(array_list, item);
 }
 
 double **allocate_2d(int size1, int size2) {
-    double **result = malloc(size1 * sizeof(double*));
+    double **result = malloc_(size1 * sizeof(double*), "allocate_2d_1");
     for (int i = 0; i < size1; i++){
-        result[i] = malloc(size2 * sizeof(double));
+        result[i] = malloc_(size2 * sizeof(double), "allocate_2d_2");
     }
     return result;
 }
 
 void free_2d(double** array, int size1) {
     for (int i = 0; i < size1; i++){
-        free(array[i]);
+        free_(array[i]);
     }
-    free(array);
+    free_(array);
 }
 
 Array_list_ptr clone_array_list(Array_list_ptr array_list) {

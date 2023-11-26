@@ -5,9 +5,10 @@
 #include <stdlib.h>
 #include "AvlTree.h"
 #include "../Stack.h"
+#include "../Memory/Memory.h"
 
 Avl_tree_ptr create_avl_tree(int (*compare)(const void *, const void *)) {
-    Avl_tree_ptr result = malloc(sizeof(Avl_tree));
+    Avl_tree_ptr result = malloc_(sizeof(Avl_tree), "create_avl_tree");
     result->root = NULL;
     result->compare = compare;
     return result;
@@ -17,7 +18,7 @@ void free_avl_tree(Avl_tree_ptr tree, void (*free_method)(void *)) {
     if (tree->root != NULL) {
         free_avl_tree_node(tree->root, free_method);
     }
-    free(tree);
+    free_(tree);
 }
 
 Avl_tree_node_ptr search_avl_tree(const Avl_tree* tree, const void *value) {
@@ -122,6 +123,7 @@ void insert_avl_tree(Avl_tree_ptr tree, void *value) {
             break;
         }
     }
+    free_stack(c, NULL);
 }
 
 void insert_avl_child(Avl_tree_ptr tree, Avl_tree_node_ptr parent, Avl_tree_node_ptr child) {

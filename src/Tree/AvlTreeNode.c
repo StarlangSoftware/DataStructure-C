@@ -4,9 +4,10 @@
 
 #include <stdlib.h>
 #include "AvlTreeNode.h"
+#include "../Memory/Memory.h"
 
 Avl_tree_node_ptr create_avl_tree_node(void *data) {
-    Avl_tree_node_ptr result = malloc(sizeof(Avl_tree_node));
+    Avl_tree_node_ptr result = malloc_(sizeof(Avl_tree_node), "create_avl_tree_node");
     result->left = NULL;
     result->right = NULL;
     result->data = data;
@@ -24,5 +25,5 @@ void free_avl_tree_node(Avl_tree_node_ptr tree_node, void (*free_method)(void *)
     if (free_method != NULL) {
         free_method(tree_node->data);
     }
-    free(tree_node);
+    free_(tree_node);
 }

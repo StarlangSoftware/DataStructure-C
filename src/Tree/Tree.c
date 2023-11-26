@@ -5,9 +5,10 @@
 #include <stdlib.h>
 #include "Tree.h"
 #include "TreeNode.h"
+#include "../Memory/Memory.h"
 
 Tree_ptr create_tree(int (*compare)(const void *, const void *)) {
-    Tree_ptr result = malloc(sizeof(Tree));
+    Tree_ptr result = malloc_(sizeof(Tree), "create_tree");
     result->root = NULL;
     result->compare = compare;
     return result;
@@ -17,7 +18,7 @@ void free_tree(Tree_ptr tree, void (*free_method)(void *)) {
     if (tree->root != NULL) {
         free_tree_node(tree->root, free_method);
     }
-    free(tree);
+    free_(tree);
 }
 
 Tree_node_ptr search_tree(const Tree* tree, const void *value) {

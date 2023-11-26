@@ -8,6 +8,7 @@
 #include "HashMap.h"
 #include "HashNode.h"
 #include "../CounterHashMap.h"
+#include "../Memory/Memory.h"
 
 unsigned int hash_function_string(const char *string, int N) {
     unsigned int total;
@@ -54,17 +55,17 @@ int compare_string_r(char *first, char *second) {
 }
 
 void free_int(int *value) {
-    free(value);
+    free_(value);
 }
 
 void free_string(char *value) {
-    free(value);
+    free_(value);
 }
 
 Linked_list_ptr *allocate_hash_table(int prime_index, int (*key_compare)(const void *, const void *)) {
     Linked_list_ptr *table;
     int N = primes[prime_index];
-    table = malloc(N * sizeof(Linked_list_ptr));
+    table = malloc_(N * sizeof(Linked_list_ptr), "allocate_hash_table");
     for (int i = 0; i < N; i++) {
         table[i] = create_linked_list(key_compare);
     }
@@ -72,7 +73,7 @@ Linked_list_ptr *allocate_hash_table(int prime_index, int (*key_compare)(const v
 }
 
 Hash_map_ptr create_hash_map(unsigned int (*hash_function)(const void *, int), int (*key_compare)(const void *, const void *)) {
-    Hash_map_ptr result = malloc(sizeof(Hash_map));
+    Hash_map_ptr result = malloc_(sizeof(Hash_map), "create_hash_map");
     result->prime_index = 0;
     result->table = allocate_hash_table(result->prime_index, key_compare);
     result->hash_function = hash_function;
@@ -92,13 +93,13 @@ void free_hash_map(Hash_map_ptr hash_map, void (*free_value_method)(void *)) {
             if (free_value_method != NULL) {
                 free_value_method(hash_node->value);
             }
-            free(hash_node);
-            free(removed);
+            free_(hash_node);
+            free_(removed);
         }
-        free(linked_list);
+        free_(linked_list);
     }
-    free(hash_map->table);
-    free(hash_map);
+    free_(hash_map->table);
+    free_(hash_map);
 }
 
 void free_hash_map_of_counter_hash_map(Hash_map_ptr hash_map) {
@@ -110,13 +111,13 @@ void free_hash_map_of_counter_hash_map(Hash_map_ptr hash_map) {
             linked_list->head = linked_list->head->next;
             Hash_node_ptr hash_node = removed->data;
             free_counter_hash_map(hash_node->value);
-            free(hash_node);
-            free(removed);
+            free_(hash_node);
+            free_(removed);
         }
-        free(linked_list);
+        free_(linked_list);
     }
-    free(hash_map->table);
-    free(hash_map);
+    free_(hash_map->table);
+    free_(hash_map);
 }
 
 void rehash_hash_map(Hash_map_ptr hash_map) {
@@ -133,9 +134,9 @@ void rehash_hash_map(Hash_map_ptr hash_map) {
         }
     }
     for (int i = 0; i < primes[hash_map->prime_index]; i++) {
-        free(hash_map->table[i]);
+        free_(hash_map->table[i]);
     }
-    free(hash_map->table);
+    free_(hash_map->table);
     hash_map->prime_index++;
     hash_map->table = new_table;
 }
@@ -271,13 +272,13 @@ void free_hash_map2(Hash_map_ptr hash_map, void (*key_free_method)(void *), void
             if (value_free_method != NULL) {
                 value_free_method(hash_node->value);
             }
-            free(hash_node);
-            free(removed);
+            free_(hash_node);
+            free_(removed);
         }
-        free(linked_list);
+        free_(linked_list);
     }
-    free(hash_map->table);
-    free(hash_map);
+    free_(hash_map->table);
+    free_(hash_map);
 }
 
 Hash_map_ptr create_integer_hash_map() {

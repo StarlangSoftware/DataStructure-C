@@ -4,9 +4,10 @@
 
 #include <stdlib.h>
 #include "LinkedList.h"
+#include "../Memory/Memory.h"
 
 Linked_list_ptr create_linked_list(int (*compare)(const void *, const void *)) {
-    Linked_list_ptr result = malloc(sizeof(Linked_list));
+    Linked_list_ptr result = malloc_(sizeof(Linked_list), "create_linked_list");
     result->head = NULL;
     result->tail = NULL;
     result->compare = compare;
@@ -48,6 +49,8 @@ Node_ptr remove_first(Linked_list_ptr linked_list) {
     linked_list->head = linked_list->head->next;
     if (linked_list->head == NULL) {
         linked_list->tail = NULL;
+    } else {
+        linked_list->head->previous = NULL;
     }
     return removed;
 }
@@ -60,6 +63,8 @@ Node_ptr remove_last(Linked_list_ptr linked_list) {
     linked_list->tail = linked_list->tail->previous;
     if (linked_list->tail == NULL) {
         linked_list->head = NULL;
+    } else {
+        linked_list->tail->next = NULL;
     }
     return removed;
 }
@@ -70,7 +75,7 @@ void free_linked_list(Linked_list_ptr linked_list, void free_method(void *)) {
         linked_list->head = linked_list->head->next;
         free_node(removed, free_method);
     }
-    free(linked_list);
+    free_(linked_list);
 }
 
 bool is_linked_list_empty(const Linked_list* linked_list) {

@@ -4,9 +4,10 @@
 
 #include <stdlib.h>
 #include "Node.h"
+#include "../Memory/Memory.h"
 
 Node_ptr create_node(void *data) {
-    Node_ptr result = malloc(sizeof(Node));
+    Node_ptr result = malloc_(sizeof(Node), "create_node");
     result->data = data;
     result->previous = NULL;
     result->next = NULL;
@@ -17,7 +18,7 @@ void free_node(Node_ptr node, void free_method(void *data)) {
     if (free_method != NULL) {
         free_method(node->data);
     }
-    free(node);
+    free_(node);
 }
 
 void *get_data(Node_ptr node) {

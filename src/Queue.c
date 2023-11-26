@@ -4,16 +4,17 @@
 
 #include <stdlib.h>
 #include "Queue.h"
+#include "Memory/Memory.h"
 
 Queue_ptr create_queue() {
-    Queue_ptr result = malloc(sizeof(Queue));
+    Queue_ptr result = malloc_(sizeof(Queue), "create_queue");
     result->list = create_linked_list(NULL);
     return result;
 }
 
 void free_queue(Queue_ptr queue, void free_method(void *)) {
     free_linked_list(queue->list, free_method);
-    free(queue);
+    free_(queue);
 }
 
 bool is_queue_empty(const Queue* queue) {
@@ -30,7 +31,7 @@ void *dequeue(Queue_ptr queue) {
     }
     Node_ptr node = remove_first(queue->list);
     void *item = node->data;
-    free(node);
+    free_(node);
     return item;
 }
 
