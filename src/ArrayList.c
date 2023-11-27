@@ -44,7 +44,7 @@ void free_array_list(Array_list_ptr array_list, void free_method(void *)) {
 void check_and_increase_size(Array_list_ptr array_list) {
     if (array_list->size == array_list->maxSize) {
         array_list->maxSize *= 2;
-        array_list->array = realloc(array_list->array, array_list->maxSize * sizeof(void *));
+        array_list->array = realloc_(array_list->array, array_list->maxSize * sizeof(void *), "check_and_increase_size");
     }
 }
 
