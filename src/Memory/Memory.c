@@ -92,7 +92,7 @@ Hash_node_ptr hash_map_insert_(Hash_map_ptr hash_map, void *key, void *value) {
         hash_map->count--;
     }
     if (hash_map->count > 0.95 * primes[hash_map->prime_index]) {
-        printf("Warning hash map almost full 95 percent");
+        printf("Warning hash map almost full 95 percent\n");
     }
     Hash_node_ptr hash_node = create_hash_node_(key, value);
     add_last(hash_map->table[address], create_node_(hash_node));
