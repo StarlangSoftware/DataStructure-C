@@ -48,6 +48,10 @@ void start_memory_check() {
     memory_map = create_hash_map2(hash_function_address, compare_address, 10);
 }
 
+void start_large_memory_check() {
+    memory_map = create_hash_map2(hash_function_address, compare_address, 15);
+}
+
 void remove_node_(Linked_list_ptr linked_list, Node_ptr node) {
     Node_ptr next = node->next;
     Node_ptr previous = node->previous;
@@ -86,6 +90,9 @@ Hash_node_ptr hash_map_insert_(Hash_map_ptr hash_map, void *key, void *value) {
         Node_ptr node = hash_list_get(hash_map->table[address], key);
         remove_node_(hash_map->table[address], node);
         hash_map->count--;
+    }
+    if (hash_map->count > 0.95 * primes[hash_map->prime_index]) {
+        printf("Warning hash map almost full 95 percent");
     }
     Hash_node_ptr hash_node = create_hash_node_(key, value);
     add_last(hash_map->table[address], create_node_(hash_node));
