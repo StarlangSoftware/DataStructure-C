@@ -11,7 +11,7 @@ unsigned int hash_function_address(const void *address, int N){
 }
 
 int compare_address(const void *first, const void *second){
-    return compare_int(first, second);
+    return ((long)first - (long)second);
 }
 
 Linked_list_ptr create_linked_list_(int (*compare)(const void *, const void *)) {
