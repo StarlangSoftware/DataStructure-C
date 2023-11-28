@@ -14,6 +14,10 @@ void start_memory_check();
 
 void start_large_memory_check();
 
+void start_medium_memory_check();
+
+void start_x_large_memory_check();
+
 void end_memory_check();
 
 void* malloc_(size_t size, char* function_name);

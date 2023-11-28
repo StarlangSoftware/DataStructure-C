@@ -48,7 +48,15 @@ void start_memory_check() {
     memory_map = create_hash_map2(hash_function_address, compare_address, 10);
 }
 
+void start_medium_memory_check() {
+    memory_map = create_hash_map2(hash_function_address, compare_address, 15);
+}
+
 void start_large_memory_check() {
+    memory_map = create_hash_map2(hash_function_address, compare_address, 20);
+}
+
+void start_x_large_memory_check() {
     memory_map = create_hash_map2(hash_function_address, compare_address, 23);
 }
 
