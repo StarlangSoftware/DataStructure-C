@@ -88,6 +88,9 @@ Array_list_ptr value_list(const Hash_map* hash_map);
 
 bool hash_map_is_empty(const Hash_map* hash_map);
 
-void hash_map_merge(Hash_map_ptr hash_map1, Hash_map_ptr hash_map2);
+void hash_map_merge(Hash_map_ptr hash_map1,
+                    Hash_map_ptr hash_map2,
+                    void* (*clone_key_method)(void* key),
+                    void* (*clone_value_method)(void* value));
 
 #endif //DATASTRUCTURE_HASHMAP_H

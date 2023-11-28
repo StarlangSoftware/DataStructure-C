@@ -103,10 +103,14 @@ bool hash_set_is_empty(const Hash_set* hash_set) {
     return hash_map_is_empty(hash_set->hash_map);
 }
 
-void hash_set_merge(Hash_set_ptr hash_set1, const Hash_set* hash_set2) {
+void hash_set_merge(Hash_set_ptr hash_set1, const Hash_set* hash_set2, void* (*clone_method)(void* item)) {
     Array_list_ptr key_list = hash_set_key_list(hash_set2);
     for (int i = 0; i < key_list->size; i++){
-        hash_set_insert(hash_set1, array_list_get(key_list, i));
+        if (clone_method != NULL){
+            hash_set_insert(hash_set1, clone_method(array_list_get(key_list, i)));
+        } else {
+            hash_set_insert(hash_set1, array_list_get(key_list, i));
+        }
     }
     free_array_list(key_list, NULL);
 }

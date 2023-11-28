@@ -34,6 +34,6 @@ Array_list_ptr hash_set_key_list(const Hash_set* hash_set);
 
 bool hash_set_is_empty(const Hash_set* hash_set);
 
-void hash_set_merge(Hash_set_ptr hash_set1, const Hash_set* hash_set2);
+void hash_set_merge(Hash_set_ptr hash_set1, const Hash_set* hash_set2, void* (*clone_method)(void* item));
 
 #endif //DATASTRUCTURE_HASHSET_H

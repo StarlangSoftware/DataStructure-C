@@ -286,13 +286,28 @@ Hash_map_ptr create_integer_hash_map() {
                            (int (*)(const void *, const void *)) compare_int);
 }
 
-void hash_map_merge(Hash_map_ptr hash_map1, Hash_map_ptr hash_map2) {
+void hash_map_merge(Hash_map_ptr hash_map1,
+                    Hash_map_ptr hash_map2,
+                    void* (*clone_key_method)(void* key),
+                    void* (*clone_value_method)(void* value)) {
     for (int i = 0; i < primes[hash_map2->prime_index]; i++) {
         Linked_list_ptr linked_list = hash_map2->table[i];
         Node_ptr iterator = linked_list->head;
         while (iterator != NULL) {
             Hash_node_ptr hash_node = iterator->data;
-            hash_map_insert(hash_map1, hash_node->key, hash_node->value);
+            if (clone_key_method != NULL){
+                if (clone_value_method != NULL){
+                    hash_map_insert(hash_map1, clone_key_method(hash_node->key), clone_value_method(hash_node->value));
+                } else {
+                    hash_map_insert(hash_map1, clone_key_method(hash_node->key), hash_node->value);
+                }
+            } else {
+                if (clone_value_method != NULL){
+                    hash_map_insert(hash_map1, hash_node->key, clone_value_method(hash_node->value));
+                } else {
+                    hash_map_insert(hash_map1, hash_node->key, hash_node->value);
+                }
+            }
             iterator = iterator->next;
         }
     }
