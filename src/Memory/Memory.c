@@ -49,7 +49,7 @@ void start_memory_check() {
 }
 
 void start_large_memory_check() {
-    memory_map = create_hash_map2(hash_function_address, compare_address, 20);
+    memory_map = create_hash_map2(hash_function_address, compare_address, 23);
 }
 
 void remove_node_(Linked_list_ptr linked_list, Node_ptr node) {
