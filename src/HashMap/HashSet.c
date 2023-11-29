@@ -107,7 +107,9 @@ void hash_set_merge(Hash_set_ptr hash_set1, const Hash_set* hash_set2, void* (*c
     Array_list_ptr key_list = hash_set_key_list(hash_set2);
     for (int i = 0; i < key_list->size; i++){
         if (clone_method != NULL){
-            hash_set_insert(hash_set1, clone_method(array_list_get(key_list, i)));
+            if (!hash_set_contains(hash_set1, array_list_get(key_list, i))){
+                hash_set_insert(hash_set1, clone_method(array_list_get(key_list, i)));
+            }
         } else {
             hash_set_insert(hash_set1, array_list_get(key_list, i));
         }
