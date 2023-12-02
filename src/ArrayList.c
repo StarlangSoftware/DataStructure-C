@@ -26,7 +26,7 @@ Array_list_ptr create_array_list_of_string(char **array, int size) {
 Array_list_ptr create_array_list_of_int(int *array, int size) {
     Array_list_ptr result = create_array_list();
     for (int i = 0; i < size; i++) {
-        array_list_add(result, &(array[i]));
+        array_list_add_int(result, array[i]);
     }
     return result;
 }
