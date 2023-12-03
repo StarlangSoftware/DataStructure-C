@@ -90,7 +90,7 @@ double array_list_get_double(const Array_list* array_list, int index) {
 void array_list_add_all(Array_list_ptr dst, const Array_list* src) {
     if (dst->size + src->size > dst->maxSize) {
         dst->maxSize = (dst->size + src->size) * 2;
-        dst->array = realloc(dst->array, dst->maxSize * sizeof(void *));
+        dst->array = realloc_(dst->array, dst->maxSize * sizeof(void *), "array_list_add_all");
     }
     for (int i = 0; i < src->size; i++){
         dst->array[dst->size + i] = src->array[i];
@@ -416,7 +416,7 @@ void array_list_resize(Array_list_ptr array_list, int new_size) {
     if (array_list->size < new_size) {
         array_list->maxSize = new_size;
         array_list->size = new_size;
-        array_list->array = realloc(array_list->array, array_list->maxSize * sizeof(void *));
+        array_list->array = realloc_(array_list->array, array_list->maxSize * sizeof(void *), "array_list_resize");
     }
 }
 
