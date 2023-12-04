@@ -429,7 +429,7 @@ void array_list_add_int(Array_list_ptr array_list, int value) {
 double **allocate_2d(int size1, int size2) {
     double **result = malloc_(size1 * sizeof(double*), "allocate_2d_1");
     for (int i = 0; i < size1; i++){
-        result[i] = malloc_(size2 * sizeof(double), "allocate_2d_2");
+        result[i] = calloc_(size2, sizeof(double), "allocate_2d_2");
     }
     return result;
 }
