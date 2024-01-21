@@ -6,7 +6,7 @@ from conan.tools.files import copy
 
 
 class DataStructureConan(ConanFile):
-    name = "data_structure-c"
+    name = "data_structure_c"
     version = "1.0.0"
     license = "GPL License"
     author = "Olcay Taner Yildiz olcay.yildiz@ozyegin.edu.tr"

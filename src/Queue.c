@@ -25,6 +25,10 @@ void enqueue(Queue_ptr queue, void *item) {
     add_last(queue->list, create_node(item));
 }
 
+void enqueue_front(Queue_ptr queue, void *item){
+    add_first(queue->list, create_node(item));
+}
+
 void *dequeue(Queue_ptr queue) {
     if (is_linked_list_empty(queue->list)) {
         return NULL;
@@ -41,4 +45,14 @@ Queue_ptr create_queue2(Array_list_ptr items) {
         enqueue(result, array_list_get(items, i));
     }
     return result;
+}
+
+void *dequeue_back(Queue_ptr queue) {
+    if (is_linked_list_empty(queue->list)) {
+        return NULL;
+    }
+    Node_ptr node = remove_last(queue->list);
+    void *item = node->data;
+    free_(node);
+    return item;
 }

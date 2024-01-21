@@ -25,6 +25,10 @@ bool is_queue_empty(const Queue* queue);
 
 void enqueue(Queue_ptr queue, void *item);
 
+void enqueue_front(Queue_ptr queue, void *item);
+
 void *dequeue(Queue_ptr queue);
+
+void* dequeue_back(Queue_ptr queue);
 
 #endif //DATASTRUCTURE_QUEUE_H
