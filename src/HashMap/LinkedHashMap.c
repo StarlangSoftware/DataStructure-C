@@ -44,6 +44,11 @@ void linked_hash_map_remove(Linked_hash_map_ptr linked_hash_map, void *key, void
     linked_hash_map_remove_key(linked_hash_map, key);
 }
 
+void linked_hash_map_remove2(Linked_hash_map_ptr linked_hash_map, void *key, void (*free_method)(void *)) {
+    hash_map_remove(linked_hash_map->hash_map, key, free_method);
+    linked_hash_map_remove_key2(linked_hash_map, key);
+}
+
 void linked_hash_map_remove_key(Linked_hash_map_ptr linked_hash_map, const void *key) {
     Node_ptr iterator = linked_hash_map->linked_list->head;
     while (iterator != NULL) {
@@ -51,6 +56,19 @@ void linked_hash_map_remove_key(Linked_hash_map_ptr linked_hash_map, const void 
         if (linked_hash_map->linked_list->compare(hash_node->key, key) == 0) {
             remove_node(linked_hash_map->linked_list, iterator, NULL);
             free_hash_node(hash_node, free_, NULL);
+            break;
+        }
+        iterator = iterator->next;
+    }
+}
+
+void linked_hash_map_remove_key2(Linked_hash_map_ptr linked_hash_map, const void *key) {
+    Node_ptr iterator = linked_hash_map->linked_list->head;
+    while (iterator != NULL) {
+        Hash_node_ptr hash_node = iterator->data;
+        if (linked_hash_map->linked_list->compare(hash_node->key, key) == 0) {
+            remove_node(linked_hash_map->linked_list, iterator, NULL);
+            free_hash_node(hash_node, NULL, NULL);
             break;
         }
         iterator = iterator->next;
