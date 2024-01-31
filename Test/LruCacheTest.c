@@ -6,6 +6,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include "../src/Cache/LRUCache.h"
+#include "../src/Memory/Memory.h"
 
 void lru_cache_test1() {
     char *keys[3] = {"item1", "item2", "item3"};
@@ -14,7 +15,9 @@ void lru_cache_test1() {
                                            (unsigned int (*)(const void *, int)) hash_function_string,
                                            (int (*)(const void *, const void *)) compare_string);
     for (int i = 0; i < 3; i++) {
-        lru_cache_add(cache, keys[i], data[i]);
+        char* dst = malloc_(strlen(keys[i]) + 1, "str_copy");
+        strcpy(dst, keys[i]);
+        lru_cache_add(cache, dst, data[i]);
     }
     if (!lru_cache_contains(cache, "item1")) {
         printf("Test Failed in lru_cache_test1\n");
@@ -25,7 +28,7 @@ void lru_cache_test1() {
     if (lru_cache_contains(cache, "item4")) {
         printf("Test Failed in lru_cache_test1\n");
     }
-    free_lru_cache(cache, NULL, NULL);
+    free_lru_cache(cache, free_, NULL);
 }
 
 void lru_cache_test2() {
@@ -35,7 +38,9 @@ void lru_cache_test2() {
                                            (unsigned int (*)(const void *, int)) hash_function_string,
                                            (int (*)(const void *, const void *)) compare_string);
     for (int i = 0; i < 3; i++) {
-        lru_cache_add(cache, keys[i], data[i]);
+        char* dst = malloc_(strlen(keys[i]) + 1, "str_copy");
+        strcpy(dst, keys[i]);
+        lru_cache_add(cache, dst, data[i]);
     }
     if (lru_cache_contains(cache, "item1")) {
         printf("Test Failed in lru_cache_test2\n");
@@ -43,7 +48,7 @@ void lru_cache_test2() {
     if (!lru_cache_contains(cache, "item2")) {
         printf("Test Failed in lru_cache_test2\n");
     }
-    free_lru_cache(cache, NULL, NULL);
+    free_lru_cache(cache, free_, NULL);
 }
 
 void lru_cache_test3() {

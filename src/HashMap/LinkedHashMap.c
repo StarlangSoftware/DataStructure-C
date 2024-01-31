@@ -2,7 +2,6 @@
 // Created by Olcay Taner YILDIZ on 9.02.2023.
 //
 
-#include <stdlib.h>
 #include "LinkedHashMap.h"
 #include "HashNode.h"
 #include "../Memory/Memory.h"
@@ -50,7 +49,8 @@ void linked_hash_map_remove_key(Linked_hash_map_ptr linked_hash_map, const void 
     while (iterator != NULL) {
         Hash_node_ptr hash_node = iterator->data;
         if (linked_hash_map->linked_list->compare(hash_node->key, key) == 0) {
-            remove_node(linked_hash_map->linked_list, iterator, free_);
+            remove_node(linked_hash_map->linked_list, iterator, NULL);
+            free_hash_node(hash_node, free_, NULL);
             break;
         }
         iterator = iterator->next;
