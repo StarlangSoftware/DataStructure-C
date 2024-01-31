@@ -19,6 +19,8 @@ Linked_hash_map_ptr create_linked_hash_map(unsigned int (*hash_function)(const v
 
 void free_linked_hash_map(Linked_hash_map_ptr linked_hash_map, void free_method(void *));
 
+void free_linked_hash_map2(Linked_hash_map_ptr linked_hash_map, void key_free_method(void *), void free_method(void *));
+
 void linked_hash_map_insert(Linked_hash_map_ptr linked_hash_map, void *key, void *value);
 
 bool linked_hash_map_contains(const Linked_hash_map * linked_hash_map, const void *key);

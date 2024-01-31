@@ -20,6 +20,12 @@ void free_linked_hash_map(Linked_hash_map_ptr linked_hash_map, void (*free_metho
     free_(linked_hash_map);
 }
 
+void free_linked_hash_map2(Linked_hash_map_ptr linked_hash_map, void (*key_free_method)(void *), void (*free_method)(void *)) {
+    free_hash_map2(linked_hash_map->hash_map, key_free_method, free_method);
+    free_linked_list(linked_hash_map->linked_list, NULL);
+    free_(linked_hash_map);
+}
+
 void linked_hash_map_insert(Linked_hash_map_ptr linked_hash_map, void *key, void *value) {
     int contains = linked_hash_map_contains(linked_hash_map, key);
     Hash_node_ptr hash_node = hash_map_insert(linked_hash_map->hash_map, key, value);

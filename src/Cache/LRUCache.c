@@ -28,8 +28,8 @@ create_lru_cache(int cache_size, unsigned int (*hash_function)(const void *, int
  * @param lru_cache
  * @param free_method_map_node Free method for hash map node
  */
-void free_lru_cache(Lru_cache_ptr lru_cache, void (*free_method_map_node)(void *)) {
-    free_linked_hash_map(lru_cache->map, free_method_map_node);
+void free_lru_cache(Lru_cache_ptr lru_cache, void (*key_free_method)(void *), void (*free_method_map_node)(void *)) {
+    free_linked_hash_map2(lru_cache->map, key_free_method, free_method_map_node);
     free_(lru_cache);
 }
 
