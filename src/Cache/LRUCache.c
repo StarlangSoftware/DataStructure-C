@@ -56,7 +56,7 @@ bool lru_cache_contains(const Lru_cache *lru_cache, const void *key) {
 void *lru_cache_get(const Lru_cache* lru_cache, void *key) {
     if (lru_cache_contains(lru_cache, key)) {
         void *value = linked_hash_map_get(lru_cache->map, key);
-        linked_hash_map_remove(lru_cache->map, key, NULL);
+        linked_hash_map_remove2(lru_cache->map, key, NULL);
         linked_hash_map_insert(lru_cache->map, key, value);
         return value;
     } else {
