@@ -72,6 +72,8 @@ bool hash_map_contains(const Hash_map* hash_map, const void *key);
 
 void *hash_map_get(const Hash_map* hash_map, const void *key);
 
+void *hash_map_get_key(const Hash_map* hash_map, const void *key);
+
 void hash_map_remove(Hash_map_ptr hash_map, const void *key, void free_method(void *));
 
 void rehash_hash_map(Hash_map_ptr hash_map);

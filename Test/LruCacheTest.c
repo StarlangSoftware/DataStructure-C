@@ -9,6 +9,7 @@
 #include "../src/Memory/Memory.h"
 
 void lru_cache_test1() {
+    char* datum;
     char *keys[3] = {"item1", "item2", "item3"};
     char *data[3] = {"1", "2", "3"};
     Lru_cache_ptr cache = create_lru_cache(50,
@@ -21,9 +22,19 @@ void lru_cache_test1() {
     }
     if (!lru_cache_contains(cache, "item1")) {
         printf("Test Failed in lru_cache_test1\n");
+    } else {
+        datum = lru_cache_get(cache, "item1");
+        if (strcmp(datum, "1") != 0){
+            printf("Test Failed in lru_cache_test1\n");
+        }
     }
     if (!lru_cache_contains(cache, "item2")) {
         printf("Test Failed in lru_cache_test1\n");
+    } else {
+        datum = lru_cache_get(cache, "item2");
+        if (strcmp(datum, "2") != 0){
+            printf("Test Failed in lru_cache_test1\n");
+        }
     }
     if (lru_cache_contains(cache, "item4")) {
         printf("Test Failed in lru_cache_test1\n");
@@ -32,6 +43,7 @@ void lru_cache_test1() {
 }
 
 void lru_cache_test2() {
+    char *datum;
     char *keys[3] = {"item1", "item2", "item3"};
     char *data[3] = {"1", "2", "3"};
     Lru_cache_ptr cache = create_lru_cache(2,
@@ -47,6 +59,19 @@ void lru_cache_test2() {
     }
     if (!lru_cache_contains(cache, "item2")) {
         printf("Test Failed in lru_cache_test2\n");
+    } else {
+        datum = lru_cache_get(cache, "item2");
+        if (strcmp(datum, "2") != 0){
+            printf("Test Failed in lru_cache_test2\n");
+        }
+    }
+    if (!lru_cache_contains(cache, "item3")) {
+        printf("Test Failed in lru_cache_test2\n");
+    } else {
+        datum = lru_cache_get(cache, "item3");
+        if (strcmp(datum, "3") != 0){
+            printf("Test Failed in lru_cache_test2\n");
+        }
     }
     free_lru_cache(cache, free_, NULL);
 }

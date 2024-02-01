@@ -2,7 +2,6 @@
 // Created by Olcay Taner YILDIZ on 20.01.2023.
 //
 
-#include <stdlib.h>
 #include "LRUCache.h"
 #include "../Memory/Memory.h"
 
@@ -56,8 +55,9 @@ bool lru_cache_contains(const Lru_cache *lru_cache, const void *key) {
 void *lru_cache_get(const Lru_cache* lru_cache, void *key) {
     if (lru_cache_contains(lru_cache, key)) {
         void *value = linked_hash_map_get(lru_cache->map, key);
+        void *old_key = hash_map_get_key(lru_cache->map->hash_map, key);
         linked_hash_map_remove2(lru_cache->map, key, NULL);
-        linked_hash_map_insert(lru_cache->map, key, value);
+        linked_hash_map_insert(lru_cache->map, old_key, value);
         return value;
     } else {
         return NULL;

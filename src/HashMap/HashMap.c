@@ -2,8 +2,6 @@
 // Created by Olcay Taner YILDIZ on 19.01.2023.
 //
 
-#include <stdlib.h>
-#include <printf.h>
 #include <string.h>
 #include "HashMap.h"
 #include "HashNode.h"
@@ -310,5 +308,16 @@ void hash_map_merge(Hash_map_ptr hash_map1,
             }
             iterator = iterator->next;
         }
+    }
+}
+
+void *hash_map_get_key(const Hash_map *hash_map, const void *key) {
+    unsigned int address = hash_map->hash_function(key, primes[hash_map->prime_index]);
+    Node_ptr node = hash_list_get(hash_map->table[address], key);
+    if (node != NULL) {
+        Hash_node_ptr hash_node = node->data;
+        return hash_node->key;
+    } else {
+        return NULL;
     }
 }
