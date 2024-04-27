@@ -2,7 +2,6 @@
 // Created by Olcay Taner YILDIZ on 22.01.2023.
 //
 
-#include <stdlib.h>
 #include "AvlTreeNode.h"
 #include "../Memory/Memory.h"
 

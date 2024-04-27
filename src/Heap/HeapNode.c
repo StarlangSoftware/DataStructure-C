@@ -2,7 +2,6 @@
 // Created by Olcay Taner YILDIZ on 18.01.2023.
 //
 
-#include <stdlib.h>
 #include "HeapNode.h"
 #include "../Memory/Memory.h"
 

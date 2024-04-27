@@ -2,7 +2,6 @@
 // Created by Olcay Taner YILDIZ on 16.01.2023.
 //
 
-#include <stdlib.h>
 #include "Node.h"
 #include "../Memory/Memory.h"
 

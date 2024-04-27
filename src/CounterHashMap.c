@@ -2,7 +2,6 @@
 // Created by Olcay Taner YILDIZ on 24.01.2023.
 //
 
-#include <stdlib.h>
 #include "CounterHashMap.h"
 #include "HashMap/HashNode.h"
 #include "Memory/Memory.h"
