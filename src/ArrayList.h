@@ -20,7 +20,7 @@ Array_list_ptr create_array_list();
 
 Array_list_ptr create_array_list_of_string(char *array[], int size);
 
-Array_list_ptr create_array_list_of_int(int array[], int size);
+Array_list_ptr create_array_list_of_int(const int array[], int size);
 
 Array_list_ptr create_array_list_of_double(int size);
 

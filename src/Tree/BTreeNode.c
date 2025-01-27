@@ -25,8 +25,8 @@ BTree_node_ptr create_btree_node(int d) {
 /**
  * Another constructor of a B+ Tree node. By default, it is not a leaf node. Adds two children.
  * @param d d in d-ary tree.
- * @param firstChild First child of the root node.
- * @param secondChild Second child of the root node.
+ * @param first_Child First child of the root node.
+ * @param second_child Second child of the root node.
  * @param newK First value in the node.
  */
 BTree_node_ptr create_btree_node_with_children(BTree_node_ptr first_Child,
@@ -74,7 +74,7 @@ void free_btree_node(BTree_node_ptr btree_node, void (*free_method)(void *)) {
  * we need to continue the search with the i. child.
  * @param btree_node Tree node
  * @param value Searched value
- * @param comparator Comparator function which compares two elements.
+ * @param compare Comparator function which compares two elements.
  * @return The position of searched value in array K.
  */
 int btree_node_position(const BTree_node* btree_node, const void *value, int (*compare)(const void *, const void *)) {
@@ -97,7 +97,7 @@ int btree_node_position(const BTree_node* btree_node, const void *value, int (*c
  * Add the new value insertedK to the array K into the calculated position index.
  * @param btree_node Tree node
  * @param index Place to insert new value
- * @param insertedK New value to be inserted.
+ * @param inserted_K New value to be inserted.
  */
 void insert_into_K(BTree_node_ptr btree_node, int index, void *inserted_K) {
     for (int i = btree_node->m; i > index; i--) {
@@ -109,7 +109,7 @@ void insert_into_K(BTree_node_ptr btree_node, int index, void *inserted_K) {
 /**
  * Transfers the last d values of the current node to the newNode.
  * @param btree_node Tree node
- * @param newNode New node.
+ * @param new_node New node.
  */
 void move_half_of_the_K_to_new_node(BTree_node_ptr btree_node, BTree_node_ptr new_node) {
     for (int i = 0; i < btree_node->d; i++) {
@@ -121,7 +121,7 @@ void move_half_of_the_K_to_new_node(BTree_node_ptr btree_node, BTree_node_ptr ne
 /**
  * Transfers the last d links of the current node to the newNode.
  * @param btree_node Tree node
- * @param newNode New node.
+ * @param new_node New node.
  */
 void move_half_of_the_children_to_new_node(BTree_node_ptr btree_node, BTree_node_ptr new_node) {
     for (int i = 0; i < btree_node->d; i++) {
@@ -133,7 +133,7 @@ void move_half_of_the_children_to_new_node(BTree_node_ptr btree_node, BTree_node
 /**
  * Transfers the last d values and the last d links of the current node to the newNode.
  * @param btree_node Tree node
- * @param newNode New node.
+ * @param new_node New node.
  */
 void move_half_of_the_elements_to_new_node(BTree_node_ptr btree_node, BTree_node_ptr new_node) {
     move_half_of_the_K_to_new_node(btree_node, new_node);

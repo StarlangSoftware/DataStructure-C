@@ -36,6 +36,7 @@ void free_lru_cache(Lru_cache_ptr lru_cache, void (*key_free_method)(void *), vo
  * The contains method takes a T type input key and returns true if the map has the given key,
  * false otherwise.
  *
+ * @param lru_cache
  * @param key T type input key.
  * @return 1 if the map has the given key, 0 otherwise.
  */
@@ -49,6 +50,7 @@ bool lru_cache_contains(const Lru_cache *lru_cache, const void *key) {
  * that cacheNode from LinkedList and adds it again to the beginning of the list since it is
  * more likely to be used again. At the end, returns the data value of that cacheNode.
  *
+ * @param lru_cache
  * @param key T type input key.
  * @return data value if the map has the given key, nullptr otherwise.
  */

@@ -16,7 +16,7 @@
  * @return Hash function result for a given string.
  */
 unsigned int hash_function_string(const char *string, int N) {
-    unsigned int total;
+    unsigned int total = 0;
     for (int i = 0; i < strlen(string); i++) {
         total = total * 256 + string[i];
     }
@@ -103,7 +103,7 @@ int compare_double_r(const double *first, const double *second) {
  * @return An integer greater than, equal to, or less than 0, according as the string first is less than, equal to, or
  * greater than the string second.
  */
-int compare_string_r(char *first, char *second) {
+int compare_string_r(const char *first, const char *second) {
     return strcmp(second, first);
 }
 

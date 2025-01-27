@@ -159,8 +159,8 @@ void *max_than_threshold_counter_hash_map(const Counter_hash_map* counter_hash_m
 /**
  * The add method adds value of each key of toBeAdded to the current counterHashMap.
  *
- * @param counter_hash_map Map to process.
- * @param toBeAdded CounterHashMap to be added to this counterHashMap.
+ * @param dst Map to process.
+ * @param src CounterHashMap to be added to this counterHashMap.
  */
 void add_counter_hash_map(Counter_hash_map_ptr dst, const Counter_hash_map* src) {
     for (int i = 0; i < primes[src->map->prime_index]; i++) {

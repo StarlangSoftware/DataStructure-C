@@ -10,7 +10,7 @@
  * Constructor of the linked hash map. Allocates an empty linked hash map, with a size of 11 initially. Also allocates
  * a linked list which stores the insertion order of the keys in the hash map.
  * @param hash_function Hash function for the hash map.
- * @param key_compare Comparator function to compare two items in the linked list. The function will be used in
+ * @param compare Comparator function to compare two items in the linked list. The function will be used in
  * searching the hash table.
  * @return Empty linked hash map.
  */
@@ -80,7 +80,7 @@ bool linked_hash_map_contains(const Linked_hash_map* linked_hash_map, const void
  * @param key Key for which item will be deleted.
  * @param free_method Destructor method for the value associated with the key.
  */
-void linked_hash_map_remove(Linked_hash_map_ptr linked_hash_map, void *key, void (*free_method)(void *)) {
+void linked_hash_map_remove(Linked_hash_map_ptr linked_hash_map, const void *key, void (*free_method)(void *)) {
     hash_map_remove(linked_hash_map->hash_map, key, free_method);
     linked_hash_map_remove_key(linked_hash_map, key);
 }
@@ -92,7 +92,7 @@ void linked_hash_map_remove(Linked_hash_map_ptr linked_hash_map, void *key, void
  * @param key Key for which item will be deleted.
  * @param free_method Destructor method for the value associated with the key.
  */
-void linked_hash_map_remove2(Linked_hash_map_ptr linked_hash_map, void *key, void (*free_method)(void *)) {
+void linked_hash_map_remove2(Linked_hash_map_ptr linked_hash_map, const void *key, void (*free_method)(void *)) {
     hash_map_remove(linked_hash_map->hash_map, key, free_method);
     linked_hash_map_remove_key2(linked_hash_map, key);
 }

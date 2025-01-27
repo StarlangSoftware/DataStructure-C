@@ -25,9 +25,9 @@ void linked_hash_map_insert(Linked_hash_map_ptr linked_hash_map, void *key, void
 
 bool linked_hash_map_contains(const Linked_hash_map * linked_hash_map, const void *key);
 
-void linked_hash_map_remove(Linked_hash_map_ptr linked_hash_map, void *key, void free_method(void *));
+void linked_hash_map_remove(Linked_hash_map_ptr linked_hash_map, const void *key, void free_method(void *));
 
-void linked_hash_map_remove2(Linked_hash_map_ptr linked_hash_map, void *key, void (*free_method)(void *));
+void linked_hash_map_remove2(Linked_hash_map_ptr linked_hash_map, const void *key, void (*free_method)(void *));
 
 void linked_hash_map_remove_key(Linked_hash_map_ptr linked_hash_map, const void *key);
 

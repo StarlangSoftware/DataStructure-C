@@ -7,7 +7,8 @@
 
 /**
  * Constructor of the B+ tree. According to the comparator, the tree could contain any object.
- * @param comparator Comparator function to compare two elements.
+ * @param d d parameter in the B+ tree.
+ * @param compare Comparator function to compare two elements.
  * @return Empty tree.
  */
 BTree_ptr create_btree(int d, int (*compare)(const void *, const void *)) {
@@ -21,7 +22,7 @@ BTree_ptr create_btree(int d, int (*compare)(const void *, const void *)) {
 /**
  * Destructor method for the B+ tree. Deallocates memory allocated for the B+ tree and its node
  * contents
- * @param tree B+ tree
+ * @param btree B+ tree
  * @param free_method Destructor method for the value in the tree node.
  */
 void free_btree(BTree_ptr btree, void (*free_method)(void *)) {
@@ -38,7 +39,7 @@ void free_btree(BTree_ptr btree, void (*free_method)(void *)) {
  * the function named position is given. If the searched value is larger than the last value of node b, we need to
  * continue the search with the rightmost child. If the searched value is smaller than the i. value of node b, we
  * need to continue the search with the i. child. As a last step, the function returns the leaf node of node b.
- * @param tree B+ tree
+ * @param btree B+ tree
  * @param value Value searched in B+ tree.
  * @return If the value exists in the tree, the function returns the node that contains the node. Otherwise, it
  * returns null.

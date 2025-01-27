@@ -52,8 +52,8 @@ Hash_set_ptr create_hash_set_of_string2(Array_list_ptr list) {
 /**
  * Destructor method for the hash set. Deallocates memory allocated for the hash set and its linked lists including
  * the contents of the node in the linked list.
- * @param hash_map The hash set.
- * @param free_value_method Destructor method for the contents of the node in the linked lists.
+ * @param hash_set The hash set.
+ * @param free_method Destructor method for the contents of the node in the linked lists.
  */
 void free_hash_set(Hash_set_ptr hash_set, void (*free_method)(void *)) {
     int N = primes[hash_set->hash_map->prime_index];
@@ -174,8 +174,8 @@ bool hash_set_is_empty(const Hash_set* hash_set) {
  * Inserts all elements in the second hash set to the first hash set. The keys are copied or cloned
  * depending on the clone_method. If the clone method is NULL, the element is copied, otherwise it is cloned and
  * the clone is inserted.
- * @param hash_map1 First hash map
- * @param hash_map2 Second hash map
+ * @param hash_set1 First hash map
+ * @param hash_set2 Second hash map
  * @param clone_method Cloning method for creating a clone of the key.
  */
 void hash_set_merge(Hash_set_ptr hash_set1, const Hash_set* hash_set2, void* (*clone_method)(void* item)) {

@@ -8,7 +8,7 @@
 
 /**
  * Constructor of the tree. According to the comparator, the tree could contain any object.
- * @param comparator Comparator function to compare two elements.
+ * @param compare Comparator function to compare two elements.
  * @return Empty tree.
  */
 Tree_ptr create_tree(int (*compare)(const void *, const void *)) {
@@ -88,7 +88,7 @@ void insert_child(Tree_ptr tree, Tree_node_ptr parent, Tree_node_ptr child) {
  * value of the new node is larger than the value of the current node, the new node will be inserted into the right
  * subtree of the current node. In this case, we continue the process with the right child of the current node.
  * @param tree Binary search tree
- * @param node Node to be inserted.
+ * @param value Value to be inserted.
  */
 void insert_tree(Tree_ptr tree, void *value) {
     Tree_node_ptr y = NULL;

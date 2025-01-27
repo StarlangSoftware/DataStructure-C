@@ -23,7 +23,7 @@ Heap_ptr create_heap(int N, int (*comparator)(void *, void *)) {
 /**
  * Destructor method for the heap. Deallocates memory allocated for the heap and its elements.
  * @param heap The heap.
- * @param free_value_method Destructor method for the value in the hash node in the linked lists.
+ * @param free_method Destructor method for the value in the hash node in the linked lists.
  */
 void free_heap(Heap_ptr heap, void (*free_method)(void *)) {
     if (free_method != NULL) {

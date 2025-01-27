@@ -9,7 +9,7 @@
 
 /**
  * Constructor of the Avl tree. According to the comparator, the Avl tree could contain any object.
- * @param comparator Comparator function to compare two elements.
+ * @param compare Comparator function to compare two elements.
  * @return Empty tree.
  */
 Avl_tree_ptr create_avl_tree(int (*compare)(const void *, const void *)) {
@@ -178,7 +178,7 @@ Avl_tree_node_ptr double_rotate_right(Avl_tree_node_ptr k1) {
  * of the right child, we need to the right single rotation. Since  the root node of the subtree will be changed
  * after a rotation, the new child of y will be the new root node t.</p>
  * @param tree Avl tree
- * @param node Node to be inserted.
+ * @param value Value to be inserted.
  */
 void insert_avl_tree(Avl_tree_ptr tree, void *value) {
     int LEFT = 1, RIGHT = 2;

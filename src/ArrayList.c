@@ -42,7 +42,7 @@ Array_list_ptr create_array_list_of_string(char **array, int size) {
  * @param size Size of the array.
  * @return Allocated and filled array list.
  */
-Array_list_ptr create_array_list_of_int(int *array, int size) {
+Array_list_ptr create_array_list_of_int(const int *array, int size) {
     Array_list_ptr result = create_array_list();
     for (int i = 0; i < size; i++) {
         array_list_add_int(result, array[i]);
@@ -265,7 +265,7 @@ void array_list_shuffle(Array_list_ptr list, int seed) {
 /**
  * Removes the element to a given index in the array list. The method shifts all elements starting index one left. The
  * method also deallocates memory for the contents of the removed element.
- * @param array_list Array list
+ * @param list Array list
  * @param index Index of the item to be removed
  * @param free_method Destructor method for the contents of the elements of the array
  */
