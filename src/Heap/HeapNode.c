@@ -6,7 +6,7 @@
 #include "../Memory/Memory.h"
 
 Heap_node_ptr create_heap_node(void *data) {
-    Heap_node_ptr result = malloc_(sizeof(Heap_node), "create_heap_node");
+    Heap_node_ptr result = malloc_(sizeof(Heap_node));
     result->data = data;
     return result;
 }

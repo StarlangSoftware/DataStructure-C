@@ -12,7 +12,7 @@
  * @return Empty tree.
  */
 Tree_ptr create_tree(int (*compare)(const void *, const void *)) {
-    Tree_ptr result = malloc_(sizeof(Tree), "create_tree");
+    Tree_ptr result = malloc_(sizeof(Tree));
     result->root = NULL;
     result->compare = compare;
     return result;

@@ -10,12 +10,12 @@
  * @param d d in d-ary tree.
  */
 BTree_node_ptr create_btree_node(int d) {
-    BTree_node_ptr result = malloc_(sizeof(BTree_node), "create_btree_node_1");
+    BTree_node_ptr result = malloc_(sizeof(BTree_node));
     result->m = 0;
     result->d = d;
     result->leaf = 1;
-    result->K = malloc_((2 * d + 1) * sizeof(void *), "create_btree_node_2");
-    result->children = malloc_((2 * d + 1) * sizeof(BTree_node_ptr), "create_btree_node_3");
+    result->K = malloc_((2 * d + 1) * sizeof(void *));
+    result->children = malloc_((2 * d + 1) * sizeof(BTree_node_ptr));
     for (int i = 0; i < 2 * d + 1; i++){
         result->children[i] = NULL;
     }
@@ -33,12 +33,12 @@ BTree_node_ptr create_btree_node_with_children(BTree_node_ptr first_Child,
                                                BTree_node_ptr second_child,
                                                void *newK,
                                                int d) {
-    BTree_node_ptr result = malloc_(sizeof(BTree_node), "create_btree_node_with_children_1");
+    BTree_node_ptr result = malloc_(sizeof(BTree_node));
     result->m = 1;
     result->d = d;
     result->leaf = 0;
-    result->K = malloc_((2 * d + 1) * sizeof(void *), "create_btree_node_with_children_2");
-    result->children = malloc_((2 * d + 1) * sizeof(BTree_node_ptr), "create_btree_node_with_children_3");
+    result->K = malloc_((2 * d + 1) * sizeof(void *));
+    result->children = malloc_((2 * d + 1) * sizeof(BTree_node_ptr));
     for (int i = 0; i < 2 * d + 1; i++){
         result->children[i] = NULL;
     }

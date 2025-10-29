@@ -8,7 +8,7 @@
 
 Counter_hash_map_ptr
 create_counter_hash_map(unsigned int (*hash_function)(const void *, int), int (*key_compare)(const void *, const void *)) {
-    Counter_hash_map_ptr result = malloc_(sizeof(Counter_hash_map), "create_counter_hash_map");
+    Counter_hash_map_ptr result = malloc_(sizeof(Counter_hash_map));
     result->map = create_hash_map(hash_function, key_compare);
     return result;
 }
@@ -30,7 +30,7 @@ void put_counter_hash_map(Counter_hash_map_ptr counter_hash_map, void *key) {
         int *previous_value = hash_map_get(counter_hash_map->map, key);
         (*previous_value)++;
     } else {
-        int *value = malloc_(sizeof(int), "put_counter_hash_map");
+        int *value = malloc_(sizeof(int));
         *value = 1;
         hash_map_insert(counter_hash_map->map, key, value);
     }
@@ -49,7 +49,7 @@ void put_counter_hash_map_n_times(Counter_hash_map_ptr counter_hash_map, void *k
         int *previous_value = hash_map_get(counter_hash_map->map, key);
         (*previous_value) += N;
     } else {
-        int *value = malloc_(sizeof(int), "put_counter_hash_map_n_times");
+        int *value = malloc_(sizeof(int));
         *value = N;
         hash_map_insert(counter_hash_map->map, key, value);
     }

@@ -7,6 +7,7 @@
 #include "../src/Memory/Memory.h"
 
 int main(){
+    start_memory_check();
     char* words1[] = {"ali", "ayşe", "çift", "çöğüş"};
     char* words2[] = {"öç", "şişe", "Ali", "Çift",
                      "Çöğüş", "Şişe", "Öç", "ayşe", "çift"};
@@ -26,4 +27,5 @@ int main(){
     free_array_list(list, NULL);
     free_hash_map(map2, NULL);
     free_hash_map(map1, NULL);
+    end_memory_check();
 }

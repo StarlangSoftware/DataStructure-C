@@ -6,7 +6,7 @@
 #include "../Memory/Memory.h"
 
 Node_ptr create_node(void *data) {
-    Node_ptr result = malloc_(sizeof(Node), "create_node");
+    Node_ptr result = malloc_(sizeof(Node));
     result->data = data;
     result->previous = NULL;
     result->next = NULL;

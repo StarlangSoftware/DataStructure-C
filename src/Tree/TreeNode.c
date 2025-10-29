@@ -6,7 +6,7 @@
 #include "../Memory/Memory.h"
 
 Tree_node_ptr create_tree_node(void *data) {
-    Tree_node_ptr result = malloc_(sizeof(Tree_node), "create_tree_node");
+    Tree_node_ptr result = malloc_(sizeof(Tree_node));
     result->left = NULL;
     result->right = NULL;
     result->data = data;

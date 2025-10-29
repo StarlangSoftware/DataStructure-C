@@ -6,7 +6,7 @@
 #include "../Memory/Memory.h"
 
 Hash_node_ptr create_hash_node(void *key, void *value) {
-    Hash_node_ptr result = malloc_(sizeof(Hash_node), "create_hash_node");
+    Hash_node_ptr result = malloc_(sizeof(Hash_node));
     result->key = key;
     result->value = value;
     return result;

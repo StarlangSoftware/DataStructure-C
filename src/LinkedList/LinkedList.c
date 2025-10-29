@@ -11,7 +11,7 @@
  * @return Empty linked list.
  */
 Linked_list_ptr create_linked_list(int (*compare)(const void *, const void *)) {
-    Linked_list_ptr result = malloc_(sizeof(Linked_list), "create_linked_list");
+    Linked_list_ptr result = malloc_(sizeof(Linked_list));
     result->head = NULL;
     result->tail = NULL;
     result->compare = compare;

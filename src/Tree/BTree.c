@@ -12,7 +12,7 @@
  * @return Empty tree.
  */
 BTree_ptr create_btree(int d, int (*compare)(const void *, const void *)) {
-    BTree_ptr result = malloc_(sizeof(BTree), "create_btree");
+    BTree_ptr result = malloc_(sizeof(BTree));
     result->d = d;
     result->compare = compare;
     result->root = NULL;

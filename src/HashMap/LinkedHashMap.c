@@ -15,7 +15,7 @@
  * @return Empty linked hash map.
  */
 Linked_hash_map_ptr create_linked_hash_map(unsigned int (*hash_function)(const void *, int), int (*compare)(const void *, const void *)) {
-    Linked_hash_map_ptr result = malloc_(sizeof(Linked_hash_map), "create_linked_hash_map");
+    Linked_hash_map_ptr result = malloc_(sizeof(Linked_hash_map));
     result->hash_map = create_hash_map(hash_function, compare);
     result->linked_list = create_linked_list(compare);
     return result;

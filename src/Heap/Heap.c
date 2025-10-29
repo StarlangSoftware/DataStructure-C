@@ -12,8 +12,8 @@
  * @return Empty heap.
  */
 Heap_ptr create_heap(int N, int (*comparator)(void *, void *)) {
-    Heap_ptr heap = malloc_(sizeof(Heap), "create_heap_1");
-    heap->array = malloc_(N * sizeof(void *), "create_heap_2");
+    Heap_ptr heap = malloc_(sizeof(Heap));
+    heap->array = malloc_(N * sizeof(void *));
     heap->count = 0;
     heap->N = N;
     heap->compare = comparator;

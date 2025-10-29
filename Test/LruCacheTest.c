@@ -16,7 +16,7 @@ void lru_cache_test1() {
                                            (unsigned int (*)(const void *, int)) hash_function_string,
                                            (int (*)(const void *, const void *)) compare_string);
     for (int i = 0; i < 3; i++) {
-        char* dst = malloc_(strlen(keys[i]) + 1, "str_copy");
+        char* dst = malloc_(strlen(keys[i]) + 1);
         strcpy(dst, keys[i]);
         lru_cache_add(cache, dst, data[i]);
     }
@@ -50,7 +50,7 @@ void lru_cache_test2() {
                                            (unsigned int (*)(const void *, int)) hash_function_string,
                                            (int (*)(const void *, const void *)) compare_string);
     for (int i = 0; i < 3; i++) {
-        char* dst = malloc_(strlen(keys[i]) + 1, "str_copy");
+        char* dst = malloc_(strlen(keys[i]) + 1);
         strcpy(dst, keys[i]);
         lru_cache_add(cache, dst, data[i]);
     }
@@ -96,7 +96,9 @@ void lru_cache_test3() {
 }
 
 int main() {
+    start_memory_check();
     lru_cache_test1();
     lru_cache_test2();
     lru_cache_test3();
+    end_memory_check();
 }

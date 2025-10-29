@@ -134,7 +134,7 @@ void free_string(char *value) {
 Linked_list_ptr *allocate_hash_table(int prime_index, int (*key_compare)(const void *, const void *)) {
     Linked_list_ptr *table;
     int N = primes[prime_index];
-    table = malloc_(N * sizeof(Linked_list_ptr), "allocate_hash_table");
+    table = malloc_(N * sizeof(Linked_list_ptr));
     for (int i = 0; i < N; i++) {
         table[i] = create_linked_list(key_compare);
     }
@@ -149,7 +149,7 @@ Linked_list_ptr *allocate_hash_table(int prime_index, int (*key_compare)(const v
  * @return Empty hash map.
  */
 Hash_map_ptr create_hash_map(unsigned int (*hash_function)(const void *, int), int (*key_compare)(const void *, const void *)) {
-    Hash_map_ptr result = malloc_(sizeof(Hash_map), "create_hash_map");
+    Hash_map_ptr result = malloc_(sizeof(Hash_map));
     result->prime_index = 0;
     result->table = allocate_hash_table(result->prime_index, key_compare);
     result->hash_function = hash_function;
@@ -293,7 +293,7 @@ Hash_node_ptr hash_map_insert(Hash_map_ptr hash_map, void *key, void *value) {
     address = hash_map->hash_function(key, primes[hash_map->prime_index]);
     if (hash_map_contains(hash_map, key)) {
         Node_ptr node = hash_list_get(hash_map->table[address], key);
-        remove_node(hash_map->table[address], node, NULL);
+        remove_node(hash_map->table[address], node, free_);
         hash_map->count--;
     }
     Hash_node_ptr hash_node = create_hash_node(key, value);

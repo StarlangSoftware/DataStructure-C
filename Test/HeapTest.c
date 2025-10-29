@@ -6,6 +6,7 @@
 #include <string.h>
 #include "../src/Heap/Heap.h"
 #include "../src/HashMap/HashMap.h"
+#include "../src/Memory/Memory.h"
 
 void test_max_heap_int() {
     int data[] = {4, 6, 2, 5, 3, 1, 7};
@@ -92,8 +93,10 @@ void test_min_heap_string() {
 }
 
 int main() {
+    start_memory_check();
     test_max_heap_int();
     test_min_heap_int();
     test_max_heap_string();
     test_min_heap_string();
+    end_memory_check();
 }

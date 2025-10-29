@@ -2,6 +2,8 @@
 // Created by Olcay Taner YILDIZ on 26.01.2023.
 //
 #include <stdio.h>
+
+#include "../src/Memory/Memory.h"
 #include "../src/Tree/Tree.h"
 #include "../src/Tree/AvlTree.h"
 #include "../src/Tree/BTree.h"
@@ -68,7 +70,9 @@ void testTree3() {
 }
 
 int main() {
+    start_memory_check();
     testTree();
     testTree2();
     testTree3();
+    end_memory_check();
 }

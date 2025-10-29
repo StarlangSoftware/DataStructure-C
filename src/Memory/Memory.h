@@ -20,11 +20,13 @@ void start_x_large_memory_check();
 
 void end_memory_check();
 
-void* malloc_(size_t size, char* function_name);
+void* malloc_(size_t size);
 
-void* realloc_(void *ptr, size_t size, char* function_name);
+void* realloc_(void *ptr, size_t size);
 
-void* calloc_(size_t count, size_t size, char* function_name);
+void* calloc_(size_t count, size_t size);
+
+char* back_trace_info();
 
 void free_(void* allocated);
 

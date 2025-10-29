@@ -13,7 +13,7 @@
  * @return Empty tree.
  */
 Avl_tree_ptr create_avl_tree(int (*compare)(const void *, const void *)) {
-    Avl_tree_ptr result = malloc_(sizeof(Avl_tree), "create_avl_tree");
+    Avl_tree_ptr result = malloc_(sizeof(Avl_tree));
     result->root = NULL;
     result->compare = compare;
     return result;

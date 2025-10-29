@@ -4,8 +4,10 @@
 
 #include <stdio.h>
 #include "../src/HashMap/HashSet.h"
+#include "../src/Memory/Memory.h"
 
 int main(){
+    start_memory_check();
     char* words[] = {"ali", "ayşe", "çift", "çöğüş", "öç", "şişe", "Ali", "Çift",
                       "Çöğüş", "Şişe", "Öç"};
     Hash_set_ptr set = create_hash_set_of_string(words, 11);
@@ -15,4 +17,5 @@ int main(){
         }
     }
     free_hash_set(set, NULL);
+    end_memory_check();
 }

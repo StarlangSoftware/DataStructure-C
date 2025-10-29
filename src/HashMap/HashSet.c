@@ -13,7 +13,7 @@
  * @return Empty hash set.
  */
 Hash_set_ptr create_hash_set(unsigned int (*hash_function)(const void *, int), int (*compare)(const void *, const void *)) {
-    Hash_set_ptr result = malloc_(sizeof(Hash_set), "create_hash_set");
+    Hash_set_ptr result = malloc_(sizeof(Hash_set));
     result->hash_map = create_hash_map(hash_function, compare);
     return result;
 }

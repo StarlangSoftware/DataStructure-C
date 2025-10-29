@@ -10,7 +10,7 @@
  * @return Empty queue.
  */
 Queue_ptr create_queue() {
-    Queue_ptr result = malloc_(sizeof(Queue), "create_queue");
+    Queue_ptr result = malloc_(sizeof(Queue));
     result->list = create_linked_list(NULL);
     return result;
 }

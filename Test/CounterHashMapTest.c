@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "../src/CounterHashMap.h"
+#include "../src/Memory/Memory.h"
 
 void testPut1() {
     char *items[3] = {"item1", "item2", "item3"};
@@ -144,6 +145,7 @@ void testTopN() {
 }
 
 int main() {
+    start_memory_check();
     testPut1();
     testPut2();
     testSumOfCounts();
@@ -151,4 +153,5 @@ int main() {
     testPutNTimes2();
     testMax();
     testTopN();
+    end_memory_check();
 }

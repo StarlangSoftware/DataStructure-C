@@ -4,7 +4,10 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <execinfo.h>
 #include "Memory.h"
+
+#include <string.h>
 
 unsigned int hash_function_address(const void *address, int N){
     return ((long)address) % N;
@@ -108,17 +111,35 @@ Hash_node_ptr hash_map_insert_(Hash_map_ptr hash_map, void *key, void *value) {
     return hash_node;
 }
 
-void* malloc_(size_t size, char* function_name){
+char* back_trace_info() {
+    char* info;
+    size_t size_of_backtrace = 0;
+    void* callstack[128];
+    int frames = backtrace(callstack, 128);
+    char** strs = backtrace_symbols(callstack, frames);
+    for (int i = 2; i < frames; ++i) {
+        size_of_backtrace = size_of_backtrace + strlen(strs[i]);
+    }
+    info = malloc(size_of_backtrace + 1);
+    strcpy(info, strs[2]);
+    for (int i = 3; i < frames; ++i) {
+        strcat(info, strs[i]);
+    }
+    free(strs);
+    return info;
+}
+
+void* malloc_(size_t size){
     void* allocated = malloc(size);
     if (memory_map != NULL){
-        hash_map_insert_(memory_map, allocated, function_name);
+        hash_map_insert_(memory_map, allocated, back_trace_info());
     }
     return allocated;
 }
 
 void free_(void* allocated){
     if (memory_map != NULL){
-        hash_map_remove(memory_map, allocated, NULL);
+        hash_map_remove(memory_map, allocated, free);
     }
     free(allocated);
 }
@@ -155,19 +176,19 @@ void end_memory_check() {
     }
 }
 
-void *realloc_(void *ptr, size_t size, char* function_name) {
+void *realloc_(void *ptr, size_t size) {
     void* allocated = realloc(ptr, size);
     if (memory_map != NULL){
         hash_map_remove(memory_map, ptr, NULL);
-        hash_map_insert_(memory_map, allocated, function_name);
+        hash_map_insert_(memory_map, allocated, back_trace_info());
     }
     return allocated;
 }
 
-void *calloc_(size_t count, size_t size, char *function_name) {
+void *calloc_(size_t count, size_t size) {
     void* allocated = calloc(count, size);
     if (memory_map != NULL){
-        hash_map_insert_(memory_map, allocated, function_name);
+        hash_map_insert_(memory_map, allocated, back_trace_info());
     }
     return allocated;
 }

@@ -10,7 +10,7 @@
  * @return Empty stack.
  */
 Stack_ptr create_stack() {
-    Stack_ptr result = malloc_(sizeof(Stack), "create_stack");
+    Stack_ptr result = malloc_(sizeof(Stack));
     result->list = create_linked_list(NULL);
     return result;
 }

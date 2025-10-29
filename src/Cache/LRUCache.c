@@ -14,7 +14,7 @@
  */
 Lru_cache_ptr
 create_lru_cache(int cache_size, unsigned int (*hash_function)(const void *, int), int (*compare)(const void *, const void *)) {
-    Lru_cache_ptr result = malloc_(sizeof(Lru_cache), "create_lru_cache");
+    Lru_cache_ptr result = malloc_(sizeof(Lru_cache));
     result->cache_size = cache_size;
     result->map = create_linked_hash_map(hash_function, compare);
     return result;

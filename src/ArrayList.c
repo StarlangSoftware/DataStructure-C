@@ -13,9 +13,9 @@
  * @return Empty array list.
  */
 Array_list_ptr create_array_list() {
-    Array_list_ptr array_list = malloc_(sizeof(Array_list), "create_array_list_1");
+    Array_list_ptr array_list = malloc_(sizeof(Array_list));
     array_list->maxSize = 10;
-    array_list->array = malloc_(array_list->maxSize * sizeof(void *), "create_array_list_2");
+    array_list->array = malloc_(array_list->maxSize * sizeof(void *));
     array_list->size = 0;
     return array_list;
 }
@@ -74,7 +74,7 @@ void free_array_list(Array_list_ptr array_list, void free_method(void *)) {
 void check_and_increase_size(Array_list_ptr array_list) {
     if (array_list->size == array_list->maxSize) {
         array_list->maxSize *= 2;
-        array_list->array = realloc_(array_list->array, array_list->maxSize * sizeof(void *), "check_and_increase_size");
+        array_list->array = realloc_(array_list->array, array_list->maxSize * sizeof(void *));
     }
 }
 
@@ -95,7 +95,7 @@ void array_list_add(Array_list_ptr array_list, void *item) {
  * @param value Number to be added.
  */
 void array_list_add_double(Array_list_ptr array_list, double value) {
-    double *item = malloc_(sizeof(double), "array_list_add_double");
+    double *item = malloc_(sizeof(double));
     *item = value;
     array_list_add(array_list, item);
 }
@@ -154,7 +154,7 @@ double array_list_get_double(const Array_list* array_list, int index) {
 void array_list_add_all(Array_list_ptr dst, const Array_list* src) {
     if (dst->size + src->size > dst->maxSize) {
         dst->maxSize = (dst->size + src->size) * 2;
-        dst->array = realloc_(dst->array, dst->maxSize * sizeof(void *), "array_list_add_all");
+        dst->array = realloc_(dst->array, dst->maxSize * sizeof(void *));
     }
     for (int i = 0; i < src->size; i++){
         dst->array[dst->size + i] = src->array[i];
@@ -645,7 +645,7 @@ void array_list_clear(Array_list_ptr list, void (*free_method)(void *)) {
     }
     free_(list->array);
     list->maxSize = 10;
-    list->array = malloc_(list->maxSize * sizeof(void *), "array_list_clear");
+    list->array = malloc_(list->maxSize * sizeof(void *));
     list->size = 0;
 }
 
@@ -657,7 +657,7 @@ void array_list_clear(Array_list_ptr list, void (*free_method)(void *)) {
 Array_list_ptr create_array_list_of_double(int size) {
     Array_list_ptr values = create_array_list();
     for (int i = 0; i < size; i++){
-        double *value = calloc_(1, sizeof(double), "create_array_list_of_double");
+        double *value = calloc_(1, sizeof(double));
         array_list_add(values, value);
     }
     return values;
@@ -696,7 +696,7 @@ void array_list_resize(Array_list_ptr array_list, int new_size) {
     if (array_list->size < new_size) {
         array_list->maxSize = new_size;
         array_list->size = new_size;
-        array_list->array = realloc_(array_list->array, array_list->maxSize * sizeof(void *), "array_list_resize");
+        array_list->array = realloc_(array_list->array, array_list->maxSize * sizeof(void *));
     }
 }
 
@@ -706,7 +706,7 @@ void array_list_resize(Array_list_ptr array_list, int new_size) {
  * @param value Number to be added.
  */
 void array_list_add_int(Array_list_ptr array_list, int value) {
-    int *item = malloc_(sizeof(int), "array_list_add_int");
+    int *item = malloc_(sizeof(int));
     *item = value;
     array_list_add(array_list, item);
 }
@@ -718,9 +718,9 @@ void array_list_add_int(Array_list_ptr array_list, int value) {
  * @return Allocated 2d array.
  */
 double **allocate_2d(int size1, int size2) {
-    double **result = malloc_(size1 * sizeof(double*), "allocate_2d_1");
+    double **result = malloc_(size1 * sizeof(double*));
     for (int i = 0; i < size1; i++){
-        result[i] = calloc_(size2, sizeof(double), "allocate_2d_2");
+        result[i] = calloc_(size2, sizeof(double));
     }
     return result;
 }
