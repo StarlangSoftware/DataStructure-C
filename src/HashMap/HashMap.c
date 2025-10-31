@@ -233,6 +233,33 @@ void free_hash_map2(Hash_map_ptr hash_map, void (*key_free_method)(void *), void
 }
 
 /**
+ * Destructor method for the hash map. Deallocates memory allocated for the hash map and its linked lists including
+ * the contents of the key and value in the hash node.
+ * @param hash_map The hash map.
+ * @param key_free_method Destructor method for the key in the hash node in the linked lists.
+ */
+void free_hash_map_of_array_list(Hash_map_ptr hash_map, void (*key_free_method)(void *)) {
+    int N = primes[hash_map->prime_index];
+    for (int i = 0; i < N; i++) {
+        Linked_list_ptr linked_list = hash_map->table[i];
+        while (linked_list->head != NULL) {
+            Node_ptr removed = linked_list->head;
+            linked_list->head = linked_list->head->next;
+            Hash_node_ptr hash_node = removed->data;
+            if (key_free_method != NULL) {
+                key_free_method(hash_node->key);
+            }
+            free_array_list(hash_node->value, NULL);
+            free_(hash_node);
+            free_(removed);
+        }
+        free_(linked_list);
+    }
+    free_(hash_map->table);
+    free_(hash_map);
+}
+
+/**
  * Destructor method for the hash map, which has Counter Hash maps as content, that is node values. Does the same
  * job in free_hash_map except it calls free_counter_hash_map instead of free_value_method.
  * @param hash_map The hash map.
