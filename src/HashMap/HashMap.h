@@ -97,4 +97,6 @@ void hash_map_merge(Hash_map_ptr hash_map1,
                     void* (*clone_key_method)(void* key),
                     void* (*clone_value_method)(void* value));
 
+void add_to_hash_map_of_array_list(Hash_map_ptr hash_map, void* key, void* value);
+
 #endif //DATASTRUCTURE_HASHMAP_H

@@ -517,6 +517,17 @@ void hash_map_merge(Hash_map_ptr hash_map1,
     }
 }
 
+void add_to_hash_map_of_array_list(Hash_map_ptr hash_map, void* key, void* value) {
+    if (hash_map_contains(hash_map, key)) {
+        Array_list_ptr list = hash_map_get(hash_map, key);
+        array_list_add(list, value);
+    } else {
+        Array_list_ptr list = create_array_list();
+        array_list_add(list, value);
+        hash_map_insert(hash_map, key, value);
+    }
+}
+
 /**
  * Returns the key object as if it is stored in the hash map.
  * @param hash_map Hash map to search for the key.
