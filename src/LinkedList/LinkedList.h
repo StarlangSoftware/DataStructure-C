@@ -40,4 +40,6 @@ bool linked_list_contains(const Linked_list* linked_list, const void *item);
 
 Node_ptr linked_list_get(const Linked_list* linked_list, const void *item);
 
+void merge_linked_list(Linked_list_ptr first_list, Linked_list_ptr second_list);
+
 #endif //DATASTRUCTURE_LINKEDLIST_H

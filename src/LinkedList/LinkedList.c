@@ -170,6 +170,11 @@ Node_ptr linked_list_get(const Linked_list* linked_list, const void *item) {
     return NULL;
 }
 
+void merge_linked_list(Linked_list_ptr first_list, Linked_list_ptr second_list) {
+    first_list->tail->next = second_list->head;
+    first_list->tail = second_list->tail;
+}
+
 /**
  * Checks an item if the linked list contains a specific item, and removes if it exists. Comparison will be done using
  * the compare method set in the linked list construction.
