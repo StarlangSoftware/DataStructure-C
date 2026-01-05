@@ -524,7 +524,7 @@ void add_to_hash_map_of_array_list(Hash_map_ptr hash_map, void* key, void* value
     } else {
         Array_list_ptr list = create_array_list();
         array_list_add(list, value);
-        hash_map_insert(hash_map, key, value);
+        hash_map_insert(hash_map, key, list);
     }
 }
 
