@@ -41,13 +41,7 @@ void push(Stack_ptr stack, void *item) {
  * @return Item removed.
  */
 void *pop(Stack_ptr stack) {
-    if (is_linked_list_empty(stack->list)) {
-        return NULL;
-    }
-    Node_ptr node = remove_last(stack->list);
-    void *item = node->data;
-    free_(node);
-    return item;
+    return remove_last(stack->list);
 }
 
 /**

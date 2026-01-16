@@ -30,9 +30,13 @@ void add_first(Linked_list_ptr linked_list, Node_ptr node);
 
 void add_last(Linked_list_ptr linked_list, Node_ptr node);
 
-Node_ptr remove_first(Linked_list_ptr linked_list);
+void* remove_first(Linked_list_ptr linked_list);
 
-Node_ptr remove_last(Linked_list_ptr linked_list);
+Node_ptr remove_first_node(Linked_list_ptr linked_list);
+
+void* remove_last(Linked_list_ptr linked_list);
+
+Node_ptr remove_last_node(Linked_list_ptr linked_list);
 
 bool is_linked_list_empty(const Linked_list* linked_list);
 

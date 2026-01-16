@@ -61,7 +61,22 @@ void add_first(Linked_list_ptr linked_list, Node_ptr node) {
  * @param linked_list Linked list
  * @return The head node.
  */
-Node_ptr remove_first(Linked_list_ptr linked_list) {
+void* remove_first(Linked_list_ptr linked_list) {
+    void* data = NULL;
+    Node_ptr removed = remove_first_node(linked_list);
+    if (removed != NULL) {
+        data = removed->data;
+        free_(removed);
+    }
+    return data;
+}
+
+/**
+ * Removes and returns the first (head) node from the linked list.
+ * @param linked_list Linked list
+ * @return The head node.
+ */
+Node_ptr remove_first_node(Linked_list_ptr linked_list) {
     if (is_linked_list_empty(linked_list)) {
         return NULL;
     }
@@ -75,12 +90,21 @@ Node_ptr remove_first(Linked_list_ptr linked_list) {
     return removed;
 }
 
+void* remove_last(Linked_list_ptr linked_list) {
+    void* data = NULL;
+    Node_ptr removed = remove_last_node(linked_list);
+    if (removed != NULL) {
+        data = removed->data;
+        free_(removed);
+    }
+    return data;
+}
 /**
  * Removes and returns the last (tail) node from the linked list.
  * @param linked_list Linked list
  * @return The tail node.
  */
-Node_ptr remove_last(Linked_list_ptr linked_list) {
+Node_ptr remove_last_node(Linked_list_ptr linked_list) {
     if (is_linked_list_empty(linked_list)) {
         return NULL;
     }

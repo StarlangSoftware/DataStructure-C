@@ -72,13 +72,7 @@ void enqueue_front(Queue_ptr queue, void *item){
  * @return Removed item
  */
 void *dequeue(Queue_ptr queue) {
-    if (is_linked_list_empty(queue->list)) {
-        return NULL;
-    }
-    Node_ptr node = remove_first(queue->list);
-    void *item = node->data;
-    free_(node);
-    return item;
+    return remove_first(queue->list);
 }
 
 /**
@@ -87,11 +81,5 @@ void *dequeue(Queue_ptr queue) {
  * @return Removed item.
  */
 void *dequeue_back(Queue_ptr queue) {
-    if (is_linked_list_empty(queue->list)) {
-        return NULL;
-    }
-    Node_ptr node = remove_last(queue->list);
-    void *item = node->data;
-    free_(node);
-    return item;
+    return remove_last(queue->list);
 }
