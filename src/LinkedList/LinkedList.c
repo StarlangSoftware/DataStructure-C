@@ -195,7 +195,11 @@ Node_ptr linked_list_get(const Linked_list* linked_list, const void *item) {
 }
 
 void merge_linked_list(Linked_list_ptr first_list, Linked_list_ptr second_list) {
-    first_list->tail->next = second_list->head;
+    if (first_list->tail != NULL) {
+        first_list->tail->next = second_list->head;
+    } else {
+        first_list->head = second_list->head;
+    }
     first_list->tail = second_list->tail;
 }
 
